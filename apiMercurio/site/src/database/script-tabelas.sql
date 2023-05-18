@@ -54,7 +54,41 @@ CREATE TABLE captacao
     CONSTRAINT FOREIGN KEY(fkSensor) REFERENCES sensor(idSensor)
 );
 
+/* teste do script
 
+use mercurio;
+select * from usuario;
+
+desc captacao;
+
+select * from espaco;
+
+desc sensor;
+
+insert into empresa values 
+(null, 'teste', '12345678941', 'pequeno');
+
+insert into espaco values
+(null, 'higiene', 1);
+
+insert into sensor values
+(null, 1);
+
+update captacao set fkSensor = 1 where idCaptacao in(1, 2, 3, 4, 5, 6, 7);
+                                
+SELECT SUM(captacao.statusCaptacao) as totalCaptacao, DATE_FORMAT(captacao.dthCaptacao,'%H:%i:%s') as horaCaptacao, sensor.fkSetor 
+FROM captacao 
+JOIN sensor ON captacao.fkSensor = sensor.idSensor 
+JOIN espaco ON espaco.idSetor = sensor.fkSetor 
+WHERE captacao.fkSensor = 1 AND sensor.fkSetor = 1 
+GROUP BY(sensor.fkSetor, DATE_FORMAT(captacao.dthCaptacao,'%H:%i:%s')) 
+ORDER BY captacao.idCaptacao DESC 
+LIMIT 7;
+
+
+select sum(statusCaptacao) from captacao;
+
+*/
 
 
 
