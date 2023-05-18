@@ -1,0 +1,519 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,600;1,800&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #D3D3D3;
+}
+
+:root {
+    --colorAll: #3b3b3b;
+    --colorBlue: #0066ff;
+    --colorYellow: #DEC43B;
+}
+
+a,
+button {
+    cursor: pointer;
+}
+
+
+
+/*HEADER ----------------------------------------------------------------*/
+.header {
+    background-color: #4B1761;
+    height: 4.5rem;
+}
+
+.container {
+    display: flex;
+    width: 80%;
+    margin: auto;
+}
+
+.header .container {
+    justify-content: space-between;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    text-align: start;
+}
+
+.titulo {
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.navbar li,
+.navbar a {
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+}
+
+.logo-header img {
+    margin-top: 0.5rem;
+    width: 10rem;
+    height: 3rem;
+}
+
+.btn-login a {
+
+    background-color: var(--colorYellow);
+    padding: 5px;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    box-shadow: -1px 3px 11px -3px #606060;
+}
+
+/*TITULO ----------------------------------------------------------------*/
+.titulo-quem-somos {
+    display: flex;
+    justify-content: right;
+    margin-right: 9rem;
+    font-size: 3rem;
+}
+
+/*BNNER ---------------------------------------------------------------*/
+.banner {
+    background-image: url(img/img_quemSomos.png);
+    background-size: cover;
+    /*imagem sempre ocupa toda a tela*/
+    ;
+    width: 100%;
+    height: 35rem;
+    font-family: 'Poppins';
+}
+
+.banner .container {
+    height: 500px;
+    justify-content: center;
+    /*alinhar horizontal*/
+    align-items: center;
+    /*alinha vertical*/
+}
+
+.banner p {
+    font-size: 7rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-top: 200px;
+}
+
+
+/*CONTEUDO ----------------------------------------------------------------*/
+
+.context {
+    margin-bottom: 10rem;
+}
+
+.container-pt1 {
+    display: flex;
+    width: 80%;
+    height: 100px;
+    margin: auto;
+    justify-content: space-between;
+    margin-top: 3rem;
+}
+
+.missao {
+    text-align: center;
+    width: 11rem;
+}
+
+.Pmissao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.Pvalores {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.Pvisao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.visao {
+    text-align: center;
+    width: 11rem;
+
+}
+
+.valores {
+    text-align: center;
+    width: 11rem;
+}
+
+.tltMissao {
+    box-shadow: -1px 3px 11px -3px #606060;
+    font-size: 2rem;
+    background-color: #4B1761;
+    border-radius: 10px;
+    width: 6rem;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tltValores {
+    box-shadow: -1px 3px 11px -3px #606060;
+    font-size: 2rem;
+    background-color: #4B1761;
+    border-radius: 10px;
+    width: 6rem;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.tltVisao {
+    box-shadow: -1px 3px 11px -3px #606060;
+    font-size: 2rem;
+    background-color: var(--colorYellow);
+    border-radius: 10px;
+    width: 6rem;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Conheça a mercurio */
+.conhecaNois {
+    display: flex;
+}
+
+.container-pt3 {
+    width: 80%;
+    height: 100px;
+    margin: auto;
+    justify-content: space-between;
+    margin-top: 7rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.conheca {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.vector {
+    margin-top: 200px;
+    width: 60px;
+}
+
+.tltConheca {
+    font-size: 45px;
+    color: #4D4B4B;
+    margin-top: 70px;
+}
+
+.Imgline {
+    width: 100px;
+    height: 8px;
+    margin-left: 55%;
+    margin-bottom: 80%;
+}
+
+.texto-conheca {
+    color: #4D4B4B;
+    font-size:18px;
+    margin-left: 20px;
+    margin-top: 90px;
+    margin-right: 40px;
+    text-align: justify;
+}
+
+/* Nosso time */
+
+.nossoTime {
+    height: 600px;
+}
+
+.container-pt2 {
+    width: 60%;
+    height: 100px;
+    margin: auto;
+    justify-content: space-between;
+    margin-top: 3rem;
+}
+
+.tltTime {
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 2rem;
+    color: var(--colorAll);
+}
+
+.time-fotos {
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4rem;
+}
+
+.integrante {
+    width: 8rem;
+    height: 8rem;
+    background-color: #353535;
+    border-radius: 50%;
+    justify-content: space-between;
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    color: var(--colorAll);
+    box-shadow: -1px 3px 11px -3px #000000;
+}
+
+.grupo1 {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.grupo2 {
+    display: flex;
+    margin-top: 4rem;
+    justify-content: space-evenly;
+}
+
+.int1 p {
+    align-items: center;
+    margin-top: 9rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.int1 {
+    background-image: url('./img/amanda.jpg');
+    background-size: cover;
+}
+
+.int2 {
+    background-image: url('./img/evelyn.jpg');
+    background-size: cover;
+}
+
+.int2 p {
+    align-items: center;
+    margin-top: 9rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.int3 p {
+    align-items: center;
+    margin-top: 9rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.int3 {
+    background-image: url('./img/felipe.png');
+    background-size: cover;
+}
+
+.int4 p {
+    align-items: center;
+    margin-top: 9rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.int4 {
+    background-image: url('./img/gustavo.jpg');
+    background-size: cover;
+}
+
+.int5 p {
+    align-items: center;
+    margin-top: 9rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.int5 {
+    background-image: url('./img/joao.jpg');
+    background-size: cover;
+}
+
+.int6 p {
+    align-items: center;
+    margin-top: 9rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.int6 {
+    background-image: url('./img/lucio.jpg');
+    background-size: cover;
+}
+
+.texto-missao {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+    color: var(--colorAll);
+    text-align: center;
+}
+
+.texto-visao {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+    color: var(--colorAll);
+    text-align: center;
+}
+
+.texto-valores {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+    color: var(--colorAll);
+    text-align: center;
+}
+
+/*CHAT  ----------------------------------------------------------------*/
+.chat-div {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+    font-family: 'Poppins';
+}
+
+.botoesInteresse {
+    display: flex;
+    align-items: center;
+    color: #4B1761;
+}
+
+#btnChat {
+    margin-top: 1rem;
+    border: none;
+    font-size: 1rem;
+    color: #4B1761;
+    background-color: transparent;
+    margin-left: 1.6rem;
+}
+
+#btnCadastro {
+    margin-top: 1rem;
+    color: #4B1761;
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+}
+
+.interesse {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: #3b3b3b;
+}
+
+.cadastrobtn {
+    color: #4B1761;
+}
+
+.botoesInteresse i {
+    margin-right: 8px;
+}
+
+
+
+
+
+
+/*FOOTER  ----------------------------------------------------------------*/
+.footer {
+    width: 100%;
+    height: 9rem;
+    background-color: #4B1761;
+    margin-top: 5rem;
+}
+
+.logo-footer img {
+    margin-top: 2rem;
+    width: 10rem;
+    height: 3rem;
+
+}
+
+.container-footer {
+    display: flex;
+    width: 80%;
+    height: 100px;
+    margin: auto;
+}
+
+.imagens {
+    background-color: #ffffff;
+    border-radius: 5px;
+    width: 10px;
+    height: 10px;
+}
+
+.redes {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    margin-right: 25px;
+}
+
+hr {
+    height: 120px;
+}
+
+.paginas-footer {
+    color: #ffffff;
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+    margin-top: 1rem;
+}
+
+.paginas-footer li,
+.paginas-footer a {
+    color: #ffffff;
+    text-decoration: none;
+    list-style: none;
+    margin-right: 4rem;
+}

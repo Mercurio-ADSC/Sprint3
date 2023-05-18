@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Mercúrio - Simulador Financeiro</title>
+    <link rel="icon" type="image/png" href="/css/img/asinha.png"/>
+
+    <link rel="stylesheet" href="/css/style_simulador.css">
+    <script src="https://kit.fontawesome.com/22cb63056a.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="logo-header"><img src="/css/img/LOGO_COMPLETA.png" alt=""> </div>
+            <ul class="navbar">
+                <li><a style="width: 110px;" href="/home">Home</a></li>
+                <li><a style="width: 180px;" href="/quemSomos">Quem Somos</a></li>
+                <li><a style="width: 180px;" href="">Simulador</a></li>
+                <li><a style="width: 180px; color: #DEC43B;" href="/cadastro">Cadastre-se</a></li>
+                <li class="btn-login"><a style="width: 110px;" href="/login">Login</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Mudei algumas coisas como adicionar o container, tirei a tag form e tirei tmb a outra div que estava aqui -->
+
+    <div class="containerForm">
+        <div class="formulario">
+            <h1> Faça sua simulação </h1>
+
+            <input placeholder="Informe o faturamento mensal" class="input" type="text" id="inputFaturamentoMensal">
+            <i class="fa-solid fa-brazilian-real-sign icon" style="color: #4f4f4f;"></i><br>
+
+            <input placeholder="Informe o número de vendas" class="input" type="text" id="inputNumVendas">
+            <i class="fa-solid fa-tags icon" style="color: #4f4f4f;"></i><br>
+            <button onclick="calcular()">Simular</button>
+        </div>
+        <div class="função">
+            <div class="resultado" id="resposta">
+                <h3>A mercúrio te oferece</h3>
+                <div class="grafico">
+                    <canvas id="myChart"> </canvas>
+                </div>
+                <div id="resposta_simulacao"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="container-footer">
+
+            <div class="empresa">
+                <div class="logo-footer"><img src="/css/img/LOGO_COMPLETA.png" alt=""
+                        srcset=""></div>
+
+                <div class="redes">
+                    <a href=""><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a>
+                    <a href=""><i class="fa-brands fa-facebook" style="color: #ffffff;"></i></a>
+                    <a href=""><i class="fa-brands fa-youtube" style="color: #ffffff;"></i></a>
+                    <a href=""><i class="fa-brands fa-twitter" style="color: #ffffff;"></i></a>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="paginas-footer">
+                <div class="paginas">
+
+                    <ul>
+                        <li><a href="">Home</a></li>
+                        <li><a href="">Simulador</a></li>
+                        <li><a style="color:#DEC43B" ; href="">Cadastre-se</a></li>
+                    </ul>
+                </div>
+
+                <div class="informacoes">
+                    <ul>
+                        <li><a href="../tela_quem_somos/quemSomos.html">Quem Somos</a></li>
+                        <li><a href="">Fale conosco</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
+
+<script>
+    const ctx = document.getElementById('myChart');
+
+new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['FaturamentoMensal', 'FaturamentoTrimestral', 'FaturamentoSemestral',
+                    'FaturamentoAnual'
+                ],
+                datasets: [{
+                        label: 'Faturamento Atual',
+                        data: [],
+                        borderColor: 'red',
+                        backgroundColor: 'red',
+                        borderWidth: 2
+                    }, {
+                        label: 'Faturamento com Mercúrio',
+                        data: [],
+                        borderColor: 'rgb(50,205,50)',
+                        backgroundColor: 'rgb(50,205,50)',
+                        borderWidth: 2
+                    }
+
+
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    
+
+</script>
+
+<script>
+    var faturamentoMensalControle;
+    var faturamentoMensalExperimento;
+    var ticketMedioControle;
+    var ticketMedioExperimento;
+    var faturamentoTrimestral;
+    var faturamentoSemestral;
+    var faturamentoAnual;
+    var faturamentoTrimestralExperimento;
+    var faturamentoSemestralExperimento;
+    var faturamentoAnualExperimento;
+    var faturamentoTrimestralControle;
+    var faturamentoSemestralControle;
+    var faturamentoAnualControle
+
+    function calcular() {
+        numVendas = Number(inputNumVendas.value);
+        faturamentoMensalControle = Number(inputFaturamentoMensal.value);
+
+        ticketMedioControle = faturamentoMensalControle / numVendas;
+        ticketMedioExperimento = ticketMedioControle * 1.45;
+
+        faturamentoMensalExperimento = faturamentoMensalControle * 1.45;
+        faturamentoTrimestral = faturamentoMensalExperimento * 3;
+        faturamentoSemestral = faturamentoMensalExperimento * 6;
+        faturamentoAnual = faturamentoMensalExperimento * 12;
+        faturamentoTrimestralExperimento = faturamentoMensalExperimento * 3;
+        faturamentoSemestralExperimento = faturamentoMensalExperimento * 6;
+        faturamentoAnualExperimento = faturamentoMensalExperimento * 12;
+
+        faturamentoTrimestralControle = faturamentoMensalControle * 3
+        faturamentoSemestralControle = faturamentoMensalControle * 6
+        faturamentoAnualControle = faturamentoMensalControle * 12
+
+
+
+        // resposta.innerHTML += `
+        // Após analisarmos os dados do seu estabelecimento, constatamos que o ticket médio dos seus clientes é de ${ticketMedioControle.toFixed(4)}. <br> 
+        // No entanto, com um aumento na satisfação dos seus clientes, esse valor poderia ser elevado para ${ticketMedioExperimento.toFixed(4)}. 
+        // Acreditamos que essa oportunidade de melhorar seus resultados financeiros seja um grande incentivo para investir em ações que possam aumentar a satisfação dos seus clientes e, consequentemente, elevar o ticket médio do seu estabelecimento. Nós da Mercurio estamos à disposição para ajudá-lo nesse processo e transformar esses dados em resultados concretos.
+        // <div class="inner">
+        // Após análise dos dados do seu estabelecimento, verificamos que o ticket médio dos seus clientes é de <b>${(ticketMedioControle).toFixed(2)}</b>.
+        // Porém, ao promover melhorias que visem aumentar a satisfação dos clientes, esse valor pode ser elevado para <b>${(ticketMedioExperimento).toFixed(2)}</b>. 
+        // Essa é uma oportunidade valiosa para investir em ações que possam elevar a satisfação dos seus clientes e, consequentemente, aumentar o faturamento do seu estabelecimento. A equipe Mercúrio está à disposição para auxiliá-lo nesse processo e transformar esses dados em resultados reais. Acreditamos que esse seja um passo importante para impulsionar o seu negócio e alcançar o sucesso desejado.
+        // </div>
+        // `
+//<<<<<<< HEAD
+        resposta.innerHTML += `
+        <div class = "inner" id="texto">
+            Analisando os dados do seu estabelecimento, identificamos que o ticket médio dos seus clientes é de <b style="color:red;">R$${ticketMedioControle.toFixed(4)}</b>. No entanto, com um aumento na satisfação dos clientes, esse valor poderia ser elevado para <b style="color:green;">R$${ticketMedioExperimento.toFixed(4)}</b>. Essa oportunidade de melhoria nos resultados financeiros é um incentivo para investir em ações que possam aumentar a satisfação dos clientes e, consequentemente, elevar o ticket médio do seu estabelecimento. A equipe da Mercurio está à disposição para auxiliá-lo nesse processo e transformar esses dados em resultados concretos. Acreditamos que essa seja uma estratégia valiosa para impulsionar o seu negócio e alcançar o sucesso desejado. 
+        </div>
+        `;
+
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['FaturamentoMensal', 'FaturamentoTrimestral', 'FaturamentoSemestral',
+                    'FaturamentoAnual'
+                ],
+                datasets: [{
+                        label: 'Faturamento Atual',
+                        data: [faturamentoMensalControle, faturamentoTrimestralControle,
+                            faturamentoSemestralControle, faturamentoAnualControle,
+                        ],
+                        borderColor: 'red',
+                        backgroundColor: 'red',
+                        borderWidth: 2
+                    }, {
+                        label: 'Faturamento com Mercúrio',
+                        data: [faturamentoMensalExperimento, faturamentoTrimestralExperimento,
+                            faturamentoSemestralExperimento, faturamentoAnualExperimento,
+                        ],
+                        borderColor: 'rgb(50,205,50)',
+                        backgroundColor: 'rgb(50,205,50)',
+                        borderWidth: 2
+                    }
+
+
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        
+    }
+</script>

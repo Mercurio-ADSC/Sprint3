@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,600;1,800&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #E3E3E3;
+}
+
+:root {
+    --colorAll: #3b3b3b;
+    --colorBlue: #0066ff;
+    --colorYellow:  #DEC43B;
+}
+
+a, button{
+    cursor: pointer;
+}
+
+
+
+/*HEADER ----------------------------------------------------------------*/
+.header {
+    background-color: #4B1761;
+    height: 4.5rem;
+}
+
+.container {
+    display: flex;
+    width: 90%;
+    margin: auto;
+}
+
+.header .container {
+    justify-content: space-between;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    text-align: start;
+}
+
+.titulo {
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.navbar li,
+.navbar a {
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+}
+
+.logo-header img {
+    margin-top: 0.5rem;
+    width: 10rem;
+    height: 3rem;
+}
+
+.img-conf {
+    margin-right: 10px;
+}
+
+.btn-login a {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+/*CORPO DA PÁGINA ----------------------------------------------------------------*/
+
+/* Primeiro Gráfico */
+
+.container-dashboard{
+    display: flex;
+    width: 80%;
+    margin: auto;
+}
+
+.dashboard1 {
+    display: flex;
+    margin-top: 90px;
+    height: 500px;
+    width: 100%;
+}
+.fluxos{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 30%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.quadro1{
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffffff;
+    height: 40%;
+    width: 90%;
+    border-radius: 10px;
+    box-shadow: -1px 3px 11px -3px #000000;
+}
+
+.quadro1 h2{
+    color: #4B1761;
+    font-size: 55px;
+    font-weight: bold;
+    justify-content: center;
+    margin-bottom: 0;
+    margin-left: 22%;
+}
+
+.quadro2{
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffffff;
+    height: 40%;
+    width: 90%;
+    border-radius: 10px;
+    box-shadow: -1px 3px 11px -3px #000000;
+}
+
+.quadro2 h2{
+    color: #4B1761;
+    font-size: 50px;
+    font-weight: bold;
+    justify-content: center;
+    margin-bottom: 0;
+    margin-left: 25%;
+}
+
+.quadro2 h4{
+    color: #4D4B4B;
+    font-size: 20px;
+    justify-content: center;
+    margin-top: 0px;
+    margin-left: 32%;
+}
+
+.grafico1{
+    display: flex;
+    background-color: #ffffff;
+    height: 88%;
+    width: 80%;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+    border-radius: 10px;
+    box-shadow: -1px 3px 11px -3px #000000;
+}
+
+.grafico1 h2{
+    font-family: 'Poppins', sans-serif;
+    color: #4B1761;
+    font-size: 50px;
+    font-weight: bold;
+    justify-content: center;
+    margin-bottom: 0;
+    margin-left: 38%;
+    margin-top: 22%;
+}
+
+/* Segundo Gráfico */
+
+.dashboard2 {
+    display: flex;
+    margin-top: 40px;
+    height: 500px;
+    width: 100%;
+}
+
+.botoes{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 18%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.setor, .data, .hora, .grafico{
+    font-family: 'Poppins', sans-serif;
+    width: 90%;
+    height: 35px;
+    border-radius: 8px;
+    color: #4B1761;
+    font-weight: 600;
+    border: none;
+    background-color: #ffffff;
+}
+
+.filtrar{
+    font-family: 'Poppins', sans-serif;
+    width: 90%;
+    height: 35px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    background-color: #4B1761;
+    border: none;
+}
+
+.grafico2{
+    display: flex;
+    background-color: #ffffff;
+    height: 88%;
+    width: 80%;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+    border-radius: 10px;
+    box-shadow: -1px 3px 11px -3px #000000;
+}
+
+.grafico2 h2{
+    font-family: 'Poppins', sans-serif;
+    color: #4B1761;
+    font-size: 50px;
+    font-weight: bold;
+    justify-content: center;
+    margin-bottom: 0;
+    margin-left: 38%;
+    margin-top: 22%;
+}
+
+.ranking{
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    background-color:#ffffff;
+    height: 88%;
+    margin-top: 30px;
+    width: 30%;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: -1px 3px 11px -3px #000000;
+}
+
+.ranking h3{
+    color: #4B1761;
+    font-size: 35px;
+    font-weight: bold;
+    justify-content: center;
+    margin-bottom: 0px;
+}
+
+.ranking h4{
+    color: #4D4B4B;
+    font-size: 20px;
+    justify-content: center;
+    margin-top: 0px;
+}
+
+.ranking span{
+    margin-top: 40px;
+    margin-bottom: 10px;
+    color: #4D4B4B;
+    font-size: 20px;
+}
+
+.ranking .numeracao{
+    font-weight: bold;
+}
+
+/*FOOTER  ----------------------------------------------------------------*/
+
+.footer {
+    width: 100%;
+    height: 9rem;
+    background-color: #4B1761;
+    margin-top: 4rem;
+}
+
+.logo-footer img{
+    margin-top: 2rem;
+    width: 10rem;
+    height: 3rem;
+
+}
+
+.container-footer {
+    display: flex;
+    width: 80%;
+    height: 100px;
+    margin: auto;
+}
+
+.imagens {
+    background-color: #ffffff;
+    border-radius: 5px;
+    width: 10px;
+    height: 10px;
+}
+
+.redes {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    margin-right: 25px;
+}
+
+hr {
+    height: 120px;
+}
+
+.paginas-footer {
+    color: #ffffff;
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+    margin-top: 1rem;
+}
+
+.paginas-footer li,
+.paginas-footer a {
+    color: #ffffff;
+    text-decoration: none;
+    list-style: none;
+    margin-right: 4rem;
+}

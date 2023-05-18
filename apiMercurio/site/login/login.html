@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercúrio - Entrar</title>
+    <link rel="stylesheet" href="../css/styleLogin.css">
+
+    <link rel="icon" type="image/png" href="/css/img/asinha.png"/>
+    
+    <script src="https://kit.fontawesome.com/22cb63056a.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="logo-header"><img src="/css/img/LOGO_COMPLETA.png" alt=""> </div>
+            <ul class="navbar">
+                <li><a style="width: 110px;" href="/home">Home</a></li>
+                <li><a style="width: 180px;" href="/quemSomos">Quem Somos</a></li>
+                <li><a style="width: 180px;" href="">Simulador</a></li>
+                <li><a style="width: 180px; color: #DEC43B;" href="/cadastro">Cadastre-se</a></li>
+                <li class="btn-login"><a style="width: 110px;" href="/login">Login</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <section class="login">
+
+        <div class="formulario">
+            <h1> Login</h1>
+                     <form> 
+
+                <input placeholder="fernando.brandao@sptech.school" class="input email" name="emailUsuario" type="text"
+                    id="inputLogin" required oninvalid="this.setCustomValidity('O campo e-mail está vazio')" oninput="setCustomValidity('')">
+                <i class="fa-solid fa-user icon" style="color: #4f4f4f;"></i><br>
+
+                <input placeholder="********" type="password" name="senhaUsuario" class="input senha " id="inputSenha"  required oninvalid="this.setCustomValidity('O campo senha está vazio')" oninput="setCustomValidity('')">
+                <i class="fa-solid fa-lock icon" style="color: #4f4f4f;"></i> <br>
+
+                <div class="links-form">
+                    <a href="/recuperarSenha" style="color:#4B1761;">Esqueceu a senha?</a> <br>
+
+                    <span> Não é cadastrado? <a href="/cadastro" style="color:#4B1761;">
+                            Cadastre-se</a></span>
+                </div>
+
+            </form>
+
+            <button id="teste" onclick="VerificarUsuario()">Entrar</button>
+    
+        </div>
+    </section>
+
+
+    <div class="footer">
+        <div class="container-footer">
+
+            <div class="empresa">
+                <div class="logo-footer"><img src="/css/img/LOGO_COMPLETA.png" alt="" srcset=""></div>
+
+                <div class="redes">
+                    <a href=""><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a>
+                    <a href=""><i class="fa-brands fa-facebook" style="color: #ffffff;"></i></a>
+                    <a href=""><i class="fa-brands fa-youtube" style="color: #ffffff;"></i></a>
+                    <a href=""><i class="fa-brands fa-twitter" style="color: #ffffff;"></i></a>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="paginas-footer">
+                <div class="paginas">
+
+                    <ul>
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="">Simulador</a></li>
+                        <li><a style="color:#DEC43B" ; href="/cadastro">Cadastre-se</a></li>
+                    </ul>
+                </div>
+
+                <div class="informacoes">
+                    <ul>
+                        <li><a href="/quemSomos">Quem Somos</a></li>
+                        <li><a href="">Fale conosco</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+
+    function VerificarUsuario() {
+        //aguardar();
+
+        var emailVar = inputLogin.value;
+        var senhaVar = inputSenha.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            // cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+           // finalizarAguardar();
+            return false;
+        }
+        // else {
+        //     setInterval(sumirMensagem, 5000)
+        // }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    // sessionStorage.CPF_USUARIO = json.cpf;
+
+                    setTimeout(function () {
+                        window.location.href = `http://localhost:3300/dashboard`
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                   // finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    // function sumirMensagem() {
+    //     cardErro.style.display = "none"
+    // }
+
+</script>
+
+<!-- <script>
+
+    function VerificarUsuario(){
+
+        var usuario = inputLogin.value;
+        var senha = inputSenha.value;
+        var validacaoUser = usuario == "fernando.brandao@sptech.school" 
+        var validacaoSenha = senha == "12345678";
+
+        
+
+        if(validacaoUser && validacaoSenha){
+
+            alert(`
+                   Usuário autenticado com sucesso!
+                   Redirecionando para o DashBoard!`)
+                   window.location.href = `http://localhost:3300/dashboard`
+                   
+        } else if(validacaoUser && !validacaoSenha){
+
+            alert(`
+                    Senha incorreta, insira uma senha válida e tente novamente!
+                `)
+        } else if (!validacaoUser && validacaoSenha){
+
+            alert(`E-mail incorreto, insira um e-mail válido e tente novamente!`)
+        } else {
+            alert(`Usuário e senha incorretos, por favor, verifique suas credenciais e tente novamente!`)
+        }
+
+
+    }
+
+
+
+</script> -->

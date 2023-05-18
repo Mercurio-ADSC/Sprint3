@@ -1,0 +1,372 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,600;1,800&display=swap');
+
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    background-color: #DCDCDC;
+    background-size: cover;
+
+}
+
+a,
+button {
+    cursor: pointer;
+}
+
+
+
+.header {
+    background-color: #4B1761;
+    mix-blend-mode: normal;
+    backdrop-filter: blur(2px);
+    height: 4.5rem;
+}
+
+.container {
+    display: flex;
+    width: 80%;
+    margin: auto;
+}
+
+
+
+
+.header .container {
+    justify-content: space-between;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    text-align: start;
+}
+
+.titulo {
+    color: #ffffff;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.navbar li,
+.navbar a {
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+}
+
+.cadastrar a {
+    color: #DEC43B;
+}
+
+.teste {
+    width: 1rem;
+}
+
+.btn-login a {
+
+    background-color: #DEC43B;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    box-shadow: -1px 3px 11px -3px #606060;
+}
+
+.container {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    justify-content: space-between;
+}
+
+.containerForm{
+    display: flex;
+    width: 100%;
+    margin: auto;
+    justify-content: space-between;
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 200px;
+    list-style: none;
+    margin-left: 50%;
+    padding: 10px;
+}
+
+.links a {
+    width: 80px;
+    height: 19px;
+    left: 16px;
+    top: 11px;
+    font-family: 'Secular One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 23px;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100px;
+    list-style: none;
+    margin-left: 75%;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.logo-header img {
+    margin-top: 0.5rem;
+    width: 10rem;
+    height: 3rem;
+}
+
+/*Formulario*/
+/* Não adicionei display: flex, pq o container ja tem essa propriedade
+então nao tem o pq adicionar em outras tag, já que o display passa para 
+os itens que estão dentro dela */
+
+
+
+.formulario h1 {
+    text-align: center;
+    font-size: 1.6rem;
+    font-family: 'Poppins';
+    font-weight: 600;
+    color: #3b3b3b;
+    margin-left: -20px;
+    align-self: center;
+    margin-bottom: 50px;
+}
+
+
+.formulario input {
+    width: 180px;
+    height: 10px;
+    border-radius: 20px;
+    border: 1px grey solid;
+    padding: 12px;
+    margin: 10 px;
+    margin-bottom: 10px;
+    margin-left: 10%;
+    justify-content: center;
+}
+
+/* adicionei para poder colocar o icone no input */
+.formulario i {
+    margin-left: 6%;
+    margin-bottom: 20px;
+}
+
+/* adicionei as margins, usei o margin-left com % 
+pq ficaria mais facil de medir o centro 
+já que ele ficaria em 30% do formulario */
+
+
+.formulario button {
+    background-color: #4B1761;
+    color: #FFFFFF;
+    width: 150px;
+    height: 40px;
+    margin: 10px;
+    border-radius: 10px;
+    align-self: center;
+    border: none;
+    font-family: 'Poppins';
+    font-weight: 600;
+    margin-top: 8px;
+    margin-left: 20%;
+}
+
+/* estilização do botão do arquivo senha*/
+/* .formulario button{
+        background-color: #DEC43B;
+        color: #FFFFFF;
+        width: 150px;
+        height: 40px;
+        margin: 10px;
+        border-radius: 10px;
+        align-self: center;
+        border: none;
+        font-family: 'Poppins';
+        font-weight: 600; 
+        margin-top: 50px;
+        margin-left: 30%;
+    } */
+
+
+
+
+
+
+/* daqui para baixo eu nao mexi nada */
+
+
+
+
+.selecao {
+    width: 270px;
+    height: 20px;
+    border-radius: 20px;
+    border: 1px grey solid;
+    padding: 8px;
+    margin: 5px;
+}
+
+
+
+/**Footer**/
+.footer {
+    position: absolute;
+    width: 100%;
+    height: 9rem;
+    background-color: #4B1761;
+}
+
+.logo-footer img {
+    margin-top: 2rem;
+    width: 10rem;
+    height: 3rem;
+
+}
+
+.container-footer {
+    display: flex;
+    width: 80%;
+    height: 100px;
+    margin: auto;
+}
+
+.imagens {
+    background-color: #ffffff;
+    border-radius: 5px;
+    width: 10px;
+    height: 10px;
+}
+
+.redes {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    margin-right: 25px;
+}
+
+hr {
+    height: 120px;
+}
+
+.paginas-footer {
+    color: #ffffff;
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+    margin-top: 1rem;
+}
+
+.paginas-footer li,
+.paginas-footer a {
+    color: #ffffff;
+    text-decoration: none;
+    list-style: none;
+    margin-right: 4rem;
+}
+
+
+.input {
+    position: absolute;
+    background-color: transparent;
+    padding-right: 120px;
+    text-align: center;
+}
+
+.botao {
+    justify-content: center;
+
+}
+
+form {
+    display: flex;
+    margin-left: -90px;
+}
+
+.icon {
+    padding: 10px;
+    padding-left: 120px;
+
+}
+
+.resultado {
+    display: flex;
+    /* justify-content: left; */
+    width: 100vh;
+    height: 100vh;
+    background-color: #FFFFFF;
+    padding: 12px;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 8px;
+    color: #3b3b3b;
+    font-size: 15px;
+}
+
+.resultado h3{
+    text-align: center;
+}
+
+.formulario {
+    margin-top: 113px;
+    background-color: #DCDCDC;
+    padding: 20px;
+    width: 120vh;
+    margin-top: 180px;
+    margin-left: 50px;
+}
+
+.formulario h1{
+    margin-right: 60px;
+}
+
+.formulario input{
+    width: 250px;
+}
+
+.formulario button{
+    margin-left: 200px;
+}
+
+.resultado canvas{
+    margin-bottom: 25px;
+}
+
+.grafico
+{
+    width: 40rem;
+    height: 25rem;
+    margin-left: 3rem;
+}
+/* 
+.função {
+    display: flex;
+    flex-direction: column;
+} */
+
+.inner{
+    margin-bottom: 4rem;
+}

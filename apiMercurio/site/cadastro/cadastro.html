@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercúrio - Cadastro</title>
+    <link rel="stylesheet" href="/css/styleCadastro.css">
+    <!-- <link rel="stylesheet" href="/css/styleCadastro.css"> -->
+    <link rel="icon" type="image/png" href="/css/img/asinha.png"/>
+    <script src="https://kit.fontawesome.com/22cb63056a.js" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="../codig_cadastro_login/logar.js"> -->
+
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="logo-header"><img src="/css/img/LOGO_COMPLETA.png" alt=""> </div>
+            <ul class="navbar">
+                <li><a style="width: 110px;" href="/home">Home</a></li>
+                <li><a style="width: 180px;" href="/quemSomos">Quem Somos</a></li>
+                <li><a style="width: 180px;" href="">Simulador</a></li>
+                <li><a style="width: 180px; color: #DEC43B;" href="/cadastro">Cadastre-se</a></li>
+                <li class="btn-login"><a style="width: 110px;" href="/login">Login</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+    <section class="cadastro">
+        <div class="formulario">
+            <h1>Cadastro</h1>
+            <form action="/api/empresa" method="post">
+                <div class="containerForm">
+
+
+                    <span class="nomeEmpresa">Nome da empresa</span> <br>
+                    <input name="razaoSocial" id="input_nomeEmpresa" required oninvalid="this.setCustomValidity('O Campo deve ser preenchido')" oninput="setCustomValidity('')"> <br>
+
+                    <span class="ladoTexto">
+                        <span>CNPJ</span>
+                        <span>Porte</span>
+                    </span>
+                    <span class="ladoAlado">
+                        <!-- input cnpj -->
+                        <input name="cnpjEmpresa" id="input_cnpj" required oninvalid="this.setCustomValidity('O Campo deve ser preenchido com o CNPJ')" oninput="setCustomValidity('')">
+                        <!-- input do porte da empresa -->
+                        <select class="selecao" name="porteEmpresa" id="input_porte">
+                            <option selected disabled>Porte</option>
+                            <option value="Pequena">Pequena</option>
+                            <option value="Média">Media</option>
+                            <option value="Grande">Grande</option>
+                        </select>
+                    </span>
+
+                </div>
+                <br>
+                <span class="cadastrar_novo_fun"><a style="margin-left: 25px;" href="/cadastroFuncionarioInstitucional">Cadastrar novo funcionario</a></span>
+            </form>
+            <button onclick="CadastrarEmpresa()">Continuar</button>
+        </div>
+    </section>
+                        
+
+    <!--Footer-->
+    <div class="footer">
+        <div class="container-footer">
+
+            <div class="empresa">
+                <div class="logo-footer"><img src="/css/img/LOGO_COMPLETA.png" alt="" srcset=""></div>
+
+                <div class="redes">
+                    <a href=""><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a>
+                    <a href=""><i class="fa-brands fa-facebook" style="color: #ffffff;"></i></a>
+                    <a href=""><i class="fa-brands fa-youtube" style="color: #ffffff;"></i></a>
+                    <a href=""><i class="fa-brands fa-twitter" style="color: #ffffff;"></i></a>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="paginas-footer">
+                <div class="paginas">
+
+                    <ul>
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="">Simulador</a></li>
+                        <li><a style="color:#DEC43B" ; href="/cadastro">Cadastre-se</a></li>
+                    </ul>
+                </div>
+
+                <div class="informacoes">
+                    <ul>
+                        <li><a href="/quemSomos">Quem Somos</a></li>
+                        <li><a href="">Fale conosco</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+<script>
+    function CadastrarEmpresa() {
+        // aguardar();
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nome_empresa = input_nomeEmpresa.value;
+        var cnpj_empresa = input_cnpj.value;
+        nome_empresa = nome_empresa.toLowerCase();
+       
+
+        if (nome_empresa.length == "" || cnpj_empresa.length == "") {
+            // cardErro.style.display = "block"
+            alert('Mensagem de erro para todos os campos em branco');
+
+            // finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(5000)
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeEmpresa: nome_empresa,
+                CnpjEmpresa: cnpj_empresa
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                // cardErro.style.display = "block";
+
+                alert('Cadastro realizado com sucesso! Redirecionando para tela de Login...');
+
+                setTimeout(() => {
+                    window.location = "login.html";
+                }, "2000")
+
+                limparFormulario();
+                // finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    // function sumirMensagem() {
+    //     cardErro.style.display = "none"
+    // }
+
+</script>
+<!-- <script>
+
+    function CadastrarEmpresa() {
+        var nome_empresa = input_nomeEmpresa.value;
+        var cnpj_empresa = input_cnpj.value;
+        nome_empresa = nome_empresa.toLowerCase();
+        // var indice_empresa = login.indexOf(nomeEmpresa);
+
+        if (cnpj_empresa.length < 14 || cnpj_empresa.length > 14) {
+            alert(`
+                   Atenção, o CNPJ deve ter 14 caracteres!
+                   Por favor, insira um CNPJ válido!
+                `)
+        }else if(cnpj_empresa.length = 14 && nome_empresa == nome_empresa){
+
+           
+            alert(`Cadastrado com Sucesso`)
+            window.location.href = 'http://localhost:3300/cadastroFuncionarioInstitucional'
+
+        } else {
+            alert(`Falha ao cadastrar, por favor, verifique os campos preenchidos e tente novamente!`)
+        }
+        
+        
+       
+    }
+</script> -->

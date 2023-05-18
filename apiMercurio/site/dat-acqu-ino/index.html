@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercúrio | Dashboard</title>
+
+    <script src="https://kit.fontawesome.com/22cb63056a.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="/css/img/asinha.png"/>
+
+    <link rel="stylesheet" href="../css/styleDash.css">
+
+      <!-- links dashboard -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
+    <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+    
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="logo-header"><img src="../css/img/LOGO_COMPLETA.png" alt=""> </div>
+            <ul class="navbar">
+                <a href="/cadastroFuncionario">
+                    <li class="img-conf"><i class="fa-solid fa-user-plus" style="color: #ffffff;"></i></li>
+                </a>
+                <!-- Tirei o link, pois não sei para onde linkar -->
+                <li class="btn-login"><a style="width: 110px;" href=""><i
+                            class="fa-solid fa-circle-user fa-lg" style="color: #ffffff;"></i>Usuário</a></li>
+            </ul>
+        </div>
+
+        <div class="linha-amarela"></div>
+    </div>
+
+    <div class="corpo">
+
+        <div class="alertas">
+            <a href="/listaSetoresCriticos">
+                <div class="quadro alerta4">
+                    <span class="tlt-alerta ">Fluxo Crítico</span>
+                    <span class="numero-alerta critico">1</span>
+                    <div class="abrir-setor">
+                            <span class="setor-alerta">Setor(es)</span>
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                </div>
+            </a>
+            <a href="/listaSetoresEmergenciais">
+                <div class="quadro alerta3">
+                    <span class="tlt-alerta ">Fluxo Emergencial</span>
+                    <span class="numero-alerta emergencia">1</span>
+                    <div class="abrir-setor">
+                            <span class="setor-alerta">Setor(es)</span>
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                </div>
+            </a>
+            <a href="/listaSetoresAlerta">
+                <div class="quadro alerta2">
+                    <span class="tlt-alerta ">Fluxo Alerta</span>
+                    <span class="numero-alerta alerta">2</span>
+                    <div class="abrir-setor">
+                            <span class="setor-alerta">Setor(es)</span>
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                </div>
+            </a>
+            <a href="/listaSetoresIdeais">
+                <div class="quadro alerta1">
+                    <span class="tlt-alerta ">Fluxo Ideal</span>
+                    <span class="numero-alerta ideal">3</span>
+                    <div class="abrir-setor">
+                        <span class="setor-alerta">Setor(es)</span>
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="alerta-fluxo">
+            <img src="../css/img/thumbnail_fluxo.png" alt="" srcset="">
+        </div>
+
+        <div class="grafico-fluxo-setores">
+            <section>
+                <canvas class="grafico_setores" id="setores"></canvas>
+            </section>
+        </div>
+
+        <div class="quadro2-graficos">
+            <div class="grafico-fluxo-pesquisa">
+                <section>
+                    <canvas class="grafico_filtros" id="filtros"></canvas>
+                </section>
+            </div>
+            <div class="bloco-campos">
+                <div class="campos-filtros">
+                    <h4 class="tlt-setores">Comparação de setor</h4>
+                    <select class="setor">
+                        <option selected disabled>Setor</option>
+                        <option value="line">Açougue</option>
+                        <option value="bar">Bebidas</option>
+                        <option value="bar">Hortifruti</option>
+                        <option value="bar">Padaria</option>
+                        <option value="bar">Peixaria</option>
+                    </select>
+
+                    <select class="mes">
+                        <option selected disabled>Mês</option>
+                        <option value="line">Janeiro</option>
+                        <option value="bar">Fevereiro</option>
+                        <option value="bar">Março</option>
+                        <option value="bar">Dezembro</option>
+                    </select>
+
+                    <button class="filtrar">Filtrar</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="div-grafico-simulacao">
+            <section>
+                <canvas id="chave"></canvas>
+            </section>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="container-footer">
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+
+<script>
+
+    /* -- chave */
+    var contextoChave = document.getElementById('chave').getContext('2d');
+        contextoChave.canvas.width = 1150;
+        contextoChave.canvas.height = 300;
+        var chave = new Chart(
+            contextoChave,
+            {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: 'Movimentação',
+                        type: 'line',
+                        borderColor: ['#ffd902'],
+                        backgroundColor: ['#ffe135']
+                    }]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            distribution: 'series',
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }],
+                        yAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Chave'
+                            },
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                    animation: {
+                        duration: 0
+                    }
+                }
+            }
+        );
+
+        var paginacao = {};
+        var tempo = {};
+        function obterDados(grafico, endpoint) {
+            var http = new XMLHttpRequest();
+            http.open('GET', 'http://localhost:3300/sensores/' + endpoint, false);
+            http.send(null);
+            var valores = JSON.parse(http.responseText);
+            if (paginacao[endpoint] == null) {
+                paginacao[endpoint] = 0;
+            }
+            if (tempo[endpoint] == null) {
+                tempo[endpoint] = 0;
+            }
+            // Exibir à partir do último elemento exibido anteriormente
+            var ultimaPaginacao = paginacao[endpoint];
+            paginacao[endpoint] = valores.length;
+            var valores = valores.slice(ultimaPaginacao);
+            valores.forEach((valor) => {
+                //Máximo de 60 itens exibidos no gráfico
+                if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
+                    grafico.data.labels.shift();
+                    grafico.data.datasets[0].data.shift();
+                }
+
+                grafico.data.labels.push(tempo[endpoint]++);
+                grafico.data.datasets[0].data.push(parseFloat(valor));
+                grafico.update();
+            })
+        }
+
+        setInterval(() => {
+            obterDados(chave, 'chave');
+        }, 1000);
+
+
+    // grafico fluxos
+    var contextoSetor = document.getElementById('setores').getContext('2d');
+    contextoSetor.canvas.width = 1150;
+    contextoSetor.canvas.height = 300;
+
+    var chave = new Chart(
+        contextoSetor, {
+            type: 'bar',
+            data: { // json dos dados
+            labels: ['07:00', '07:10', '07:20', '07:30', '07:40', '07:50', '08:00', '08:10', '08:20'], // vetor do eixo X,
+
+            datasets: [{ // json e vetor
+
+                    // linha 1
+                    label: 'Padaria',
+                    data: [20,40,90,1000,20,200,500,800,450,430],
+                    borderWidth: 1,
+                    backgroundColor: 'rgba(184,134,11)',
+                },
+
+                // linha 2
+                {
+
+                    label: 'Açougue',
+                    data: [210,745,140,1005,758,140,69,210,630],
+                    borderWidth: 1,
+                    backgroundColor: 'rgba(205,92,92)',
+                },
+
+                // linha 3
+                {
+
+                    label: 'Bebidas',
+                    data: [701, 643, 222, 550, 345, 779, 162, 20, 90],
+                    borderWidth: 1,
+                    backgroundColor: 'rgba(135,206,250)',
+                },
+                // linha 3
+                {
+
+                    label: 'Higiene',
+                    data: [600, 220, 100, 180, 1000, 12, 35, 64,34],
+                    borderWidth: 1,
+                    backgroundColor: 'rgba(119,136,153)',
+                },
+                // linha 3
+                {
+
+                    label: 'Confeitaria',
+                    data: [200, 510, 452, 965, 74, 324, 466, 741,254],
+                    borderWidth: 1,
+                    backgroundColor: 'rgba(188,143,143)',
+                },
+                // linha 3
+                {
+
+                    label: 'Limpeza',
+                    data: [500, 650, 254, 20, 34, 745, 125, 225,210],
+                    borderWidth: 1,
+                    backgroundColor: 'rgba(238,232,170)',
+                },
+                // linha 3
+                {
+
+                    label: 'Bolachas',
+                    data: [210, 10, 254, 100, 788, 324, 147, 189,452],
+                    borderWidth: 1,
+                    backgroundColor: 'rgba(139,0,139)',
+                }
+
+            ],
+        },
+            options: {
+
+                tooltips: {
+                    bodyFontStyle: 'bold',
+            callbacks: {
+                label: function(tooltipItem, data) {
+                    var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                    var label = data.labels[tooltipItem.index];
+                    var message = '';
+
+                    if (value >= 420 && value <= 630 ) {
+                        message = 'Fluxo Ideal';
+                    
+                    }else if(value > 209 && value < 420){
+                        message = 'Fluxo em Alerta';
+                    
+                    }else if(value > 630 && value < 841){
+                        message = 'Fluxo em Alerta';
+                    }
+                    else if( value >= 100 && value <= 210){
+                        message = 'Fluxo Emergencial';
+                    
+                    }else if(value >= 840 && value <= 1000){
+                        message = 'Fluxo Emergencial';
+
+                    }else if(value >= 0 && value < 100 ){
+                        message = 'Fluxo Crítico';
+                    
+                    }else if(value >= 1001){
+                        message = 'Fluxo Crítico';
+                    
+                    }
+
+                    return `Hora ${label}: Fluxo de ${value} - ${message}`;
+
+                }
+            }
+            },
+                legend: {
+
+                    labels: {
+                        fontColor: 'white'
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                       
+
+                        ticks: {
+                            beginAtZero: true
+
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                animation: {
+                    duration: 0
+                }
+            }
+        }
+    );
+
+    // var paginacao = {};
+    // var tempo = {};
+
+    // function obterDados(grafico, endpoint) {
+    //     var http = new XMLHttpRequest();
+    //     http.open('GET', 'http://localhost:3300/sensores/' + endpoint, false);
+    //     http.send(null);
+    //     var valores = JSON.parse(http.responseText);
+    //     if (paginacao[endpoint] == null) {
+    //         paginacao[endpoint] = 0;
+    //     }
+    //     if (tempo[endpoint] == null) {
+    //         tempo[endpoint] = 0;
+    //     }
+    //     // Exibir à partir do último elemento exibido anteriormente
+    //     var ultimaPaginacao = paginacao[endpoint];
+    //     paginacao[endpoint] = valores.length;
+    //     var valores = valores.slice(ultimaPaginacao);
+    //     valores.forEach((valor) => {
+    //         //Máximo de 60 itens exibidos no gráfico
+    //         if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
+    //             grafico.data.labels.shift();
+    //             grafico.data.datasets[0].data.shift();
+    //         }
+
+    //         grafico.data.labels.push(tempo[endpoint]++);
+    //         grafico.data.datasets[0].data.push(parseFloat(valor));
+    //         grafico.update();
+    //     })
+    // }
+
+    // setInterval(() => {
+    //     obterDados(chave, 'chave');
+    // }, 1000);
+
+
+   // GRAFICO DOS FILTROS
+   var grafico_filtros = document.getElementById('filtros').getContext('2d');
+    grafico_filtros.canvas.width = 830;
+    grafico_filtros.canvas.height = 300;
+
+    new Chart(grafico_filtros, {
+        type: 'line',
+
+        data: { // json dos dados
+            labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30], // vetor do eixo X,
+
+            datasets: [{ // json e vetor
+
+                    // linha 1
+                    label: '2021',
+                    data: [20,40,90,170,800,420,630,1000,100,200,190,600,500,300,1000,20,200,500,800,450,320,210,987,985,100,456,78,341,521,640],
+                    borderWidth: 1,
+                    borderColor: 'rgba(106,90,205)',
+                },
+
+                // linha 2
+                {
+
+                    label: '2022',
+                    data: [100,250,30,150,654,500,100,845,500,210,310,477,1000,210,745,140,654,900,140,521,320,547,658,1000,130,758,140,69,210,630],
+                    borderWidth: 1,
+                    borderColor: 'rgba(173,216,230)',
+                },
+
+                // linha 3
+                {
+
+                    label: '2023',
+                    data: [950, 65, 420, 777, 112, 888, 40, 620, 930, 235, 820, 311, 530, 80, 720, 950, 299, 701, 915, 643, 222, 550, 345, 779, 162, 935, 423, 711, 888, 20],
+                    borderWidth: 1,
+                    borderColor: 'rgba( 255,255,0)',
+                }
+
+            ],
+        },
+        options: {
+            tooltips: {
+                bodyFontStyle: 'bold',
+            callbacks: {
+                label: function(tooltipItem, data) {
+                    var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                    var label = data.labels[tooltipItem.index];
+                    var message = '';
+
+                    if (value >= 420 && value <= 630 ) {
+                        message = 'Fluxo Ideal';
+                    
+                    }else if(value > 209 && value < 420){
+                        message = 'Fluxo em Alerta';
+                    
+                    }else if(value > 630 && value < 841){
+                        message = 'Fluxo em Alerta';
+                    }
+                    else if( value >= 100 && value <= 210){
+                        message = 'Fluxo Emergencial';
+                    
+                    }else if(value >= 840 && value <= 1000){
+                        message = 'Fluxo Emergencial';
+
+                    }else if(value >= 0 && value < 100 ){
+                        message = 'Fluxo Crítico';
+                    
+                    }else if(value >= 1001){
+                        message = 'Fluxo Crítico';
+                    
+                    }
+
+                    return `Dia ${label}: Fluxo de ${value} - ${message}`;
+                }
+            }
+            },
+            legend: {
+
+                labels: {
+                    fontColor: 'white'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+
+                },
+
+            }
+        }
+    });
+
+
+
+
+
+    var paginacao = {};
+    var tempo = {};
+
+    function obterDados(grafico, endpoint) {
+        var http = new XMLHttpRequest();
+        http.open('GET', 'http://localhost:3300/sensores/' + endpoint, false);
+        http.send(null);
+        var valores = JSON.parse(http.responseText);
+        if (paginacao[endpoint] == null) {
+            paginacao[endpoint] = 0;
+        }
+        if (tempo[endpoint] == null) {
+            tempo[endpoint] = 0;
+        }
+        // Exibir à partir do último elemento exibido anteriormente
+        var ultimaPaginacao = paginacao[endpoint];
+        paginacao[endpoint] = valores.length;
+        var valores = valores.slice(ultimaPaginacao);
+        valores.forEach((valor) => {
+            //Máximo de 60 itens exibidos no gráfico
+            if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
+                grafico.data.labels.shift();
+                grafico.data.datasets[0].data.shift();
+            }
+
+            grafico.data.labels.push(tempo[endpoint]++);
+            grafico.data.datasets[0].data.push(parseFloat(valor));
+            grafico.update();
+        })
+    }
+
+    setInterval(() => {
+        obterDados(chave, 'chave');
+    }, 1000);
+</script>

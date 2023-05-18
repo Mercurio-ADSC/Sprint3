@@ -1,0 +1,335 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,600;1,800&display=swap');
+
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    background-image: url('/css/img/image31.png');
+    background-size: cover;
+
+}
+
+a,
+button {
+    cursor: pointer;
+}
+
+
+
+.header {
+    background-color: #4B1761;
+    mix-blend-mode: normal;
+    backdrop-filter: blur(2px);
+    height: 4.5rem;
+}
+
+.container {
+    display: flex;
+    width: 80%;
+    margin: auto;
+}
+
+
+
+
+.header .container {
+    justify-content: space-between;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    text-align: start;
+}
+
+.titulo {
+    color: #ffffff;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.navbar li,
+.navbar a {
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+}
+
+.cadastrar a {
+    color: #DEC43B;
+    font-weight: bold;
+}
+
+.teste {
+    width: 1rem;
+}
+
+.btn-login a {
+
+    background-color: #DEC43B;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    box-shadow: -1px 3px 11px -3px #606060;
+}
+
+.container {
+    display: flex;
+    width: 80%;
+    margin: auto;
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 200px;
+    list-style: none;
+    margin-left: 50%;
+    padding: 10px;
+}
+
+.links a {
+    width: 80px;
+    height: 19px;
+    left: 16px;
+    top: 11px;
+    font-family: 'Secular One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 23px;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100px;
+    list-style: none;
+    margin-left: 75%;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.logo-header img {
+    margin-top: 0.5rem;
+    width: 10rem;
+    height: 3rem;
+}
+
+
+.formulario {
+    background-color: #FFFFFF;
+    width: 400px;
+    height: 300px;
+    margin-top: 120px;
+    margin-left: 30%;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: -1px 3px 11px -3px #60606081;
+}
+
+#form-novaSenha {
+    background-color: #FFFFFF;
+    width: 400px;
+    height: 350px;
+    margin-top: 120px;
+    margin-left: 30%;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: -1px 3px 11px -3px #60606081;
+}
+
+.formulario h1 {
+    text-align: center;
+    font-size: 1.6rem;
+    font-family: 'Poppins';
+    font-weight: 600;
+    color: #3b3b3b;
+    align-self: center;
+    margin-left: 10px;
+    margin-bottom: 50px;
+}
+
+
+.formulario input {
+
+    width: 290px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px grey solid;
+    padding: 8px;
+    margin: 5px;
+    margin-left: 40px;
+    box-shadow: -1px 3px 11px -3px #60606081;
+
+}
+
+.formulario i {
+    margin-left: 30px;
+    margin-top: 10px;
+}
+
+.formulario button {
+    background-color: #DEC43B;
+    width: 150px;
+    height: 40px;
+    margin: 10px;
+    border-radius: 10px;
+    align-self: center;
+    border: none;
+    font-family: 'Poppins';
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-left: 30%;
+}
+
+.formulario button a {
+    color: #FFFFFF;
+}
+
+.formulario .botao {
+    background-color: #DEC43B;
+    color: #FFFFFF;
+    width: 150px;
+    height: 40px;
+    margin: 10px;
+    border-radius: 10px;
+    align-self: center;
+    border: none;
+    font-family: 'Poppins';
+    font-weight: 600;
+    margin-top: 50px;
+    margin-left: 30%;
+}
+
+
+.formulario a {
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.formulario span {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.selecao {
+    width: 270px;
+    height: 20px;
+    border-radius: 20px;
+    border: 1px grey solid;
+    padding: 8px;
+    margin: 5px;
+}
+
+.formulario .confSenha {
+    margin-top: 2rem;
+}
+
+.formulario .confSenha-icon {
+    margin-top: 2.3rem;
+}
+
+
+/**Footer**/
+.footer {
+    position: absolute;
+    width: 100%;
+    height: 9rem;
+    margin-top: 28rem;
+    background-color: #4B1761;
+    margin-top: 10rem;
+
+
+}
+
+.logo-footer img {
+    margin-top: 2rem;
+    width: 10rem;
+    height: 3rem;
+
+}
+
+.container-footer {
+    display: flex;
+    width: 80%;
+    height: 100px;
+    margin: auto;
+}
+
+.imagens {
+    background-color: #ffffff;
+    border-radius: 5px;
+    width: 10px;
+    height: 10px;
+}
+
+.redes {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    margin-right: 25px;
+}
+
+hr {
+    height: 120px;
+}
+
+.paginas-footer {
+    color: #ffffff;
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+    margin-top: 1rem;
+}
+
+.paginas-footer li,
+.paginas-footer a {
+    color: #ffffff;
+    text-decoration: none;
+    list-style: none;
+    margin-right: 4rem;
+}
+
+
+.input {
+    position: absolute;
+    background-color: transparent;
+    padding-right: 100px;
+    text-align: center;
+}
+
+
+.icon {
+    padding: 10px;
+    padding-left: 20px;
+
+}
+
+.botao {
+    justify-content: center;
+
+}
+
+form {
+    display: flex;
+    margin-left: -90px;
+}

@@ -1,0 +1,370 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,600;1,800&display=swap');
+
+
+body {
+
+    margin: 0;
+    padding: 0;
+    background-image: url(img/img_cadastro.png);
+    background-size: cover;
+}
+
+
+a,
+button {
+
+    cursor: pointer;
+}
+
+
+
+.header {
+
+    background-color: #4B1761;
+    mix-blend-mode: normal;
+    backdrop-filter: blur(2px);
+    height: 4.5rem;
+}
+
+.container {
+
+    display: flex;
+    width: 80%;
+    margin: auto;
+}
+
+.header .container {
+
+    justify-content: space-between;
+}
+
+.navbar {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    text-align: start;
+}
+
+.titulo {
+
+    color: #ffffff;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.navbar li,
+
+.navbar a {
+
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+}
+
+.teste {
+
+    width: 1rem;
+}
+
+.btn-login a {
+
+    background-color: #DEC43B;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    box-shadow: -1px 3px 11px -3px #606060;
+}
+
+.container {
+
+    display: flex;
+    width: 80%;
+    margin: auto;
+}
+
+.links {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 200px;
+    list-style: none;
+    margin-left: 50%;
+    padding: 10px;
+}
+
+.links a {
+
+    width: 80px;
+    height: 19px;
+    left: 16px;
+    top: 11px;
+    font-family: 'Secular One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 23px;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100px;
+    list-style: none;
+    margin-left: 75%;
+    padding: 10px;
+    text-decoration: none;
+}
+
+
+.logo-header img {
+
+    margin-top: 0.5rem;
+    width: 10rem;
+    height: 3rem;
+}
+
+
+
+
+
+/*Formulario*/
+
+.formulario {
+
+    background-color: #FFFFFF;
+    width: 600px;
+    height: 450px;
+    display: flex;
+    margin-left: 27%;
+    margin-top: 90px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: -1px 3px 11px -3px #60606081;
+}
+
+form {
+
+    width: 100%;
+}
+
+.containerForm {
+
+    flex-direction: column;
+    width: 90%;
+    margin: auto;
+}
+
+.formulario span {
+
+    font-family: 'Poppins';
+    font-weight: 400;
+}
+
+.formulario h1 {
+
+    font-size: 2rem;
+    font-family: 'Poppins';
+    font-weight: 600;
+    color: #3b3b3b;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nomeEmpresa {
+
+    font-family: 'Poppins';
+    font-weight: 400;
+    margin-top: 25px;
+    margin-left: 15px;
+}
+
+.ladoAlado {
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.ladoAlado2 {
+
+    display: flex;
+    flex-direction: row;
+}
+
+.ladoTexto {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#input_cnpj {
+
+    width: 270px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px grey solid;
+    padding: 8px;
+    margin: 5px;
+    box-shadow: -1px 3px 11px -3px #60606081;
+}
+
+#input_nomeEmpresa {
+
+    width: 510px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px grey solid;
+    padding: 8px;
+    margin: 5px;
+    box-shadow: -1px 3px 11px -3px #60606081;
+}
+
+#input_email {
+
+    width: 290px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px grey solid;
+    padding: 8px;
+    margin: 5px;
+    box-shadow: -1px 3px 11px -3px #60606081;
+}
+
+#input_senha {
+
+    width: 270px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px grey solid;
+    padding: 8px;
+    margin: 5px;
+    box-shadow: -1px 3px 11px -3px #60606081;
+}
+
+.selecao {
+
+    width: 270px;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px grey solid;
+    padding: 8px;
+    margin: 5px;
+    box-shadow: -1px 3px 11px -3px #60606081;
+}
+
+.formulario button {
+
+    background-color: #DEC43B;
+    color: #FFFFFF;
+    width: 150px;
+    height: 40px;
+    margin-left: 230px;
+    margin-top: 15px;
+    border-radius: 8px;
+    border: none;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.formulario a {
+
+    text-decoration: none;
+}
+
+i {
+
+    display: flex;
+    justify-content: center;
+}
+
+.cadastrar_novo_fun {
+
+    color: #4B1761;
+    font-size: 15px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+/**Footer**/
+
+.footer {
+
+    position: absolute;
+    width: 100%;
+    height: 9rem;
+    background-color: #4B1761;
+    margin-top: 8rem;
+
+}
+
+.logo-footer img {
+
+    margin-top: 2rem;
+    width: 10rem;
+    height: 3rem;
+
+}
+
+.container-footer {
+
+    display: flex;
+    width: 80%;
+    height: 100px;
+    margin: auto;
+}
+
+.imagens {
+
+    background-color: #ffffff;
+    border-radius: 5px;
+    width: 10px;
+    height: 10px;
+}
+
+.redes {
+
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    margin-right: 25px;
+}
+
+hr {
+
+    height: 120px;
+}
+
+.paginas-footer {
+
+    color: #ffffff;
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+    margin-top: 1rem;
+}
+
+.paginas-footer li,
+
+.paginas-footer a {
+
+    color: #ffffff;
+    text-decoration: none;
+    list-style: none;
+    margin-right: 4rem;
+}
