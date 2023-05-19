@@ -11,6 +11,7 @@
     <link rel="icon" type="image/png" href="/css/img/asinha.png"/>
 
     <link rel="stylesheet" href="../css/styleDash.css">
+    <script type="application/json" src="../js/funcoes.js"></script>
 
       <!-- links dashboard -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
@@ -28,9 +29,11 @@
                     <li class="img-conf"><i class="fa-solid fa-user-plus" style="color: #ffffff;"></i></li>
                 </a>
                 <!-- Tirei o link, pois não sei para onde linkar -->
-                <li class="btn-login"><a style="width: 110px;" href=""><i
-                            class="fa-solid fa-circle-user fa-lg" style="color: #ffffff;"></i>Usuário</a></li>
+                <li class="btn-login"><a style="width: 110px;" href="">
+                    <i class="fa-solid fa-circle-user fa-lg" style="color: #ffffff;"></i>
+                    <span id="b_usuario">Usuário</span></a></li>
             </ul>
+            
         </div>
 
         <div class="linha-amarela"></div>
@@ -143,6 +146,26 @@
 
 
 <script>
+
+// function validarSessao() {
+//     // aguardar();
+
+//     var email = sessionStorage.EMAIL_USUARIO;
+//     var nome = sessionStorage.NOME_USUARIO;
+
+//     var b_usuario = document.getElementById("b_usuario");
+
+//     if (email != null && nome != null) {
+//         // window.alert(`Seja bem-vindo, ${nome}!`);
+//         b_usuario.innerHTML = nome;
+
+//         // finalizarAguardar();
+//     } else {
+//         window.location = "../login.html";
+//     }
+// }
+
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
     /* -- chave */
     // var contextoChave = document.getElementById('chave').getContext('2d');
@@ -544,7 +567,7 @@ function obterDadosGraficos() {
     obterDadosGrafico(4)
 }
 
-verificar_autenticacao();
+// verificar_autenticacao();
 
 // function alterarTitulo(testefk) {
 //     var tituloAquario = document.getElementById(`tituloAquario${testefk}`)

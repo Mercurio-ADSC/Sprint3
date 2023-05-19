@@ -110,16 +110,16 @@
 function irLogar(){
 
     var DadosUsuario = {
-        nome: input_nome_usuario.value,
-        dataNascimento: input_dtNasc_usuario.value,
-        cpf: Number(input_cpf_usuario.value),
-        email: input_email_usuario.value,
-        senha: input_senha_usuario.value,
-        funcao: input_funcao.value
+        nomeVar: input_nome_usuario.value,
+        dataNascimentoVar: input_dtNasc_usuario.value,
+        cpfVar: input_cpf_usuario.value,
+        emailVar: input_email_usuario.value,
+        senhaVar: input_senha_usuario.value,
+        funcaoVar: input_funcao.value
     };
        
 
-        if (DadosUsuario.email.length == "" || DadosUsuario.senha.length == "") {
+        if (DadosUsuario.emailVar.length == "" || DadosUsuario.senhaVar.length == "") {
             // cardErro.style.display = "block"
             alert('Mensagem de erro para todos os campos em branco');
 
@@ -139,12 +139,12 @@ function irLogar(){
             body: JSON.stringify({
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
-                email:DadosUsuario.email, 
-                senha: DadosUsuario.senha,
-                nome: DadosUsuario.nome,
-                nivelUsuario: DadosUsuario.nivel,
-                cpf: DadosUsuario.cpf,
-                dtNascimento: DadosUsuario.dtNascimento
+                emailServer:DadosUsuario.emailVar, 
+                senhaServer: DadosUsuario.senhaVar,
+                nomeServer: DadosUsuario.nomeVar,
+                nivelUsuarioServer: DadosUsuario.funcaoVar,
+                cpfServer: DadosUsuario.cpfVar,
+                dtNascimentoServer: DadosUsuario.dataNascimentoVar
             })
         }).then(function (resposta) {
 
@@ -159,7 +159,7 @@ function irLogar(){
                     window.location.href = 'http://localhost:3300/Login'
                 }, "2000")
 
-                limparFormulario();
+               // limparFormulario();
                 // finalizarAguardar();
             } else {
                 throw ("Houve um erro ao tentar realizar o cadastro!");
