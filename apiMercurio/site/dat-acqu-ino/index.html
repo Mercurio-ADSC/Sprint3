@@ -1,766 +1,461 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mercúrio | Dashboard</title>
 
-    <script src="https://kit.fontawesome.com/22cb63056a.js" crossorigin="anonymous"></script>
-    <link rel="icon" type="image/png" href="/css/img/asinha.png"/>
+    <script
+      src="https://kit.fontawesome.com/22cb63056a.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="icon" type="image/png" href="/css/img/asinha.png" />
 
-    <link rel="stylesheet" href="../css/styleDash.css">
+    <link rel="stylesheet" href="../css/styleDash.css" />
     <script type="application/json" src="../js/funcoes.js"></script>
 
-      <!-- links dashboard -->
+    <!-- links dashboard -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
     <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
-    
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="header">
-        <div class="container">
-            <div class="logo-header"><img src="../css/img/LOGO_COMPLETA.png" alt=""> </div>
-            <ul class="navbar">
-                <a href="/cadastroFuncionario">
-                    <li class="img-conf"><i class="fa-solid fa-user-plus" style="color: #ffffff;"></i></li>
-                </a>
-                <!-- Tirei o link, pois não sei para onde linkar -->
-                <li class="btn-login"><a style="width: 110px;" href="">
-                    <i class="fa-solid fa-circle-user fa-lg" style="color: #ffffff;"></i>
-                    <span id="b_usuario">Usuário</span></a></li>
-            </ul>
-            
+      <div class="container">
+        <div class="logo-header">
+          <img src="../css/img/LOGO_COMPLETA.png" alt="" />
         </div>
+        <ul class="navbar">
+          <a href="/cadastroFuncionario">
+            <li class="img-conf">
+              <i class="fa-solid fa-user-plus" style="color: #ffffff"></i>
+            </li>
+          </a>
+          <!-- Tirei o link, pois não sei para onde linkar -->
+          <li class="btn-login">
+            <a style="width: 110px" href="">
+              <i
+                class="fa-solid fa-circle-user fa-lg"
+                style="color: #ffffff"
+              ></i>
+              <span id="b_usuario">Usuário</span></a
+            >
+          </li>
+        </ul>
+      </div>
 
-        <div class="linha-amarela"></div>
+      <div class="linha-amarela"></div>
     </div>
 
     <div class="corpo">
-
-        <div class="alertas">
-            <a href="/listaSetoresCriticos">
-                <div class="quadro alerta4">
-                    <span class="tlt-alerta ">Fluxo Crítico</span>
-                    <span class="numero-alerta critico">1</span>
-                    <div class="abrir-setor">
-                            <span class="setor-alerta">Setor(es)</span>
-                            <i class="fa-solid fa-plus"></i>
-                        </div>
-                </div>
-            </a>
-            <a href="/listaSetoresEmergenciais">
-                <div class="quadro alerta3">
-                    <span class="tlt-alerta ">Fluxo Emergencial</span>
-                    <span class="numero-alerta emergencia">1</span>
-                    <div class="abrir-setor">
-                            <span class="setor-alerta">Setor(es)</span>
-                            <i class="fa-solid fa-plus"></i>
-                        </div>
-                </div>
-            </a>
-            <a href="/listaSetoresAlerta">
-                <div class="quadro alerta2">
-                    <span class="tlt-alerta ">Fluxo Alerta</span>
-                    <span class="numero-alerta alerta">2</span>
-                    <div class="abrir-setor">
-                            <span class="setor-alerta">Setor(es)</span>
-                            <i class="fa-solid fa-plus"></i>
-                        </div>
-                </div>
-            </a>
-            <a href="/listaSetoresIdeais">
-                <div class="quadro alerta1">
-                    <span class="tlt-alerta ">Fluxo Ideal</span>
-                    <span class="numero-alerta ideal">3</span>
-                    <div class="abrir-setor">
-                        <span class="setor-alerta">Setor(es)</span>
-                        <i class="fa-solid fa-plus"></i>
-                    </div>
-                </div>
-            </a>
-
-        </div>
-
-        <div class="alerta-fluxo">
-            <img src="../css/img/thumbnail_fluxo.png" alt="" srcset="">
-        </div>
-
-        <div class="grafico-fluxo-setores">
-            <section>
-                <canvas class="grafico_setores" id="setores"></canvas>
-            </section>
-        </div>
-
-        <div class="quadro2-graficos">
-            <div class="grafico-fluxo-pesquisa">
-                <section>
-                    <canvas class="grafico_filtros" id="filtros"></canvas>
-                </section>
+      <div class="alertas">
+        <a href="/listaSetoresCriticos">
+          <div class="quadro alerta4">
+            <span class="tlt-alerta">Fluxo Crítico</span>
+            <span class="numero-alerta critico">1</span>
+            <div class="abrir-setor">
+              <span class="setor-alerta">Setor(es)</span>
+              <i class="fa-solid fa-plus"></i>
             </div>
-            <div class="bloco-campos">
-                <div class="campos-filtros">
-                    <h4 class="tlt-setores">Comparação de setor</h4>
-                    <select class="setor">
-                        <option selected disabled>Setor</option>
-                        <option value="line">Açougue</option>
-                        <option value="bar">Bebidas</option>
-                        <option value="bar">Hortifruti</option>
-                        <option value="bar">Padaria</option>
-                        <option value="bar">Peixaria</option>
-                    </select>
-
-                    <select class="mes">
-                        <option selected disabled>Mês</option>
-                        <option value="line">Janeiro</option>
-                        <option value="bar">Fevereiro</option>
-                        <option value="bar">Março</option>
-                        <option value="bar">Dezembro</option>
-                    </select>
-
-                    <button class="filtrar">Filtrar</button>
-                </div>
+          </div>
+        </a>
+        <a href="/listaSetoresEmergenciais">
+          <div class="quadro alerta3">
+            <span class="tlt-alerta">Fluxo Emergencial</span>
+            <span class="numero-alerta emergencia">1</span>
+            <div class="abrir-setor">
+              <span class="setor-alerta">Setor(es)</span>
+              <i class="fa-solid fa-plus"></i>
             </div>
+          </div>
+        </a>
+        <a href="/listaSetoresAlerta">
+          <div class="quadro alerta2">
+            <span class="tlt-alerta">Fluxo Alerta</span>
+            <span class="numero-alerta alerta">2</span>
+            <div class="abrir-setor">
+              <span class="setor-alerta">Setor(es)</span>
+              <i class="fa-solid fa-plus"></i>
+            </div>
+          </div>
+        </a>
+        <a href="/listaSetoresIdeais">
+          <div class="quadro alerta1">
+            <span class="tlt-alerta">Fluxo Ideal</span>
+            <span class="numero-alerta ideal">3</span>
+            <div class="abrir-setor">
+              <span class="setor-alerta">Setor(es)</span>
+              <i class="fa-solid fa-plus"></i>
+            </div>
+          </div>
+        </a>
+      </div>
 
+      <div class="alerta-fluxo">
+        <img src="../css/img/thumbnail_fluxo.png" alt="" srcset="" />
+      </div>
+
+      <div class="grafico-fluxo-setores">
+        <section>
+          <canvas class="grafico_setores" id="setores"></canvas>
+        </section>
+      </div>
+
+      <div class="quadro2-graficos">
+        <div class="grafico-fluxo-pesquisa">
+          <section>
+            <canvas class="grafico_filtros" id="filtros"></canvas>
+          </section>
         </div>
+        <div class="bloco-campos">
+          <div class="campos-filtros">
+            <h4 class="tlt-setores">Comparação de setor</h4>
+            <select class="setor">
+              <option selected disabled>Setor</option>
+              <option value="line">Açougue</option>
+              <option value="bar">Bebidas</option>
+              <option value="bar">Hortifruti</option>
+              <option value="bar">Padaria</option>
+              <option value="bar">Peixaria</option>
+            </select>
 
-        <div class="div-grafico-simulacao">
-            <section>
-                <canvas id="chave"></canvas>
-            </section>
+            <select class="mes">
+              <option selected disabled>Mês</option>
+              <option value="line">Janeiro</option>
+              <option value="bar">Fevereiro</option>
+              <option value="bar">Março</option>
+              <option value="bar">Dezembro</option>
+            </select>
+
+            <button class="filtrar">Filtrar</button>
+          </div>
         </div>
+      </div>
 
+      <div class="div-grafico-simulacao">
+        <section>
+          <canvas id="chaveTeste"></canvas>
+        </section>
+      </div>
     </div>
 
     <div class="footer">
-        <div class="container-footer">
-        </div>
+      <div class="container-footer"></div>
     </div>
-
-</body>
-
+  </body>
 </html>
 
-
 <script>
+  b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
-// function validarSessao() {
-//     // aguardar();
+  // function validarSessao() {
 
-//     var email = sessionStorage.EMAIL_USUARIO;
-//     var nome = sessionStorage.NOME_USUARIO;
+  //     aguardar();
 
-//     var b_usuario = document.getElementById("b_usuario");
+  //     var email = sessionStorage.EMAIL_USUARIO;
+  //     var nome = sessionStorage.NOME_USUARIO;
 
-//     if (email != null && nome != null) {
-//         // window.alert(`Seja bem-vindo, ${nome}!`);
-//         b_usuario.innerHTML = nome;
+  //     var b_usuario = document.getElementById("b_usuario");
 
-//         // finalizarAguardar();
-//     } else {
-//         window.location = "../login.html";
-//     }
-// }
+  //     if (email != null && nome != null) {
+  //         // window.alert(`Seja bem-vindo, ${nome}!`);
+  //         b_usuario.innerHTML = nome;
 
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+  //         // finalizarAguardar();
+  //     } else {
+  //         window.location = "../login.html";
+  //     }
+  // }
 
-    /* -- chave */
-    // var contextoChave = document.getElementById('chave').getContext('2d');
-    //     contextoChave.canvas.width = 1150;
-    //     contextoChave.canvas.height = 300;
-    //     var chave = new Chart(
-    //         contextoChave,
-    //         {
-    //             type: 'line',
-    //             data: {
-    //                 datasets: [{
-    //                     label: 'Movimentação',
-    //                     type: 'line',
-    //                     borderColor: ['#ffd902'],
-    //                     backgroundColor: ['#ffe135']
-    //                 }]
-    //             },
-    //             options: {
-    //                 scales: {
-    //                     xAxes: [{
-    //                         distribution: 'series',
-    //                         ticks: {
-    //                             beginAtZero: true
-    //                         }
-    //                     }],
-    //                     yAxes: [{
-    //                         scaleLabel: {
-    //                             display: true,
-    //                             labelString: 'Chave'
-    //                         },
-    //                         ticks: {
-    //                             beginAtZero: true
-    //                         }
-    //                     }]
-    //                 },
-    //                 animation: {
-    //                     duration: 0
-    //                 }
-    //             }
-    //         }
-    //     );
+  let testefk = 1;
 
-        // var paginacao = {};
-        // var tempo = {};
-        // function obterDados(grafico, endpoint) {
-        //     var http = new XMLHttpRequest();
-        //     // http.open('GET', 'http://localhost:3300/sensores/' + endpoint, false);
-        //     http.send(null);
-        //     var valores = JSON.parse(http.responseText);
-        //     if (paginacao[endpoint] == null) {
-        //         paginacao[endpoint] = 0;
-        //     }
-        //     if (tempo[endpoint] == null) {
-        //         tempo[endpoint] = 0;
-        //     }
-        //     // Exibir à partir do último elemento exibido anteriormente
-        //     var ultimaPaginacao = paginacao[endpoint];
-        //     paginacao[endpoint] = valores.length;
-        //     var valores = valores.slice(ultimaPaginacao);
-        //     valores.forEach((valor) => {
-        //         //Máximo de 60 itens exibidos no gráfico
-        //         if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
-        //             grafico.data.labels.shift();
-        //             grafico.data.datasets[0].data.shift();
-        //         }
+  let proximaAtualizacao;
 
-        //         grafico.data.labels.push(tempo[endpoint]++);
-        //         grafico.data.datasets[0].data.push(parseFloat(valor));
-        //         grafico.update();
-        //     })
-        // }
+  window.onload = obterDadosGraficos();
 
-        // setInterval(() => {
-        //     obterDados(chave, 'chave');
-        // }, 1000);
+  function obterDadosGraficos() {
+    obterDadosGrafico(1);
+    // obterDadosGrafico()
+  }
 
+  // verificar_autenticacao();
 
-    // grafico fluxos
-    var contextoSetor = document.getElementById('setores').getContext('2d');
-    contextoSetor.canvas.width = 1150;
-    contextoSetor.canvas.height = 300;
+  // function alterarTitulo(testefk) {
+  //     var tituloAquario = document.getElementById(`tituloAquario${testefk}`)
+  //     tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>Aquário " + testefk + "</span>"
+  // }
 
-    var chave = new Chart(
-        contextoSetor, {
-            type: 'bar',
-            data: { // json dos dados
-            labels: ['07:00', '07:10', '07:20', '07:30', '07:40', '07:50', '08:00', '08:10', '08:20'], // vetor do eixo X,
-
-            datasets: [{ // json e vetor
-
-                    // linha 1
-                    label: 'Padaria',
-                    data: [20,40,90,1000,20,200,500,800,450,430],
-                    borderWidth: 1,
-                    backgroundColor: 'rgba(184,134,11)',
-                },
-
-                // linha 2
-                {
-
-                    label: 'Açougue',
-                    data: [210,745,140,1005,758,140,69,210,630],
-                    borderWidth: 1,
-                    backgroundColor: 'rgba(205,92,92)',
-                },
-
-                // linha 3
-                {
-
-                    label: 'Bebidas',
-                    data: [701, 643, 222, 550, 345, 779, 162, 20, 90],
-                    borderWidth: 1,
-                    backgroundColor: 'rgba(135,206,250)',
-                },
-                // linha 3
-                {
-
-                    label: 'Higiene',
-                    data: [600, 220, 100, 180, 1000, 12, 35, 64,34],
-                    borderWidth: 1,
-                    backgroundColor: 'rgba(119,136,153)',
-                },
-                // linha 3
-                {
-
-                    label: 'Confeitaria',
-                    data: [200, 510, 452, 965, 74, 324, 466, 741,254],
-                    borderWidth: 1,
-                    backgroundColor: 'rgba(188,143,143)',
-                },
-                // linha 3
-                {
-
-                    label: 'Limpeza',
-                    data: [500, 650, 254, 20, 34, 745, 125, 225,210],
-                    borderWidth: 1,
-                    backgroundColor: 'rgba(238,232,170)',
-                },
-                // linha 3
-                {
-
-                    label: 'Bolachas',
-                    data: [210, 10, 254, 100, 788, 324, 147, 189,452],
-                    borderWidth: 1,
-                    backgroundColor: 'rgba(139,0,139)',
-                }
-
-            ],
-        },
-            options: {
-
-                tooltips: {
-                    bodyFontStyle: 'bold',
-            callbacks: {
-                label: function(tooltipItem, data) {
-                    var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                    var label = data.labels[tooltipItem.index];
-                    var message = '';
-
-                    if (value >= 420 && value <= 630 ) {
-                        message = 'Fluxo Ideal';
-                    
-                    }else if(value > 209 && value < 420){
-                        message = 'Fluxo em Alerta';
-                    
-                    }else if(value > 630 && value < 841){
-                        message = 'Fluxo em Alerta';
-                    }
-                    else if( value >= 100 && value <= 210){
-                        message = 'Fluxo Emergencial';
-                    
-                    }else if(value >= 840 && value <= 1000){
-                        message = 'Fluxo Emergencial';
-
-                    }else if(value >= 0 && value < 100 ){
-                        message = 'Fluxo Crítico';
-                    
-                    }else if(value >= 1001){
-                        message = 'Fluxo Crítico';
-                    
-                    }
-
-                    return `Hora ${label}: Fluxo de ${value} - ${message}`;
-
-                }
-            }
-            },
-                legend: {
-
-                    labels: {
-                        fontColor: 'white'
-                    }
-                },
-                scales: {
-                    xAxes: [{
-                       
-
-                        ticks: {
-                            beginAtZero: true
-
-                        }
-                    }],
-                    yAxes: [{
-                        scaleLabel: {
-                            display: true,
-                        },
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                },
-                animation: {
-                    duration: 0
-                }
-            }
-        }
-    );
-
-    // var paginacao = {};
-    // var tempo = {};
-
-    // function obterDados(grafico, endpoint) {
-    //     var http = new XMLHttpRequest();
-    //     http.open('GET', 'http://localhost:3300/sensores/' + endpoint, false);
-    //     http.send(null);
-    //     var valores = JSON.parse(http.responseText);
-    //     if (paginacao[endpoint] == null) {
-    //         paginacao[endpoint] = 0;
-    //     }
-    //     if (tempo[endpoint] == null) {
-    //         tempo[endpoint] = 0;
-    //     }
-    //     // Exibir à partir do último elemento exibido anteriormente
-    //     var ultimaPaginacao = paginacao[endpoint];
-    //     paginacao[endpoint] = valores.length;
-    //     var valores = valores.slice(ultimaPaginacao);
-    //     valores.forEach((valor) => {
-    //         //Máximo de 60 itens exibidos no gráfico
-    //         if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
-    //             grafico.data.labels.shift();
-    //             grafico.data.datasets[0].data.shift();
-    //         }
-
-    //         grafico.data.labels.push(tempo[endpoint]++);
-    //         grafico.data.datasets[0].data.push(parseFloat(valor));
-    //         grafico.update();
-    //     })
-    // }
-
-    // setInterval(() => {
-    //     obterDados(chave, 'chave');
-    // }, 1000);
-
-
-   // GRAFICO DOS FILTROS
-   var grafico_filtros = document.getElementById('filtros').getContext('2d');
-    grafico_filtros.canvas.width = 830;
-    grafico_filtros.canvas.height = 300;
-
-    new Chart(grafico_filtros, {
-        type: 'line',
-
-        data: { // json dos dados
-            labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30], // vetor do eixo X,
-
-            datasets: [{ // json e vetor
-
-                    // linha 1
-                    label: '2021',
-                    data: [20,40,90,170,800,420,630,1000,100,200,190,600,500,300,1000,20,200,500,800,450,320,210,987,985,100,456,78,341,521,640],
-                    borderWidth: 1,
-                    borderColor: 'rgba(106,90,205)',
-                },
-
-                // linha 2
-                {
-
-                    label: '2022',
-                    data: [100,250,30,150,654,500,100,845,500,210,310,477,1000,210,745,140,654,900,140,521,320,547,658,1000,130,758,140,69,210,630],
-                    borderWidth: 1,
-                    borderColor: 'rgba(173,216,230)',
-                },
-
-                // linha 3
-                {
-
-                    label: '2023',
-                    data: [950, 65, 420, 777, 112, 888, 40, 620, 930, 235, 820, 311, 530, 80, 720, 950, 299, 701, 915, 643, 222, 550, 345, 779, 162, 935, 423, 711, 888, 20],
-                    borderWidth: 1,
-                    borderColor: 'rgba( 255,255,0)',
-                }
-
-            ],
-        },
-        options: {
-            tooltips: {
-                bodyFontStyle: 'bold',
-            callbacks: {
-                label: function(tooltipItem, data) {
-                    var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                    var label = data.labels[tooltipItem.index];
-                    var message = '';
-
-                    if (value >= 420 && value <= 630 ) {
-                        message = 'Fluxo Ideal';
-                    
-                    }else if(value > 209 && value < 420){
-                        message = 'Fluxo em Alerta';
-                    
-                    }else if(value > 630 && value < 841){
-                        message = 'Fluxo em Alerta';
-                    }
-                    else if( value >= 100 && value <= 210){
-                        message = 'Fluxo Emergencial';
-                    
-                    }else if(value >= 840 && value <= 1000){
-                        message = 'Fluxo Emergencial';
-
-                    }else if(value >= 0 && value < 100 ){
-                        message = 'Fluxo Crítico';
-                    
-                    }else if(value >= 1001){
-                        message = 'Fluxo Crítico';
-                    
-                    }
-
-                    return `Dia ${label}: Fluxo de ${value} - ${message}`;
-                }
-            }
-            },
-            legend: {
-
-                labels: {
-                    fontColor: 'white'
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-
-                },
-
-            }
-        }
-    });
-
-
-// 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-
-
-    // var paginacao = {};
-    // var tempo = {};
-
-    // function obterDados(grafico, endpoint) {
-    //     var http = new XMLHttpRequest();
-    //     http.open('GET', 'http://10.18.35.234:3300/ultimas/2');
-    //     http.send(null);
-    //     var valores = JSON.parse(http.responseText);
-    //     if (paginacao[endpoint] == null) {
-    //         paginacao[endpoint] = 0;
-    //     }
-    //     if (tempo[endpoint] == null) {
-    //         tempo[endpoint] = 0;
-    //     }
-    //     // Exibir à partir do último elemento exibido anteriormente
-    //     var ultimaPaginacao = paginacao[endpoint];
-    //     paginacao[endpoint] = valores.length;
-    //     var valores = valores.slice(ultimaPaginacao);
-    //     valores.forEach((valor) => {
-    //         //Máximo de 60 itens exibidos no gráfico
-    //         if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
-    //             grafico.data.labels.shift();
-    //             grafico.data.datasets[0].data.shift();
-    //         }
-
-    //         grafico.data.labels.push(tempo[endpoint]++);
-    //         grafico.data.datasets[0].data.push(parseFloat(valor));
-    //         grafico.update();
-    //     })
-    // }
-
-    // setInterval(() => {
-    //     obterDados(chave);
-    // }, 1000);
-</script>
-
-<script>
-
-let testefk = 1
-
-let proximaAtualizacao;
-
-window.onload = obterDadosGraficos();
-
-function obterDadosGraficos() {
-    obterDadosGrafico(1)
-    obterDadosGrafico(2)
-    obterDadosGrafico(3)
-    obterDadosGrafico(4)
-}
-
-// verificar_autenticacao();
-
-// function alterarTitulo(testefk) {
-//     var tituloAquario = document.getElementById(`tituloAquario${testefk}`)
-//     tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>Aquário " + testefk + "</span>"
-// }
-
-function exibirAquario(testefk) {
-    let todosOsGraficos = document.getElementById("graficos")
+  function exibirAquario(testefk) {
+    let todosOsGraficos = document.getElementById("graficos");
 
     for (i = 1; i <= todosOsGraficos.childElementCount; i++) {
-        // exibindo - ou não - o gráfico
-        let elementoAtual = document.getElementById(`grafico${i}`)
-        if (elementoAtual.classList.contains("display-block")) {
-            elementoAtual.classList.remove("display-block")
-        }
-        elementoAtual.classList.add("display-none")
-        
-        // alterando estilo do botão
-        let btnAtual = document.getElementById(`btnAquario${i}`)
-        if (btnAtual.classList.contains("btn-pink")) {
-            btnAtual.classList.remove("btn-pink")
-        }
-        btnAtual.classList.add("btn-white")
+      // exibindo - ou não - o gráfico
+      let elementoAtual = document.getElementById(`grafico${i}`);
+      if (elementoAtual.classList.contains("display-block")) {
+        elementoAtual.classList.remove("display-block");
+      }
+      elementoAtual.classList.add("display-none");
+
+      // alterando estilo do botão
+      let btnAtual = document.getElementById(`btnAquario${i}`);
+      if (btnAtual.classList.contains("btn-pink")) {
+        btnAtual.classList.remove("btn-pink");
+      }
+      btnAtual.classList.add("btn-white");
     }
-    
+
     // exibindo - ou não - o gráfico
-    let graficoExibir = document.getElementById(`grafico${testefk}`)
-    graficoExibir.classList.remove("display-none")
-    graficoExibir.classList.add("display-block")
-    
+    let graficoExibir = document.getElementById(`grafico${testefk}`);
+    graficoExibir.classList.remove("display-none");
+    graficoExibir.classList.add("display-block");
+
     // alterando estilo do botão
-    let btnExibir = document.getElementById(`btnAquario${testefk}`)
-    btnExibir.classList.remove("btn-white")
-    btnExibir.classList.add("btn-pink")
-}
+    let btnExibir = document.getElementById(`btnAquario${testefk}`);
+    btnExibir.classList.remove("btn-white");
+    btnExibir.classList.add("btn-pink");
+  }
 
-// O gráfico é construído com três funções:
-// 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-// 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-// 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
+  // O gráfico é construído com três funções:
+  // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+  // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+  // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
 
-// Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-// para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-// A função *obterDadosGrafico* também invoca a função *plotarGrafico*
+  // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+  // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+  // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
 
-//     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-//     Para ajustar o "select", ajuste o comando sql em src/models
-function obterDadosGrafico(testefk) {
+  //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+  //     Para ajustar o "select", ajuste o comando sql em src/models
 
-    //alterarTitulo(testefk)
-
+  // OK -----------------------------------------------------------------------
+  function obterDadosGrafico(testefk) {
     if (proximaAtualizacao != undefined) {
-        clearTimeout(proximaAtualizacao);
+      clearTimeout(proximaAtualizacao);
     }
 
-    fetch(`/medidas/ultimas/${testefk}`, { cache: 'no-store' }).then(function (response) {
+    fetch(`/medidas/ultimas/${testefk}`, { cache: "no-store" })
+      .then(function (response) {
         if (response.ok) {
-            response.json().then(function (resposta) {
-                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                resposta.reverse();
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            resposta.reverse();
 
-                plotarGrafico(resposta, testefk);
-            });
+            plotarGrafico(resposta, testefk);
+          });
         } else {
-            console.error('Nenhum dado encontrado ou erro na API');
+          console.error("Nenhum dado encontrado ou erro na API");
         }
-    })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-        });
-}
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+        );
+      });
+  }
 
-// Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-// Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
-// A função *plotarGrafico* também invoca a função *atualizarGrafico*
-function plotarGrafico(resposta, testefk) {
+  // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+  // Configura o gráfico (cores, tipo, etc), materializa-o na página e,
+  // A função *plotarGrafico* também invoca a função *atualizarGrafico*
 
-    console.log('iniciando plotagem do gráfico...');
+  var statusAnteriorSetor = 0;
+  function atualizarSetor(statusAtual){
+
+    statusAtual-= statusAnteriorSetor
+
+    return statusAtual
+  }
+  var resto = 0;
+  var dadosAnteriores = []; // Array to store previous values
+
+  function plotarGrafico(resposta, testefk) {
+    console.log("iniciando plotagem do gráfico...");
 
     // Criando estrutura para plotar gráfico - labels
     let labels = [];
 
     // Criando estrutura para plotar gráfico - dados
     let dados = {
-        labels: labels,
-        datasets: [{
-            label: 'Umidade',
-            data: [],
-            fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1
-        },
+      labels: labels,
+      datasets: [
         {
-            label: 'Temperatura',
-            data: [],
-            fill: false,
-            borderColor: 'rgb(199, 52, 52)',
-            tension: 0.1
-        }]
+          label: "Padaria",
+          data: [],
+          fill: false,
+          borderWidth: 1,
+          backgroundColor: 'rgba(184,134,11)',
+          tension: 0.1,
+        },
+        // // linha 2
+        // {
+        //   label: "Açougue",
+        //   data: [210, 745, 140, 1005, 758, 140, 69, 210, 630],
+        //   borderWidth: 1,
+        //   backgroundColor: "rgba(205,92,92)",
+        // },
+
+        // // linha 3
+        // {
+        //   label: "Bebidas",
+        //   data: [701, 643, 222, 550, 345, 779, 162, 20, 90],
+        //   borderWidth: 1,
+        //   backgroundColor: "rgba(135,206,250)",
+        // },
+        // // linha 3
+        // {
+        //   label: "Higiene",
+        //   data: [600, 220, 100, 180, 1000, 12, 35, 64, 34],
+        //   borderWidth: 1,
+        //   backgroundColor: "rgba(119,136,153)",
+        // },
+        // // linha 3
+        // {
+        //   label: "Confeitaria",
+        //   data: [200, 510, 452, 965, 74, 324, 466, 741, 254],
+        //   borderWidth: 1,
+        //   backgroundColor: "rgba(188,143,143)",
+        // },
+        // // linha 3
+        // {
+        //   label: "Limpeza",
+        //   data: [500, 650, 254, 20, 34, 745, 125, 225, 210],
+        //   borderWidth: 1,
+        //   backgroundColor: "rgba(238,232,170)",
+        // },
+        // // linha 3
+        // {
+        //   label: "Bolachas",
+        //   data: [210, 10, 254, 100, 788, 324, 147, 189, 452],
+        //   borderWidth: 1,
+        //   backgroundColor: "rgba(139,0,139)",
+        // },
+      ],
     };
 
-    console.log('----------------------------------------------')
-    console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-    console.log(resposta)
+    console.log("----------------------------------------------");
+    console.log(
+      'Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":'
+    );
+    console.log(resposta);
 
     // Inserindo valores recebidos em estrutura para plotar o gráfico
+    // Inserindo valores recebidos em estrutura para plotar o gráfico
     for (i = 0; i < resposta.length; i++) {
-        var registro = resposta[i];
-        labels.push(registro.momento_grafico);
-        dados.datasets[0].data.push(registro.umidade);
-        dados.datasets[1].data.push(registro.temperatura);
-    }
+    var registro = resposta[i];
+    console.log(resto);
 
-    console.log('----------------------------------------------')
-    console.log('O gráfico será plotado com os respectivos valores:')
-    console.log('Labels:')
-    console.log(labels)
-    console.log('Dados:')
-    console.log(dados.datasets)
-    console.log('----------------------------------------------')
+    labels.push(registro.momento_grafico);
+
+    var valorAtual = registro.totalCaptacao - resto;
+    resto = registro.totalCaptacao;
+
+    var dadosCompletos = dadosAnteriores.concat([valorAtual]);
+    dadosAnteriores = dadosCompletos;
+
+    console.log("dadosAnteriores:", dadosAnteriores);
+
+    dados.datasets[0].data = dadosCompletos;
+  }
+
+    console.log("----------------------------------------------");
+    console.log("O gráfico será plotado com os respectivos valores:");
+    console.log("Labels:");
+    console.log(labels);
+    console.log("Dados:");
+    console.log(dados.datasets);
+    console.log("----------------------------------------------");
 
     // Criando estrutura para plotar gráfico - config
     const config = {
-        type: 'line',
-        data: dados,
+      type: "bar",
+      data: dados,
     };
 
     // Adicionando gráfico criado em div na tela
     let myChart = new Chart(
-        document.getElementById(`myChartCanvas${testefk}`),
-        config
+      document.getElementById(`chaveTeste`), // ???????????????????????
+      config
     );
 
     setTimeout(() => atualizarGrafico(testefk, dados, myChart), 2000);
-}
+  }
 
+  // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
+  // buscando a última medida inserida em tabela contendo as capturas,
 
-// Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-// buscando a última medida inserida em tabela contendo as capturas, 
+  //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+  //     Para ajustar o "select", ajuste o comando sql em src/models
+  function atualizarGrafico(testefk, dados, myChart) {
 
-//     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-//     Para ajustar o "select", ajuste o comando sql em src/models
-function atualizarGrafico(testefk, dados, myChart) {
+    fetch(`/medidas/tempo-real/${testefk}`, { cache: "no-store" })
 
-
-
-    fetch(`/medidas/tempo-real/${testefk}`, { cache: 'no-store' }).then(function (response) {
+      .then(function (response) {
         if (response.ok) {
-            response.json().then(function (novoRegistro) {
+          response.json().then(function (novoRegistro) {
+            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
 
-                console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                console.log(`Dados atuais do gráfico:`);
-                console.log(dados);
+            console.log(`Dados atuais do gráfico:`);
+            console.log(dados);
 
-                let avisoCaptura = document.getElementById(`avisoCaptura${testefk}`)
-                avisoCaptura.innerHTML = ""
+            let avisoCaptura = document.getElementById(
+              `avisoCaptura${testefk}`
+            );
+            avisoCaptura.innerHTML = "";
 
+            if (
+              novoRegistro[0].momento_grafico ==
+              dados.labels[dados.labels.length - 1]
+            ) {
+              console.log(
+                "---------------------------------------------------------------"
+              );
+              console.log(
+                "Como não há dados novos para captura, o gráfico não atualizará."
+              );
+              avisoCaptura.innerHTML =
+                "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará.";
+              console.log("Horário do novo dado capturado:");
+              console.log(novoRegistro[0].momento_grafico);
+              console.log("Horário do último dado capturado:");
+              console.log(dados.labels[dados.labels.length - 1]);
+              console.log(
+                "---------------------------------------------------------------"
+              );
+            } else {
+                
+              // tirando e colocando valores no gráfico
+              dados.labels.shift(); // apagar o primeiro
+              dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
 
-                if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
-                    console.log("---------------------------------------------------------------")
-                    console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                    avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
-                    console.log("Horário do novo dado capturado:")
-                    console.log(novoRegistro[0].momento_grafico)
-                    console.log("Horário do último dado capturado:")
-                    console.log(dados.labels[dados.labels.length - 1])
-                    console.log("---------------------------------------------------------------")
-                } else {
-                    // tirando e colocando valores no gráfico
-                    dados.labels.shift(); // apagar o primeiro
-                    dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+              dados.datasets[0].data.shift(); // apagar o primeiro de umidade
+              dados.datasets[0].data.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
 
-                    dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                    dados.datasets[0].data.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
+              dados.datasets[1].data.shift(); // apagar o primeiro de temperatura
+              dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
 
-                    dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
-                    dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
+              myChart.update();
+            }
 
-                    myChart.update();
-                }
-
-                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(testefk, dados, myChart), 2000);
-            });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
             // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-            proximaAtualizacao = setTimeout(() => atualizarGrafico(testefk, dados, myChart), 2000);
+            proximaAtualizacao = setTimeout(
+              () => atualizarGrafico(testefk, dados, myChart),
+              2000
+            );
+          });
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API");
+          // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+          proximaAtualizacao = setTimeout(
+            () => atualizarGrafico(testefk, dados, myChart),
+            2000
+          );
         }
-    })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-        });
-
-}
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+        );
+      });
+  }
 </script>

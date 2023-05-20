@@ -314,3 +314,8 @@
         bottom: 0;
         background-color: #4B1761;
     }
+
+    #chave{
+        width: 250px;
+        height: 250px;
+    }
