@@ -34,7 +34,7 @@
     <section class="cadastro">
         <div class="formulario">
             <h1>Cadastro</h1>
-            <form action="/api/empresa" method="post">
+            <form id="formCad">
                 <div class="containerForm">
 
 
@@ -56,10 +56,20 @@
                             <option value="Grande">Grande</option>
                         </select>
                     </span>
+                    <span class="ladoTexto">
+                        <span>Email</span>
+                        <span>Senha</span>
+                    </span>
+                    <span class="ladoAlado">
+                       
+                        <input name="emailEmpresa" id="input_email" required oninvalid="this.setCustomValidity('O Campo deve ser preenchido com o Email')" oninput="setCustomValidity('')">
+
+                        <input name="senhaEmpresa" id="input_senha" required oninvalid="this.setCustomValidity('O Campo deve ser preenchido com a Senha')" oninput="setCustomValidity('')">
+                
+                    </span>
 
                 </div>
                 <br>
-                <span class="cadastrar_novo_fun"><a style="margin-left: 25px;" href="/cadastroFuncionarioInstitucional">Cadastrar novo funcionario</a></span>
             </form>
             <button onclick="CadastrarEmpresa()">Continuar</button>
         </div>
@@ -113,15 +123,17 @@
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
         var nome_empresa = input_nomeEmpresa.value;
-        var cnpj_empresa = input_cnpj.value;
         nome_empresa = nome_empresa.toLowerCase();
+        var cnpj_empresa = input_cnpj.value;
+        var email_empresa = input_email.value;
+        var senha_empresa = input_senha.value;
+        var porte_empresa = input_porte.value;
        
 
-        if (nome_empresa.length == "" || cnpj_empresa.length == "") {
-            // cardErro.style.display = "block"
+        if (nome_empresa.length == "" || cnpj_empresa.length == "" || email_empresa.length == "" || senha_empresa.length == "" || porte_empresa.length == "") {
+            
             alert('Mensagem de erro para todos os campos em branco');
 
-            // finalizarAguardar();
             return false;
         }
         else {
@@ -129,7 +141,7 @@
         }
 
         // Enviando o valor da nova input
-        fetch("/usuarios/cadastrar", {
+        fetch("/usuarios/cadastrarEmpresa", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -138,22 +150,25 @@
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
                 nomeEmpresa: nome_empresa,
-                CnpjEmpresa: cnpj_empresa
+                cnpjEmpresa: cnpj_empresa,
+                emailEmpresa: email_empresa,
+                senhaEmpresa: senha_empresa,
+                porteEmpresa: porte_empresa,
+                fkEmpresa: sessionStorage.ID_EMPRESA
             })
         }).then(function (resposta) {
 
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                // cardErro.style.display = "block";
 
                 alert('Cadastro realizado com sucesso! Redirecionando para tela de Login...');
 
                 setTimeout(() => {
-                    window.location = "login.html";
+                    window.location = "/login"; 
                 }, "2000")
 
-                limparFormulario();
+                formCad.reset();
                 // finalizarAguardar();
             } else {
                 throw ("Houve um erro ao tentar realizar o cadastro!");
@@ -166,35 +181,4 @@
         return false;
     }
 
-    // function sumirMensagem() {
-    //     cardErro.style.display = "none"
-    // }
-
 </script>
-<!-- <script>
-
-    function CadastrarEmpresa() {
-        var nome_empresa = input_nomeEmpresa.value;
-        var cnpj_empresa = input_cnpj.value;
-        nome_empresa = nome_empresa.toLowerCase();
-        // var indice_empresa = login.indexOf(nomeEmpresa);
-
-        if (cnpj_empresa.length < 14 || cnpj_empresa.length > 14) {
-            alert(`
-                   Atenção, o CNPJ deve ter 14 caracteres!
-                   Por favor, insira um CNPJ válido!
-                `)
-        }else if(cnpj_empresa.length = 14 && nome_empresa == nome_empresa){
-
-           
-            alert(`Cadastrado com Sucesso`)
-            window.location.href = 'http://localhost:3300/cadastroFuncionarioInstitucional'
-
-        } else {
-            alert(`Falha ao cadastrar, por favor, verifique os campos preenchidos e tente novamente!`)
-        }
-        
-        
-       
-    }
-</script> -->

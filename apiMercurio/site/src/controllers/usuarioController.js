@@ -25,6 +25,7 @@ function listar(req, res) {
 }
 
 function entrar(req, res) {
+
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
 
@@ -43,6 +44,7 @@ function entrar(req, res) {
                     if (resultado.length == 1) {
                         console.log(resultado);
                         res.json(resultado[0]);
+                        console.log(resultado[0])
                     } else if (resultado.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
@@ -93,9 +95,42 @@ function cadastrar(req, res) {
     }
 }
 
+function cadastrarEmpresa(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var nomeEmpresa = req.body.nomeEmpresa;
+    var cnpjEmpresa = req.body.cnpjEmpresa;
+    var emailEmpresa = req.body.emailEmpresa;
+    var senhaEmpresa = req.body.senhaEmpresa;
+    var porteEmpresa = req.body.porteEmpresa;
+
+    // Faça as validações dos valores
+    if (nomeEmpresa == "" || cnpjEmpresa == "" || emailEmpresa == "" || senhaEmpresa == "" || senhaEmpresa == "") {
+        res.status(400).send("Preencha todos os campos");
+    } else {
+        
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.cadastrarEmpresa(nomeEmpresa, cnpjEmpresa, emailEmpresa, senhaEmpresa, senhaEmpresa)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 module.exports = {
     entrar,
     cadastrar,
     listar,
-    testar
+    testar,
+    cadastrarEmpresa
 }

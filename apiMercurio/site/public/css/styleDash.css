@@ -151,7 +151,8 @@
     }
 
     .alerta-fluxo{
-        background-color: #2d2d2d;
+        background: rgb(83, 5, 98);
+        background: linear-gradient(90deg, rgba(83, 5, 98, 1) 0%, rgba(80, 13, 142, 1) 28%, rgba(77, 6, 140, 1) 53%, rgba(0, 0, 0, 0.9859593495601365) 100%);
         border: #404040 2px solid;
         height: 10vh;
         width: 162vh;
@@ -167,21 +168,7 @@
     .grafico-fluxo-setores{
         background-color: #2d2d2d;
         border: #404040 2px solid;
-        height: 45vh;
-        width: 162vh;
-        border-radius: 10px;
-        box-shadow: -1px 3px 11px -3px #39393982;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-top: 3vh;
-    }
-
-    .div-grafico-simulacao{
-        background-color: #2d2d2d;
-        border: #404040 2px solid;
-        height: 45vh;
+        height: 50vh;
         width: 162vh;
         border-radius: 10px;
         box-shadow: -1px 3px 11px -3px #39393982;
@@ -305,6 +292,18 @@
     .abrir-setor .fa-solid{
         color: #ffffff;
     }
+
+
+    .avisoCaptura {
+        color: #ffffff;
+        font-size: 15px;
+    }
+
+    .avisoCaptura .fa-solid {
+        color: #ffffff;
+    }
+
+
     /*FOOTER  ----------------------------------------------------------------*/
 
     .footer{

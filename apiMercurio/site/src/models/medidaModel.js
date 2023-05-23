@@ -14,11 +14,15 @@ function buscarUltimasMedidas(idCaptacao, limite_linhas) {
                     order by id desc`;
   } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
 
-    instrucaoSql = `select sum(statusCaptacao) as totalCaptacao, DATE_FORMAT(dthCaptacao,'%H:%i:%s') as momento_grafico
-            from captacao
-                join sensor
-                    on fkSensor = idSensor
-			where fkSensor = ${idCaptacao} and fkSetor = ${idCaptacao} group by dthCaptacao;`;
+    instrucaoSql = `SELECT DATE_FORMAT(dthCaptacao,'%H:%i:%s') as momento_grafico, 
+    SUM(statusCaptacao) as totalCaptacao
+    FROM captacao
+    JOIN sensor on fkSensor = idSensor
+    WHERE captacao.fkSensor = ${idCaptacao} AND sensor.fkSetor = ${idCaptacao}
+    GROUP BY DATE_FORMAT(dthCaptacao,'%H:%i:%s') 
+    order by momento_grafico 
+    LIMIT ${5};`;
+
   } else {
     console.log(
       "\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n"
@@ -30,7 +34,7 @@ function buscarUltimasMedidas(idCaptacao, limite_linhas) {
   return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoReal(idSensor) {
+function buscarMedidasEmTempoReal(idCaptacao, limite_linhas) {
   instrucaoSql = "";
 
   if (process.env.AMBIENTE_PROCESSO == "producao") {
@@ -42,10 +46,16 @@ function buscarMedidasEmTempoReal(idSensor) {
                         from captacao where fk_aquario = ${idCaptacao} 
                     order by id desc`;
   } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-    instrucaoSql = `select statusCaptacao,  DATE_FORMAT(dthCaptacao,'%H:%i:%s') as momento_grafico, 
-                        fkSensor 
-                        from captacao where fkSensor = ${idSensor} 
-                    order by id desc limit 1`;
+    instrucaoSql =
+
+      instrucaoSql = `SELECT DATE_FORMAT(dthCaptacao,'%H:%i:%s') as momento_grafico, 
+      SUM(statusCaptacao) as totalCaptacao
+      FROM captacao
+      JOIN sensor on fkSensor = idSensor
+      WHERE captacao.fkSensor = ${idCaptacao} AND sensor.fkSetor = ${idCaptacao}
+      GROUP BY DATE_FORMAT(dthCaptacao,'%H:%i:%s') 
+      order by momento_grafico DESC
+      LIMIT 1;`;
   } else {
     console.log(
       "\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n"

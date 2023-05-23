@@ -100,20 +100,16 @@
 
 
     function VerificarUsuario() {
-        //aguardar();
 
         var emailVar = inputLogin.value;
         var senhaVar = inputSenha.value;
 
         if (emailVar == "" || senhaVar == "") {
-            // cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-           // finalizarAguardar();
+            
+          alert('Preencha todos os campos!')
+          
             return false;
         }
-        // else {
-        //     setInterval(sumirMensagem, 5000)
-        // }
 
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
@@ -137,10 +133,21 @@
                     console.log(json);
                     console.log(JSON.stringify(json));
 
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
-                    //sessionStorage.CPF_USUARIO = json.cpf;
+                    if(json.emailEmpresa != ""){
+
+                        console.log(json)
+
+                    sessionStorage.EMAIL_EMPRESA = json.emailEmpresa;
+                    sessionStorage.NOME_EMPRESA = json.razaoSocial;
+                    sessionStorage.ID_EMPRESA = json.fkEmpresa;
+
+                    }else{
+
+                    sessionStorage.EMAIL_USUARIO = json.emailUsuario;
+                    sessionStorage.NOME_USUARIO = json.nomeUsuario;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
+
+                    }
 
                     setTimeout(function () {
                         window.location.href = `http://localhost:3300/dashboard`
@@ -164,46 +171,4 @@
 
         return false;
     }
-
-    // function sumirMensagem() {
-    //     cardErro.style.display = "none"
-    // }
-
 </script>
-
-<!-- <script>
-
-    function VerificarUsuario(){
-
-        var usuario = inputLogin.value;
-        var senha = inputSenha.value;
-        var validacaoUser = usuario == "fernando.brandao@sptech.school" 
-        var validacaoSenha = senha == "12345678";
-
-        
-
-        if(validacaoUser && validacaoSenha){
-
-            alert(`
-                   Usuário autenticado com sucesso!
-                   Redirecionando para o DashBoard!`)
-                   window.location.href = `http://localhost:3300/dashboard`
-                   
-        } else if(validacaoUser && !validacaoSenha){
-
-            alert(`
-                    Senha incorreta, insira uma senha válida e tente novamente!
-                `)
-        } else if (!validacaoUser && validacaoSenha){
-
-            alert(`E-mail incorreto, insira um e-mail válido e tente novamente!`)
-        } else {
-            alert(`Usuário e senha incorretos, por favor, verifique suas credenciais e tente novamente!`)
-        }
-
-
-    }
-
-
-
-</script> -->
