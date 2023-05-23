@@ -70,14 +70,16 @@ function cadastrar(req, res) {
     var cpfUsuario = req.body.cpfServer;
     var dtNascUsuario = req.body.dtNascimentoServer;
     var nivelUsuario = req.body.nivelUsuarioServer;
+    var fkEmpresaUsuario = req.body.fkEmpresaServer;
 
     // Faça as validações dos valores
-    if (nomeUsuario == undefined || emailUsuario == undefined || senhaUsuario == undefined || cpfUsuario == undefined || dtNascUsuario == undefined) {
+    if (nomeUsuario == undefined || emailUsuario == undefined || senhaUsuario == undefined || cpfUsuario == undefined || dtNascUsuario == undefined || fkEmpresaUsuario == undefined) {
+
         res.status(400).send("Preencha todos os campos");
     } else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nomeUsuario, senhaUsuario, emailUsuario, nivelUsuario, cpfUsuario, dtNascUsuario)
+        usuarioModel.cadastrar(nomeUsuario, senhaUsuario, emailUsuario, nivelUsuario, cpfUsuario, dtNascUsuario, fkEmpresaUsuario)
             .then(
                 function (resultado) {
                     res.json(resultado);

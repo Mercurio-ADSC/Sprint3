@@ -521,14 +521,13 @@
       },
     },
   });
-</script>
-
-<script>
+  
   // **************************************************** ALERTAS ****************************************************************
 
   var alertas = [];
 
 function obterdados(idCaptacao) {
+  
     fetch(`/medidas/tempo-real/${idCaptacao}`)
         .then(resposta => {
 
