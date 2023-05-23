@@ -137,6 +137,8 @@
               <option value="bar">Dezembro</option>
             </select>
 
+            <div id="alerta"></div>
+
             <button class="filtrar">Filtrar</button>
           </div>
         </div>
@@ -519,4 +521,161 @@
       },
     },
   });
+</script>
+
+<script>
+  // **************************************************** ALERTAS ****************************************************************
+
+  var alertas = [];
+
+function obterdados(idCaptacao) {
+    fetch(`/medidas/tempo-real/${idCaptacao}`)
+        .then(resposta => {
+
+            if (resposta.ok) {
+                resposta.json().then(resposta => {
+
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    alertar(resposta, idCaptacao);
+                });
+            } else {
+
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
+        });
+
+}
+
+function alertar(resposta, idCaptacao) {
+    var statusCaptacao = resposta[0].startusCaptacao;
+
+    console.log(idCaptacao === resposta[0].fkSensor)
+    
+    var grauDeAviso ='';
+
+
+    var limites = {
+        criticoMenos : 100,
+        emergenciaMenos: 101,
+        alertaMenos: 210,
+        idealMenos: 420,
+        idealMais: 630,
+        alertaMais: 840,
+        emergenciaMais: 841,
+        criticoMais: 1001
+    };
+
+    var classe_temperatura = 'cor-alerta';
+
+    if (statusCaptacao >= limites.criticoMais) {
+        classe_temperatura = 'cor-alerta perigo-quente';
+        grauDeAviso = 'perigo quente'
+        grauDeAvisoCor = 'cor-alerta perigo-quente'
+        exibirAlerta(statusCaptacao, idCaptacao, grauDeAviso, grauDeAvisoCor)
+    }
+    else if (statusCaptacao < limites.criticoMais && statusCaptacao >= limites.emergenciaMais) {
+        classe_temperatura = 'cor-alerta alerta-quente';
+        grauDeAviso = 'alerta quente'
+        grauDeAvisoCor = 'cor-alerta alerta-quente'
+        exibirAlerta(temp, idCaptacao, grauDeAviso, grauDeAvisoCor)
+    }
+    else if (statusCaptacao < limites.emergenciaMais && statusCaptacao > limites.alertaMais) {
+        classe_temperatura = 'cor-alerta ideal';
+        removerAlerta(idCaptacao);
+    }
+    else if (statusCaptacao <= limites.alertaMais && statusCaptacao > limites.idealMais) {
+        classe_temperatura = 'cor-alerta alerta-frio';
+        grauDeAviso = 'alerta frio'
+        grauDeAvisoCor = 'cor-alerta alerta-frio'
+        exibirAlerta(temp, idCaptacao, grauDeAviso, grauDeAvisoCor)
+    }
+    else if (statusCaptacao <= limites.idealMais && statusCaptacao > limites.idealMenos) {
+        classe_temperatura = 'cor-alerta alerta-frio';
+        grauDeAviso = 'alerta frio'
+        grauDeAvisoCor = 'cor-alerta alerta-frio'
+        exibirAlerta(temp, idCaptacao, grauDeAviso, grauDeAvisoCor)
+    }
+    else if (statusCaptacao <= limites.idealMenos && statusCaptacao > limites.alertaMenos) {
+        classe_temperatura = 'cor-alerta alerta-frio';
+        grauDeAviso = 'alerta frio'
+        grauDeAvisoCor = 'cor-alerta alerta-frio'
+        exibirAlerta(temp, idCaptacao, grauDeAviso, grauDeAvisoCor)
+    }
+    else if (statusCaptacao <= limites.alertaMenos && statusCaptacao > limites.emergenciaMenos) {
+        classe_temperatura = 'cor-alerta alerta-frio';
+        grauDeAviso = 'alerta frio'
+        grauDeAvisoCor = 'cor-alerta alerta-frio'
+        exibirAlerta(temp, idCaptacao, grauDeAviso, grauDeAvisoCor)
+    }
+    else if (statusCaptacao <= limites.criticoMenos) {
+        classe_temperatura = 'cor-alerta perigo-frio';
+        grauDeAviso = 'perigo frio'
+        grauDeAvisoCor = 'cor-alerta perigo-frio'
+        exibirAlerta(temp, idCaptacao, grauDeAviso, grauDeAvisoCor)
+    }
+
+    var card;
+
+    if (idCaptacao == 1) {
+        temp_aquario_1.innerHTML = statusCaptacao + "°C";
+        card = card_1
+    } else if (idCaptacao == 2) {
+        temp_aquario_2.innerHTML = statusCaptacao + "°C";
+        card = card_2
+    } else if (idCaptacao == 3) {
+        temp_aquario_3.innerHTML = statusCaptacao + "°C";
+        card = card_3
+    } else if (idCaptacao == 4) {
+        temp_aquario_4.innerHTML = statusCaptacao + "°C";
+        card = card_4
+    }
+
+    card.className = classe_temperatura;
+}
+
+function exibirAlerta(temp, idCaptacao, grauDeAviso, grauDeAvisoCor) {
+    var indice = alertas.findIndex(item => item.idCaptacao == idCaptacao);
+
+    if (indice >= 0) {
+        alertas[indice] = { idCaptacao, temp, grauDeAviso, grauDeAvisoCor }
+    } else {
+        alertas.push({ idCaptacao, temp, grauDeAviso, grauDeAvisoCor });
+    }
+
+    exibirCards();
+    
+// Dentro da div com classe grauDeAvisoCor há um caractere "invisível", 
+// que pode ser inserido clicando com o seu teclado em alt+255 ou pelo código adicionado acima.
+}
+
+function removerAlerta(idCaptacao) {
+    alertas = alertas.filter(item => item.idCaptacao != idCaptacao);
+    exibirCards();
+}
+ 
+function exibirCards() {
+    alerta.innerHTML = '';
+
+    for (var i = 0; i < alertas.length; i++) {
+        var mensagem = alertas[i];
+        alerta.innerHTML += transformarEmDiv(mensagem);
+    }
+}
+
+function transformarEmDiv({ idCaptacao, statusCaptacao, grauDeAviso, grauDeAvisoCor }) {
+    return `<div class="mensagem-alarme">
+    <div class="informacao">
+    <div class="${grauDeAvisoCor}">&#12644;</div> 
+     <h3>Aquário ${idCaptacao} está em estado de ${grauDeAviso}!</h3>
+    <small>Temperatura ${startusCaptacao}.</small>   
+    </div>
+    <div class="alarme-sino"></div>
+    </div>`;
+}
+
+
 </script>
