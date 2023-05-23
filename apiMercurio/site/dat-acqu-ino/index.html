@@ -41,12 +41,13 @@
               ></i>
               <span id="b_usuario"></span></a
             >
+            <span id="funcao_usuario" style="color: #ffffff; font-weight: bold">Função</span>
           </li>
           
 
-          <a href="/cadastroFuncionario">
+          <a>
             <li class="img-conf">
-              <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i>
+              <i onclick="limparSessao()" class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i>
             </li>
           </a>
         </ul>
@@ -153,6 +154,19 @@
 
 <script>
 
+  
+function limparSessao() {
+    // aguardar();
+    sessionStorage.clear();
+    // finalizarAguardar();
+    window.location = "/login";
+}
+1
+
+var nivel = sessionStorage.FUNCAO;
+
+funcao_usuario.innerHTML = nivel;
+
   function validarSessao() {
 
       // aguardar();
@@ -164,10 +178,31 @@
       
       if(sessionStorage.NOME_EMPRESA){
 
-        b_usuario.innerHTML = sessionStorage.NOME_EMPRESA;
+
+        var nome = sessionStorage.NOME_EMPRESA;
+        var primeiroNome = '';
+
+        for(var i = 0; i < nome.length; i++){
+        primeiroNome += nome[i]
+        if(nome[i] == ' '){
+         break
+        }
+      }
+
+b_usuario.innerHTML = primeiroNome;
         
       }else if(sessionStorage.NOME_USUARIO){
-        b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+        var nome = sessionStorage.NOME_USUARIO;
+        var primeiroNome = '';
+
+        for(var i = 0; i < nome.length; i++){
+        primeiroNome += nome[i]
+        if(nome[i] == ' '){
+         break
+        }
+      }
+
+b_usuario.innerHTML = primeiroNome;
       }
   }
 
