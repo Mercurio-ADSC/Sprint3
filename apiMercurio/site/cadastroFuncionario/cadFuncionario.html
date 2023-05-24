@@ -107,29 +107,28 @@
 
 <script>
 
-function cadastrarFuncionario(){
+function irLogar(){
 
     var DadosUsuario = {
-
         nomeVar: input_nome_usuario.value,
         dataNascimentoVar: input_dtNasc_usuario.value,
         cpfVar: input_cpf_usuario.value,
         emailVar: input_email_usuario.value,
         senhaVar: input_senha_usuario.value,
-        funcaoVar: input_funcao.value,
-        fkEmpresa: sessionStorage.ID_EMPRESA
+        funcaoVar: input_funcao.value
     };
        
 
-        // if (DadosUsuario.nomeVar == "" || DadosUsuario.dataNascimentoVar == "" || DadosUsuario.cpfVar == "" || DadosUsuario.emailVar == "" || DadosUsuario.emailVar == "" || DadosUsuario.senhaVar == "" || DadosUsuario.funcaoVar == "" || DadosUsuario.fkEmpresa == "") {
-            
-        //     aguardar();
+        if (DadosUsuario.emailVar.length == "" || DadosUsuario.senhaVar.length == "") {
+            // cardErro.style.display = "block"
+            alert('Mensagem de erro para todos os campos em branco');
 
-        //     return false;
-        // }
-        // else {
-        //     setInterval(5000)
-        // }
+            // finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(5000)
+        }
 
         // Enviando o valor da nova input
         fetch("/usuarios/cadastrar", {
@@ -145,8 +144,7 @@ function cadastrarFuncionario(){
                 nomeServer: DadosUsuario.nomeVar,
                 nivelUsuarioServer: DadosUsuario.funcaoVar,
                 cpfServer: DadosUsuario.cpfVar,
-                dtNascimentoServer: DadosUsuario.dataNascimentoVar,
-                fkEmpresaServer: DadosUsuario.fkEmpresa
+                dtNascimentoServer: DadosUsuario.dataNascimentoVar
             })
         }).then(function (resposta) {
 

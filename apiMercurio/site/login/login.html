@@ -1,175 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mercúrio - Entrar</title>
-    <link rel="stylesheet" href="../css/styleLogin.css">
+    <link rel="stylesheet" href="../css/styleLogin.css" />
 
-    <link rel="icon" type="image/png" href="/css/img/asinha.png"/>
-    
-    <script src="https://kit.fontawesome.com/22cb63056a.js" crossorigin="anonymous"></script>
-</head>
+    <link rel="icon" type="image/png" href="/css/img/asinha.png" />
 
-<body>
+    <script
+      src="https://kit.fontawesome.com/22cb63056a.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
     <div class="header">
-        <div class="container">
-            <div class="logo-header"><img src="/css/img/LOGO_COMPLETA.png" alt=""> </div>
-            <ul class="navbar">
-                <li><a style="width: 110px;" href="/home">Home</a></li>
-                <li><a style="width: 180px;" href="/quemSomos">Quem Somos</a></li>
-                <li><a style="width: 180px;" href="">Simulador</a></li>
-                <li><a style="width: 180px; color: #DEC43B;" href="/cadastro">Cadastre-se</a></li>
-                <li class="btn-login"><a style="width: 110px;" href="/login">Login</a></li>
-            </ul>
+      <div class="container">
+        <div class="logo-header">
+          <img src="/css/img/LOGO_COMPLETA.png" alt="" />
         </div>
+        <ul class="navbar">
+          <li><a style="width: 110px" href="/home">Home</a></li>
+          <li><a style="width: 180px" href="/quemSomos">Quem Somos</a></li>
+          <li><a style="width: 180px" href="">Simulador</a></li>
+          <li>
+            <a style="width: 180px; color: #dec43b" href="/cadastro"
+              >Cadastre-se</a
+            >
+          </li>
+          <li class="btn-login">
+            <a style="width: 110px" href="/login">Login</a>
+          </li>
+        </ul>
+      </div>
     </div>
-
-
 
     <section class="login">
+      <div class="formulario">
+        <h1>Login</h1>
+        <form>
+          <input
+            placeholder="fernando.brandao@sptech.school"
+            class="input email"
+            name="emailUsuario"
+            type="text"
+            id="inputLogin"
+            required
+            oninvalid="this.setCustomValidity('O campo e-mail está vazio')"
+            oninput="setCustomValidity('')"
+          />
+          <i class="fa-solid fa-user icon" style="color: #4f4f4f"></i><br />
 
-        <div class="formulario">
-            <h1> Login</h1>
-                     <form> 
+          <input
+            placeholder="********"
+            type="password"
+            name="senhaUsuario"
+            class="input senha"
+            id="inputSenha"
+            required
+            oninvalid="this.setCustomValidity('O campo senha está vazio')"
+            oninput="setCustomValidity('')"
+          />
+          <i class="fa-solid fa-lock icon" style="color: #4f4f4f"></i> <br />
 
-                <input placeholder="fernando.brandao@sptech.school" class="input email" name="emailUsuario" type="text"
-                    id="inputLogin" required oninvalid="this.setCustomValidity('O campo e-mail está vazio')" oninput="setCustomValidity('')">
-                <i class="fa-solid fa-user icon" style="color: #4f4f4f;"></i><br>
+          <div class="links-form">
+            <a href="/recuperarSenha" style="color: #4b1761"
+              >Esqueceu a senha?</a
+            >
+            <br />
 
-                <input placeholder="********" type="password" name="senhaUsuario" class="input senha " id="inputSenha"  required oninvalid="this.setCustomValidity('O campo senha está vazio')" oninput="setCustomValidity('')">
-                <i class="fa-solid fa-lock icon" style="color: #4f4f4f;"></i> <br>
+            <span>
+              Não é cadastrado?
+              <a href="/cadastro" style="color: #4b1761"> Cadastre-se</a></span
+            >
+          </div>
+        </form>
 
-                <div class="links-form">
-                    <a href="/recuperarSenha" style="color:#4B1761;">Esqueceu a senha?</a> <br>
-
-                    <span> Não é cadastrado? <a href="/cadastro" style="color:#4B1761;">
-                            Cadastre-se</a></span>
-                </div>
-
-            </form>
-
-            <button id="teste" onclick="VerificarUsuario()">Entrar</button>
-    
-        </div>
+        <button id="teste" onclick="VerificarUsuario()">Entrar</button>
+      </div>
     </section>
 
-
     <div class="footer">
-        <div class="container-footer">
+      <div class="container-footer">
+        <div class="empresa">
+          <div class="logo-footer">
+            <img src="/css/img/LOGO_COMPLETA.png" alt="" srcset="" />
+          </div>
 
-            <div class="empresa">
-                <div class="logo-footer"><img src="/css/img/LOGO_COMPLETA.png" alt="" srcset=""></div>
-
-                <div class="redes">
-                    <a href=""><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a>
-                    <a href=""><i class="fa-brands fa-facebook" style="color: #ffffff;"></i></a>
-                    <a href=""><i class="fa-brands fa-youtube" style="color: #ffffff;"></i></a>
-                    <a href=""><i class="fa-brands fa-twitter" style="color: #ffffff;"></i></a>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="paginas-footer">
-                <div class="paginas">
-
-                    <ul>
-                        <li><a href="/home">Home</a></li>
-                        <li><a href="">Simulador</a></li>
-                        <li><a style="color:#DEC43B" ; href="/cadastro">Cadastre-se</a></li>
-                    </ul>
-                </div>
-
-                <div class="informacoes">
-                    <ul>
-                        <li><a href="/quemSomos">Quem Somos</a></li>
-                        <li><a href="">Fale conosco</a></li>
-                    </ul>
-                </div>
-            </div>
+          <div class="redes">
+            <a href=""
+              ><i class="fa-brands fa-instagram" style="color: #ffffff"></i
+            ></a>
+            <a href=""
+              ><i class="fa-brands fa-facebook" style="color: #ffffff"></i
+            ></a>
+            <a href=""
+              ><i class="fa-brands fa-youtube" style="color: #ffffff"></i
+            ></a>
+            <a href=""
+              ><i class="fa-brands fa-twitter" style="color: #ffffff"></i
+            ></a>
+          </div>
         </div>
-    </div>
-</body>
 
+        <hr />
+
+        <div class="paginas-footer">
+          <div class="paginas">
+            <ul>
+              <li><a href="/home">Home</a></li>
+              <li><a href="">Simulador</a></li>
+              <li>
+                <a style="color: #dec43b" ; href="/cadastro">Cadastre-se</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="informacoes">
+            <ul>
+              <li><a href="/quemSomos">Quem Somos</a></li>
+              <li><a href="">Fale conosco</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
 
 <script>
+  function VerificarUsuario() {
+    var emailVar = inputLogin.value;
+    var senhaVar = inputSenha.value;
 
+    if (emailVar == "" || senhaVar == "") {
+      alert("Preencha todos os campos!");
 
-    function VerificarUsuario() {
+      return false;
+    }
 
-        var emailVar = inputLogin.value;
-        var senhaVar = inputSenha.value;
+    console.log("FORM LOGIN: ", emailVar);
+    console.log("FORM SENHA: ", senhaVar);
 
-        if (emailVar == "" || senhaVar == "") {
-            
-          alert('Preencha todos os campos!')
-          
-            return false;
-        }
+    fetch("/usuarios/autenticar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!");
 
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
+        if (resposta.ok) {
+          console.log(resposta);
 
-        fetch("/usuarios/autenticar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            })
-        }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
+          resposta.json().then((json) => {
+            console.log(json);
+            console.log(JSON.stringify(json));
 
-            if (resposta.ok) {
-                console.log(resposta);
-
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-
-                    if(json.emailEmpresa != ""){
-
-                        console.log(json)
-
-                    sessionStorage.EMAIL_EMPRESA = json.emailEmpresa;
-                    sessionStorage.NOME_EMPRESA = json.razaoSocial;
-                    sessionStorage.ID_EMPRESA = json.fkEmpresa;
-                    sessionStorage.FUNCAO = 'Administrador';
-
-                    }else{
-
-                    sessionStorage.EMAIL_USUARIO = json.emailUsuario;
-                    sessionStorage.NOME_USUARIO = json.nomeUsuario;
-                    sessionStorage.ID_USUARIO = json.idUsuario;
-
-                    }
-
-                    setTimeout(function () {
-                        window.location.href = `http://localhost:3300/dashboard`
-                    }, 1000); // apenas para exibir o loading
-
-                });
-
+            if (json.emailEmpresa != null) {
+              console.log(json);
+              sessionStorage.EMAIL_EMPRESA = json.emailEmpresa;
+              sessionStorage.NOME_EMPRESA = json.razaoSocial;
+              sessionStorage.ID_EMPRESA = json.fkEmpresa;
+              sessionStorage.FUNCAO = "Administrador";
             } else {
-
-                console.log("Houve um erro ao tentar realizar o login!");
-
-                resposta.text().then(texto => {
-                    console.error(texto);
-                   // finalizarAguardar(texto);
-                });
+              console.log(json);
+              sessionStorage.EMAIL_EMPRESA = json.emailUsuario; // corrected key
+              sessionStorage.NOME_EMPRESA = json.nomeUsuario; // corrected key
+              sessionStorage.ID_EMPRESA = json.idUsuario; // corrected key
+              sessionStorage.FUNCAO = json.nivelUsuario; // corrected key
             }
 
-        }).catch(function (erro) {
-            console.log(erro);
-        })
+            setTimeout(function () {
+                window.location.href = `http://localhost:3300/dashboard`
+            }, 1000); // apenas para exibir o loading
+          });
+        } else {
+          console.log("Houve um erro ao tentar realizar o login!");
 
-        return false;
-    }
+          resposta.text().then((texto) => {
+            console.error(texto);
+            // finalizarAguardar(texto);
+          });
+        }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+      });
+
+    return false;
+  }
 </script>

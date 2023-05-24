@@ -28,16 +28,17 @@
           <img src="../css/img/LOGO_COMPLETA.png" alt="" />
         </div>
         <ul class="navbar">
-          <a href="/cadastroFuncionario">
+          <a href="/cadastroFuncionario" id="cadastrarNovoFunc">
             <li class="img-conf">
               <i class="fa-solid fa-user-plus" style="color: #ffffff"></i>
-            </li>
+            </li>Cadastrar Funcionário&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </a>
           
-            <a style="width: 110px" href="">
-              <i
+            <a style="width: 110px" href="" >
+              <i 
                 class="fa-solid fa-circle-user fa-lg"
-                style="color: #ffffff"
+                style="color: #ffffff;
+                margin-right: -3vh;"
               ></i>
               <span id="b_usuario"></span></a
             >
@@ -46,7 +47,7 @@
           
 
           <a>
-            <li class="img-conf">
+            <li class="img-conf">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sair&nbsp;
               <i onclick="limparSessao()" class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i>
             </li>
           </a>
@@ -154,6 +155,14 @@
 
 <script>
 
+if(sessionStorage.NOME_EMPRESA == undefined && sessionStorage.NOME_USUARIO == undefined){
+        window.location = "/login";
+      }
+
+if(sessionStorage.FUNCAO == 'Colaborador'){
+  cadastrarNovoFunc.style.visibility = 'hidden'
+}
+
   
 function limparSessao() {
     // aguardar();
@@ -203,7 +212,8 @@ b_usuario.innerHTML = primeiroNome;
       }
 
 b_usuario.innerHTML = primeiroNome;
-      }
+
+    }
   }
 
   validarSessao()
@@ -556,13 +566,14 @@ b_usuario.innerHTML = primeiroNome;
       },
     },
   });
-  
+</script>
+
+<script>
   // **************************************************** ALERTAS ****************************************************************
 
   var alertas = [];
 
 function obterdados(idCaptacao) {
-  
     fetch(`/medidas/tempo-real/${idCaptacao}`)
         .then(resposta => {
 
