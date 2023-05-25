@@ -30,9 +30,12 @@
 
     <div class="container">
         <div class="formulario">
-            <h1> Cadastre um novo colaborador</h1>
-
-            <form>
+            <div class="div_titulo">
+                <h1> Cadastre um novo colaborador</h1>
+            </div>
+            
+            <div class="inputs">
+                <div class="primeiraParte">
                 <p>Nome completo:</p>
                 <input placeholder="" name="nomeServer" class="input-campo-um" type="text" id="input_nome_usuario" required oninvalid="this.setCustomValidity('O campo nome está vazio')" oninput="setCustomValidity('')">
                 <br>
@@ -42,6 +45,8 @@
                 <p>Cpf:</p>
                 <input placeholder="" name="cpfServer" class="input-campo-tres" type="text" id="input_cpf_usuario" required oninvalid="this.setCustomValidity('O campo cpf está vazio')" oninput="setCustomValidity('')">
                 <br>
+            </div>
+            <div class="segundaParte">
                 <p>Email:</p>
                 <input placeholder="" name="emailServer" class="input-campo-quatro" type="text" id="input_email_usuario" required oninvalid="this.setCustomValidity('O campo e-mail está vazio')" oninput="setCustomValidity('')">
                 <br>
@@ -54,12 +59,13 @@
                     <option value="Administrador">Administrador</option>
                     <option value="Colaborador">Colaborador</option>
                 </select>
+            </div>
+        </div>
 
-
-            </form>
             
-            <button onclick="irLogar()">Cadastrar</button>
-
+            <div class="div_botao">
+                <button onclick="irLogar()">Cadastrar</button>
+            </div>
         </div>
     </div>
 

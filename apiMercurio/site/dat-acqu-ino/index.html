@@ -19,32 +19,36 @@
   <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
 </head>
 
-<body onload="validarSessao()">
-  <div class="header">
-    <div class="container">
-      <div class="logo-header">
-        <img src="../css/img/LOGO_COMPLETA.png" alt="" />
+  <body onload="validarSessao()">
+    <div class="header">
+      <div class="container">
+        <div class="logo-header">
+          <img src="../css/img/LOGO_COMPLETA.png" alt="" />
+        </div>
+        <ul class="navbar">
+          <a href="/cadastroFuncionario">
+            <li class="img-conf">
+              <i class="fa-solid fa-user-plus" style="color: #ffffff"></i>
+            </li>
+          </a>
+          
+            <a style="width: 110px" href="">
+              <i
+                class="fa-solid fa-circle-user fa-lg"
+                style="color: #ffffff"
+              ></i>
+              <span id="b_usuario"></span></a
+            >
+          </li>
+          
+
+          <a href="/cadastroFuncionario">
+            <li class="img-conf">
+              <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i>
+            </li>
+          </a>
+        </ul>
       </div>
-      <ul class="navbar">
-        <a href="/cadastroFuncionario">
-          <li class="img-conf">
-            <i class="fa-solid fa-user-plus" style="color: #ffffff"></i>
-          </li>
-        </a>
-
-        <a style="width: 110px" href="">
-          <i class="fa-solid fa-circle-user fa-lg" style="color: #ffffff"></i>
-          <span id="b_usuario"></span></a>
-        </li>
-
-
-        <a href="/cadastroFuncionario">
-          <li class="img-conf">
-            <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i>
-          </li>
-        </a>
-      </ul>
-    </div>
 
     <div class="linha-amarela"></div>
   </div>
@@ -148,6 +152,27 @@
 
 <script>
 
+if(sessionStorage.NOME_EMPRESA == undefined && sessionStorage.NOME_USUARIO == undefined){
+        window.location = "/login";
+      }
+
+if(sessionStorage.FUNCAO == 'Colaborador'){
+  cadastrarNovoFunc.style.visibility = 'hidden'
+}
+
+  
+function limparSessao() {
+    // aguardar();
+    sessionStorage.clear();
+    // finalizarAguardar();
+    window.location = "/login";
+}
+1
+
+var nivel = sessionStorage.FUNCAO;
+
+funcao_usuario.innerHTML = nivel;
+
   function validarSessao() {
 
     // aguardar();
@@ -159,11 +184,11 @@
 
     if (sessionStorage.NOME_EMPRESA) {
 
-      b_usuario.innerHTML = sessionStorage.NOME_EMPRESA;
-
-    } else if (sessionStorage.NOME_USUARIO) {
-      b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-    }
+        b_usuario.innerHTML = sessionStorage.NOME_EMPRESA;
+        
+      }else if(sessionStorage.NOME_USUARIO){
+        b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+      }
   }
 
   validarSessao()
