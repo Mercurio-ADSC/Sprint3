@@ -1,179 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mercúrio | Dashboard</title>
 
-    <script
-      src="https://kit.fontawesome.com/22cb63056a.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="icon" type="image/png" href="/css/img/asinha.png" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mercúrio | Dashboard</title>
 
-    <link rel="stylesheet" href="../css/styleDash.css" />
-    <script type="application/json" src="../js/funcoes.js"></script>
+  <script src="https://kit.fontawesome.com/22cb63056a.js" crossorigin="anonymous"></script>
+  <link rel="icon" type="image/png" href="/css/img/asinha.png" />
 
-    <!-- links dashboard -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-    <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
-    <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
-  </head>
+  <link rel="stylesheet" href="../css/styleDash.css" />
+  <script type="application/json" src="../js/funcoes.js"></script>
 
-  <body onload="validarSessao()">
-    <div class="header">
-      <div class="container">
-        <div class="logo-header">
-          <img src="../css/img/LOGO_COMPLETA.png" alt="" />
-        </div>
-        <ul class="navbar">
-          <a href="/cadastroFuncionario">
-            <li class="img-conf">
-              <i class="fa-solid fa-user-plus" style="color: #ffffff"></i>
-            </li>
-          </a>
-          
-            <a style="width: 110px" href="">
-              <i
-                class="fa-solid fa-circle-user fa-lg"
-                style="color: #ffffff"
-              ></i>
-              <span id="b_usuario"></span></a
-            >
+  <!-- links dashboard -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
+  <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+</head>
+
+<body onload="validarSessao()">
+  <div class="header">
+    <div class="container">
+      <div class="logo-header">
+        <img src="../css/img/LOGO_COMPLETA.png" alt="" />
+      </div>
+      <ul class="navbar">
+        <a href="/cadastroFuncionario">
+          <li class="img-conf">
+            <i class="fa-solid fa-user-plus" style="color: #ffffff"></i>
           </li>
-          
+        </a>
 
-          <a href="/cadastroFuncionario">
-            <li class="img-conf">
-              <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i>
-            </li>
-          </a>
-        </ul>
-      </div>
+        <a style="width: 110px" href="">
+          <i class="fa-solid fa-circle-user fa-lg" style="color: #ffffff"></i>
+          <span id="b_usuario"></span></a>
+        </li>
 
-      <div class="linha-amarela"></div>
+
+        <a href="/cadastroFuncionario">
+          <li class="img-conf">
+            <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i>
+          </li>
+        </a>
+      </ul>
     </div>
 
-    <div class="corpo">
-      <div class="alertas">
-        <a href="/listaSetoresCriticos">
-          <div class="quadro alerta4">
-            <span class="tlt-alerta">Fluxo Crítico</span>
-            <span class="numero-alerta critico">1</span>
-            <div class="abrir-setor">
-              <span class="setor-alerta">Setor(es)</span>
-              <i class="fa-solid fa-plus"></i>
-            </div>
-          </div>
-        </a>
-        <a href="/listaSetoresEmergenciais">
-          <div class="quadro alerta3">
-            <span class="tlt-alerta">Fluxo Emergencial</span>
-            <span class="numero-alerta emergencia">1</span>
-            <div class="abrir-setor">
-              <span class="setor-alerta">Setor(es)</span>
-              <i class="fa-solid fa-plus"></i>
-            </div>
-          </div>
-        </a>
-        <a href="/listaSetoresAlerta">
-          <div class="quadro alerta2">
-            <span class="tlt-alerta">Fluxo Alerta</span>
-            <span class="numero-alerta alerta">2</span>
-            <div class="abrir-setor">
-              <span class="setor-alerta">Setor(es)</span>
-              <i class="fa-solid fa-plus"></i>
-            </div>
-          </div>
-        </a>
-        <a href="/listaSetoresIdeais">
-          <div class="quadro alerta1">
-            <span class="tlt-alerta">Fluxo Ideal</span>
-            <span class="numero-alerta ideal">3</span>
-            <div class="abrir-setor">
-              <span class="setor-alerta">Setor(es)</span>
-              <i class="fa-solid fa-plus"></i>
-            </div>
-          </div>
-        </a>
-      </div>
+    <div class="linha-amarela"></div>
+  </div>
 
-      <div class="alerta-fluxo">
-        <img src="../css/img/thumbnail_fluxo.png" alt="" srcset="" />
-      </div>
+  <div class="corpo">
+    <div class="alertas">
+      <a href="/listaSetoresCriticos">
+        <div class="quadro alerta4">
+          <span class="tlt-alerta">Fluxo Crítico</span>
+          <span class="numero-alerta critico">1</span>
+          <div class="abrir-setor">
+            <span class="setor-alerta">Setor(es)</span>
+            <i class="fa-solid fa-plus"></i>
+          </div>
+        </div>
+      </a>
+      <a href="/listaSetoresEmergenciais">
+        <div class="quadro alerta3">
+          <span class="tlt-alerta">Fluxo Emergencial</span>
+          <span class="numero-alerta emergencia">1</span>
+          <div class="abrir-setor">
+            <span class="setor-alerta">Setor(es)</span>
+            <i class="fa-solid fa-plus"></i>
+          </div>
+        </div>
+      </a>
+      <a href="/listaSetoresAlerta">
+        <div class="quadro alerta2">
+          <span class="tlt-alerta">Fluxo Alerta</span>
+          <span class="numero-alerta alerta">2</span>
+          <div class="abrir-setor">
+            <span class="setor-alerta">Setor(es)</span>
+            <i class="fa-solid fa-plus"></i>
+          </div>
+        </div>
+      </a>
+      <a href="/listaSetoresIdeais">
+        <div class="quadro alerta1">
+          <span class="tlt-alerta">Fluxo Ideal</span>
+          <span class="numero-alerta ideal">3</span>
+          <div class="abrir-setor">
+            <span class="setor-alerta">Setor(es)</span>
+            <i class="fa-solid fa-plus"></i>
+          </div>
+        </div>
+      </a>
+    </div>
 
-      <div class="grafico-fluxo-setores">
+    <div class="alerta-fluxo">
+      <img src="../css/img/thumbnail_fluxo.png" alt="" srcset="" />
+    </div>
+
+    <div class="grafico-fluxo-setores">
+      <section>
+        <canvas id="chaveTeste" style="width: 71rem; height: 18rem"></canvas>
+      </section>
+
+      <div id="avisoCaptura" class="avisoCaptura"></div>
+    </div>
+
+    <div class="quadro2-graficos">
+      <div class="grafico-fluxo-pesquisa">
         <section>
-          <canvas id="chaveTeste" style="width: 71rem; height: 18rem"></canvas>
+          <canvas class="grafico_filtros" id="filtros"></canvas>
         </section>
-
-        <div id="avisoCaptura" class="avisoCaptura"></div>
       </div>
+      <div class="bloco-campos">
+        <div class="campos-filtros">
+          <h4 class="tlt-setores">Comparação de setor</h4>
+          <select class="setor">
+            <option selected disabled>Setor</option>
+            <option value="line">Açougue</option>
+            <option value="bar">Bebidas</option>
+            <option value="bar">Hortifruti</option>
+            <option value="bar">Padaria</option>
+            <option value="bar">Peixaria</option>
+          </select>
 
-      <div class="quadro2-graficos">
-        <div class="grafico-fluxo-pesquisa">
-          <section>
-            <canvas class="grafico_filtros" id="filtros"></canvas>
-          </section>
-        </div>
-        <div class="bloco-campos">
-          <div class="campos-filtros">
-            <h4 class="tlt-setores">Comparação de setor</h4>
-            <select class="setor">
-              <option selected disabled>Setor</option>
-              <option value="line">Açougue</option>
-              <option value="bar">Bebidas</option>
-              <option value="bar">Hortifruti</option>
-              <option value="bar">Padaria</option>
-              <option value="bar">Peixaria</option>
-            </select>
+          <select class="mes">
+            <option selected disabled>Mês</option>
+            <option value="line">Janeiro</option>
+            <option value="bar">Fevereiro</option>
+            <option value="bar">Março</option>
+            <option value="bar">Dezembro</option>
+          </select>
 
-            <select class="mes">
-              <option selected disabled>Mês</option>
-              <option value="line">Janeiro</option>
-              <option value="bar">Fevereiro</option>
-              <option value="bar">Março</option>
-              <option value="bar">Dezembro</option>
-            </select>
+          <div id="alerta"></div>
 
-            <div id="alerta"></div>
-
-            <button class="filtrar">Filtrar</button>
-          </div>
+          <button class="filtrar">Filtrar</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="footer">
-      <div class="container-footer"></div>
-    </div>
-  </body>
+  <div class="footer">
+    <div class="container-footer"></div>
+  </div>
+</body>
+
 </html>
 
 <script>
 
   function validarSessao() {
 
-      // aguardar();
+    // aguardar();
 
-      console.log(sessionStorage.NOME_EMPRESA, sessionStorage.NOME_USUARIO)
+    console.log(sessionStorage.NOME_EMPRESA, sessionStorage.NOME_USUARIO)
 
-      var b_usuario = document.getElementById("b_usuario");
+    var b_usuario = document.getElementById("b_usuario");
 
-      
-      if(sessionStorage.NOME_EMPRESA){
 
-        b_usuario.innerHTML = sessionStorage.NOME_EMPRESA;
-        
-      }else if(sessionStorage.NOME_USUARIO){
-        b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-      }
+    if (sessionStorage.NOME_EMPRESA) {
+
+      b_usuario.innerHTML = sessionStorage.NOME_EMPRESA;
+
+    } else if (sessionStorage.NOME_USUARIO) {
+      b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    }
   }
 
   validarSessao()
 
-  let testefk = 1;
+  const testefk = 1;
 
   let proximaAtualizacao;
 
@@ -389,11 +384,11 @@
               dados.datasets[0].data.shift();
 
               // gerar numero aleatorio para simulação
-            var max = 1200;
-            var min = 50;
-            var intervalo = 1 + max - min;
+              var max = 1200;
+              var min = 50;
+              var intervalo = 1 + max - min;
 
-            var aleatorio = parseInt(Math.random() * intervalo + min);
+              var aleatorio = parseInt(Math.random() * intervalo + min);
 
 
               dados.datasets[0].data.push(novoRegistro[0].totalCaptacao * aleatorio);
@@ -403,7 +398,7 @@
               myChart.update();
             }
 
-        
+
             proximaAtualizacao = setTimeout(
               () => atualizarGrafico(testefk, dados, myChart),
               5000
@@ -521,161 +516,156 @@
       },
     },
   });
-</script>
 
-<script>
+
   // **************************************************** ALERTAS ****************************************************************
 
   var alertas = [];
 
-function obterdados(idCaptacao) {
-    fetch(`/medidas/tempo-real/${idCaptacao}`)
-        .then(resposta => {
-
-            if (resposta.ok) {
-                resposta.json().then(resposta => {
-
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-
-                    alertar(resposta, idCaptacao);
-                });
-            } else {
-
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
-        });
-
+function obterdados(testefk) {
+  fetch(`/medidas/tempo-real/${testefk}`)
+    .then(resposta => {
+      console.log(resposta);
+      if (resposta.ok) {
+        if (resposta.status === 204) {
+          console.log('Nenhum dado encontrado');
+        } else {
+          resposta
+            .json()
+            .then(resposta => {
+              alertar(resposta, testefk);
+            })
+            .catch(error => {
+              console.error(`Erro na análise do JSON: ${error}`);
+            });
+        }
+      } else {
+        console.error('Erro na resposta da API');
+      }
+    })
+    .catch(function (error) {
+      console.error(`Erro na obtenção dos dados do aquário p/ gráfico: ${error.message}`);
+    });
 }
 
-function alertar(resposta, idCaptacao) {
-    var statusCaptacao = resposta[0].startusCaptacao;
+function alertar(resposta, testefk) {
+  var statusCaptacao = resposta[0].statusCaptacao;
 
-    console.log(idCaptacao === resposta[0].fkSensor)
-    
-    var grauDeAviso ='';
+  console.log(testefk === resposta[0].fkSensor);
 
+  var grauDeAviso = '';
+  var grauDeAvisoCor = '';
 
-    var limites = {
-        criticoMenos : 100,
-        emergenciaMenos: 101,
-        alertaMenos: 210,
-        idealMenos: 420,
-        idealMais: 630,
-        alertaMais: 840,
-        emergenciaMais: 841,
-        criticoMais: 1001
-    };
+  var limites = {
+    criticoMenos: 100,
+    emergenciaMenos: 101,
+    alertaMenos: 210,
+    idealMenos: 420,
+    idealMais: 630,
+    alertaMais: 840,
+    emergenciaMais: 841,
+    criticoMais: 1001,
+  };
 
-    var classe_temperatura = 'cor-alerta';
+  var classe_temperatura = 'cor-alerta';
 
-    if (statusCaptacao >= limites.criticoMais) {
-        classe_temperatura = 'cor-alerta perigo-quente';
-        grauDeAviso = 'perigo quente'
-        grauDeAvisoCor = 'cor-alerta perigo-quente'
-        exibirAlerta(statusCaptacao, idCaptacao, grauDeAviso, grauDeAvisoCor)
-    }
-    else if (statusCaptacao < limites.criticoMais && statusCaptacao >= limites.emergenciaMais) {
-        classe_temperatura = 'cor-alerta alerta-quente';
-        grauDeAviso = 'alerta quente'
-        grauDeAvisoCor = 'cor-alerta alerta-quente'
-        exibirAlerta(temp, idCaptacao, grauDeAviso, grauDeAvisoCor)
-    }
-    else if (statusCaptacao < limites.emergenciaMais && statusCaptacao > limites.alertaMais) {
-        classe_temperatura = 'cor-alerta ideal';
-        removerAlerta(idCaptacao);
-    }
-    else if (statusCaptacao <= limites.alertaMais && statusCaptacao > limites.idealMais) {
-        classe_temperatura = 'cor-alerta alerta-frio';
-        grauDeAviso = 'alerta frio'
-        grauDeAvisoCor = 'cor-alerta alerta-frio'
-        exibirAlerta(temp, idCaptacao, grauDeAviso, grauDeAvisoCor)
-    }
-    else if (statusCaptacao <= limites.idealMais && statusCaptacao > limites.idealMenos) {
-        classe_temperatura = 'cor-alerta alerta-frio';
-        grauDeAviso = 'alerta frio'
-        grauDeAvisoCor = 'cor-alerta alerta-frio'
-        exibirAlerta(temp, idCaptacao, grauDeAviso, grauDeAvisoCor)
-    }
-    else if (statusCaptacao <= limites.idealMenos && statusCaptacao > limites.alertaMenos) {
-        classe_temperatura = 'cor-alerta alerta-frio';
-        grauDeAviso = 'alerta frio'
-        grauDeAvisoCor = 'cor-alerta alerta-frio'
-        exibirAlerta(temp, idCaptacao, grauDeAviso, grauDeAvisoCor)
-    }
-    else if (statusCaptacao <= limites.alertaMenos && statusCaptacao > limites.emergenciaMenos) {
-        classe_temperatura = 'cor-alerta alerta-frio';
-        grauDeAviso = 'alerta frio'
-        grauDeAvisoCor = 'cor-alerta alerta-frio'
-        exibirAlerta(temp, idCaptacao, grauDeAviso, grauDeAvisoCor)
-    }
-    else if (statusCaptacao <= limites.criticoMenos) {
-        classe_temperatura = 'cor-alerta perigo-frio';
-        grauDeAviso = 'perigo frio'
-        grauDeAvisoCor = 'cor-alerta perigo-frio'
-        exibirAlerta(temp, idCaptacao, grauDeAviso, grauDeAvisoCor)
-    }
+  if (statusCaptacao >= limites.criticoMais) {
+    classe_temperatura = 'cor-alerta perigo-quente';
+    grauDeAviso = 'perigo quente';
+    grauDeAvisoCor = 'cor-alerta perigo-quente';
+    exibirAlerta(statusCaptacao, testefk, grauDeAviso, grauDeAvisoCor);
+  } else if (statusCaptacao < limites.criticoMais && statusCaptacao >= limites.emergenciaMais) {
+    classe_temperatura = 'cor-alerta alerta-quente';
+    grauDeAviso = 'alerta quente';
+    grauDeAvisoCor = 'cor-alerta alerta-quente';
+    exibirAlerta(statusCaptacao, testefk, grauDeAviso, grauDeAvisoCor);
+  } else if (statusCaptacao < limites.emergenciaMais && statusCaptacao > limites.alertaMais) {
+    classe_temperatura = 'cor-alerta ideal';
+    removerAlerta(testefk);
+  } else if (statusCaptacao <= limites.alertaMais && statusCaptacao > limites.idealMais) {
+    classe_temperatura = 'cor-alerta alerta-frio';
+    grauDeAviso = 'alerta frio';
+    grauDeAvisoCor = 'cor-alerta alerta-frio';
+    exibirAlerta(statusCaptacao, testefk, grauDeAviso, grauDeAvisoCor);
+  } else if (statusCaptacao <= limites.idealMais && statusCaptacao > limites.idealMenos) {
+    classe_temperatura = 'cor-alerta alerta-frio';
+    grauDeAviso = 'alerta frio';
+    grauDeAvisoCor = 'cor-alerta alerta-frio';
+    exibirAlerta(statusCaptacao, testefk, grauDeAviso, grauDeAvisoCor);
+  } else if (statusCaptacao <= limites.idealMenos && statusCaptacao > limites.alertaMenos) {
+    classe_temperatura = 'cor-alerta alerta-frio';
+    grauDeAviso = 'alerta frio';
+    grauDeAvisoCor = 'cor-alerta alerta-frio';
+    exibirAlerta(statusCaptacao, testefk, grauDeAviso, grauDeAvisoCor);
+  } else if (statusCaptacao <= limites.alertaMenos && statusCaptacao > limites.emergenciaMenos) {
+    classe_temperatura = 'cor-alerta alerta-frio';
+    grauDeAviso = 'alerta frio';
+    grauDeAvisoCor = 'cor-alerta alerta-frio';
+    exibirAlerta(statusCaptacao, testefk, grauDeAviso, grauDeAvisoCor);
+  } else if (statusCaptacao <= limites.criticoMenos) {
+    classe_temperatura = 'cor-alerta perigo-frio';
+    grauDeAviso = 'perigo frio';
+    grauDeAvisoCor = 'cor-alerta perigo-frio';
+    exibirAlerta(statusCaptacao, testefk, grauDeAviso, grauDeAvisoCor);
+  }
 
-    var card;
+  var card;
 
-    if (idCaptacao == 1) {
-        temp_aquario_1.innerHTML = statusCaptacao + "°C";
-        card = card_1
-    } else if (idCaptacao == 2) {
-        temp_aquario_2.innerHTML = statusCaptacao + "°C";
-        card = card_2
-    } else if (idCaptacao == 3) {
-        temp_aquario_3.innerHTML = statusCaptacao + "°C";
-        card = card_3
-    } else if (idCaptacao == 4) {
-        temp_aquario_4.innerHTML = statusCaptacao + "°C";
-        card = card_4
-    }
+  if (testefk == 1) {
+    temp_aquario_1.innerHTML = statusCaptacao + '°C';
+    card = card_1;
+  } else if (testefk == 2) {
+    temp_aquario_2.innerHTML = statusCaptacao + '°C';
+    card = card_2;
+  } else if (testefk == 3) {
+    temp_aquario_3.innerHTML = statusCaptacao + '°C';
+    card = card_3;
+  } else if (testefk == 4) {
+    temp_aquario_4.innerHTML = statusCaptacao + '°C';
+    card = card_4;
+  }
 
-    card.className = classe_temperatura;
+  card.className = classe_temperatura;
 }
 
-function exibirAlerta(temp, idCaptacao, grauDeAviso, grauDeAvisoCor) {
-    var indice = alertas.findIndex(item => item.idCaptacao == idCaptacao);
+function exibirAlerta(temp, testefk, grauDeAviso, grauDeAvisoCor) {
+  var indice = alertas.findIndex(item => item.testefk == testefk);
 
-    if (indice >= 0) {
-        alertas[indice] = { idCaptacao, temp, grauDeAviso, grauDeAvisoCor }
-    } else {
-        alertas.push({ idCaptacao, temp, grauDeAviso, grauDeAvisoCor });
-    }
+  if (indice >= 0) {
+    alertas[indice] = { testefk, temp, grauDeAviso, grauDeAvisoCor };
+  } else {
+    alertas.push({ testefk, temp, grauDeAviso, grauDeAvisoCor });
+  }
 
-    exibirCards();
-    
-// Dentro da div com classe grauDeAvisoCor há um caractere "invisível", 
-// que pode ser inserido clicando com o seu teclado em alt+255 ou pelo código adicionado acima.
+  exibirCards();
 }
 
-function removerAlerta(idCaptacao) {
-    alertas = alertas.filter(item => item.idCaptacao != idCaptacao);
-    exibirCards();
+function removerAlerta(testefk) {
+  alertas = alertas.filter(item => item.testefk != testefk);
+  exibirCards();
 }
- 
+
 function exibirCards() {
-    alerta.innerHTML = '';
+  alerta.innerHTML = '';
 
-    for (var i = 0; i < alertas.length; i++) {
-        var mensagem = alertas[i];
-        alerta.innerHTML += transformarEmDiv(mensagem);
-    }
+  for (var i = 0; i < alertas.length; i++) {
+    var mensagem = alertas[i];
+    alerta.innerHTML += transformarEmDiv(mensagem);
+  }
 }
 
-function transformarEmDiv({ idCaptacao, statusCaptacao, grauDeAviso, grauDeAvisoCor }) {
-    return `<div class="mensagem-alarme">
+function transformarEmDiv({ testefk, temp, grauDeAviso, grauDeAvisoCor }) {
+  return `<div class="mensagem-alarme">
     <div class="informacao">
-    <div class="${grauDeAvisoCor}">&#12644;</div> 
-     <h3>Aquário ${idCaptacao} está em estado de ${grauDeAviso}!</h3>
-    <small>Temperatura ${startusCaptacao}.</small>   
+      <div class="${grauDeAvisoCor}">&#12644;</div> 
+      <h3>Aquário ${testefk} está em estado de ${grauDeAviso}!</h3>
+      <small>Temperatura ${temp}.</small>   
     </div>
     <div class="alarme-sino"></div>
-    </div>`;
+  </div>`;
 }
+
+obterdados(4);
 
 
 </script>
