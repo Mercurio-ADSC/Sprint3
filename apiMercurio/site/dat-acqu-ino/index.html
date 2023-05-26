@@ -19,36 +19,33 @@
   <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
 </head>
 
-  <body onload="validarSessao()">
-    <div class="header">
-      <div class="container">
-        <div class="logo-header">
-          <img src="../css/img/LOGO_COMPLETA.png" alt="" />
-        </div>
-        <ul class="navbar">
-          <a href="/cadastroFuncionario">
-            <li class="img-conf">
-              <i class="fa-solid fa-user-plus" style="color: #ffffff"></i>
-            </li>
-          </a>
-          
-            <a style="width: 110px" href="">
-              <i
-                class="fa-solid fa-circle-user fa-lg"
-                style="color: #ffffff"
-              ></i>
-              <span id="b_usuario"></span></a
-            >
-          </li>
-          
+<body onload="validarSessao()">
 
-          <a href="/cadastroFuncionario">
-            <li class="img-conf">
-              <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i>
-            </li>
-          </a>
-        </ul>
+  <div class="header">
+    <div class="container">
+      <div class="logo-header">
+        <img src="../css/img/LOGO_COMPLETA.png" alt="" />
       </div>
+      <ul class="navbar">
+        <a href="/cadastroFuncionario">
+          <li class="img-conf">
+            <i class="fa-solid fa-user-plus" style="color: #ffffff"></i>
+          </li>
+        </a>
+
+        <a style="width: 110px" href="">
+          <i class="fa-solid fa-circle-user fa-lg" style="color: #ffffff"></i>
+          <span id="b_usuario"></span></a>
+        </li>
+
+
+        <a href="/cadastroFuncionario">
+          <li class="img-conf">
+            <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i>
+          </li>
+        </a>
+      </ul>
+    </div>
 
     <div class="linha-amarela"></div>
   </div>
@@ -155,45 +152,51 @@
 
 <script>
 
+<<<<<<< HEAD
   console.log(`CHEGEUI`);
 
 if(sessionStorage.NOME_EMPRESA == undefined && sessionStorage.NOME_USUARIO == undefined){
         window.location = "/login";
       }
+=======
+  if (sessionStorage.NOME_EMPRESA == undefined && sessionStorage.NOME_USUARIO == undefined) {
+    window.location = "/login";
+  }
+>>>>>>> e6429c12509511a9d1463d8d04d8cbd71da1cca6
 
-if(sessionStorage.FUNCAO == 'Colaborador'){
-  cadastrarNovoFunc.style.visibility = 'hidden'
-}
+  if (sessionStorage.FUNCAO == 'Colaborador') {
+    cadastrarNovoFunc.style.visibility = 'hidden'
+  }
 
-  
-function limparSessao() {
+
+  function limparSessao() {
     // aguardar();
     sessionStorage.clear();
     // finalizarAguardar();
     window.location = "/login";
-}
-1
+  }
 
-var nivel = sessionStorage.FUNCAO;
+  var nivel = sessionStorage.FUNCAO;
 
+<<<<<<< HEAD
 //funcao_usuario.innerHTML = nivel;
+=======
+  funcao_usuario.innerHTML = nivel;
+>>>>>>> e6429c12509511a9d1463d8d04d8cbd71da1cca6
 
   function validarSessao() {
 
-    // aguardar();
-
-    console.log(sessionStorage.NOME_EMPRESA, sessionStorage.NOME_USUARIO)
 
     var b_usuario = document.getElementById("b_usuario");
 
 
     if (sessionStorage.NOME_EMPRESA) {
 
-        b_usuario.innerHTML = sessionStorage.NOME_EMPRESA;
-        
-      }else if(sessionStorage.NOME_USUARIO){
-        b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-      }
+      b_usuario.innerHTML = sessionStorage.NOME_EMPRESA;
+
+    } else if (sessionStorage.NOME_USUARIO) {
+      b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    }
   }
 
   validarSessao()
@@ -554,6 +557,7 @@ var nivel = sessionStorage.FUNCAO;
 
   var alertas = [];
 
+<<<<<<< HEAD
 
 
   console.log("Cheguei!")
@@ -644,10 +648,38 @@ function alertar(resposta, testefk) {
     grauDeAviso = 'perigo frio';
     grauDeAvisoCor = 'cor-alerta perigo-frio';
     exibirAlerta(statusCaptacao, testefk, grauDeAviso, grauDeAvisoCor);
+=======
+  function obterdados(testefk) {
+    fetch(`/medidas/tempo-real/${testefk}`)
+      .then(resposta => {
+        console.log(resposta);
+        if (resposta.ok) {
+          if (resposta.status === 204) {
+            console.log('Nenhum dado encontrado');
+          } else {
+            resposta
+              .json()
+              .then(resposta => {
+                alertar(resposta, testefk);
+              })
+              .catch(error => {
+                console.error(`Erro na análise do JSON: ${error}`);
+              });
+          }
+        } else {
+          console.error('Erro na resposta da API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados do aquário p/ gráfico: ${error.message}`);
+      });
+>>>>>>> e6429c12509511a9d1463d8d04d8cbd71da1cca6
   }
 
-  var card;
+  function alertar(resposta, testefk) {
+    var statusCaptacao = resposta[0].statusCaptacao;
 
+<<<<<<< HEAD
   // var padaria = document.querySelector('padaria');
 
 
@@ -657,6 +689,83 @@ function alertar(resposta, testefk) {
     console.log(`CHEGAY DNOVO `);
     padaria.innerHTML =  statusCaptacao + ' disparos';
     card = card_1;
+=======
+    console.log(testefk === resposta[0].fkSensor);
+
+    var grauDeAviso = '';
+    var grauDeAvisoCor = '';
+
+    var limites = {
+      criticoMenos: 100,
+      emergenciaMenos: 101,
+      alertaMenos: 210,
+      idealMenos: 420,
+      idealMais: 630,
+      alertaMais: 840,
+      emergenciaMais: 841,
+      criticoMais: 1001,
+    };
+
+    var classe_temperatura = 'cor-alerta';
+
+    if (statusCaptacao >= limites.criticoMais) {
+      classe_temperatura = 'cor-alerta perigo-quente';
+      grauDeAviso = 'perigo quente';
+      grauDeAvisoCor = 'cor-alerta perigo-quente';
+      exibirAlerta(statusCaptacao, testefk, grauDeAviso, grauDeAvisoCor);
+    } else if (statusCaptacao < limites.criticoMais && statusCaptacao >= limites.emergenciaMais) {
+      classe_temperatura = 'cor-alerta alerta-quente';
+      grauDeAviso = 'alerta quente';
+      grauDeAvisoCor = 'cor-alerta alerta-quente';
+      exibirAlerta(statusCaptacao, testefk, grauDeAviso, grauDeAvisoCor);
+    } else if (statusCaptacao < limites.emergenciaMais && statusCaptacao > limites.alertaMais) {
+      classe_temperatura = 'cor-alerta ideal';
+      removerAlerta(testefk);
+    } else if (statusCaptacao <= limites.alertaMais && statusCaptacao > limites.idealMais) {
+      classe_temperatura = 'cor-alerta alerta-frio';
+      grauDeAviso = 'alerta frio';
+      grauDeAvisoCor = 'cor-alerta alerta-frio';
+      exibirAlerta(statusCaptacao, testefk, grauDeAviso, grauDeAvisoCor);
+    } else if (statusCaptacao <= limites.idealMais && statusCaptacao > limites.idealMenos) {
+      classe_temperatura = 'cor-alerta alerta-frio';
+      grauDeAviso = 'alerta frio';
+      grauDeAvisoCor = 'cor-alerta alerta-frio';
+      exibirAlerta(statusCaptacao, testefk, grauDeAviso, grauDeAvisoCor);
+    } else if (statusCaptacao <= limites.idealMenos && statusCaptacao > limites.alertaMenos) {
+      classe_temperatura = 'cor-alerta alerta-frio';
+      grauDeAviso = 'alerta frio';
+      grauDeAvisoCor = 'cor-alerta alerta-frio';
+      exibirAlerta(statusCaptacao, testefk, grauDeAviso, grauDeAvisoCor);
+    } else if (statusCaptacao <= limites.alertaMenos && statusCaptacao > limites.emergenciaMenos) {
+      classe_temperatura = 'cor-alerta alerta-frio';
+      grauDeAviso = 'alerta frio';
+      grauDeAvisoCor = 'cor-alerta alerta-frio';
+      exibirAlerta(statusCaptacao, testefk, grauDeAviso, grauDeAvisoCor);
+    } else if (statusCaptacao <= limites.criticoMenos) {
+      classe_temperatura = 'cor-alerta perigo-frio';
+      grauDeAviso = 'perigo frio';
+      grauDeAvisoCor = 'cor-alerta perigo-frio';
+      exibirAlerta(statusCaptacao, testefk, grauDeAviso, grauDeAvisoCor);
+    }
+
+    var card;
+
+    if (testefk == 1) {
+      temp_aquario_1.innerHTML = statusCaptacao + '°C';
+      card = card_1;
+    } else if (testefk == 2) {
+      temp_aquario_2.innerHTML = statusCaptacao + '°C';
+      card = card_2;
+    } else if (testefk == 3) {
+      temp_aquario_3.innerHTML = statusCaptacao + '°C';
+      card = card_3;
+    } else if (testefk == 4) {
+      temp_aquario_4.innerHTML = statusCaptacao + '°C';
+      card = card_4;
+    }
+
+    card.className = classe_temperatura;
+>>>>>>> e6429c12509511a9d1463d8d04d8cbd71da1cca6
   }
   // else if (testefk == 2) {
   //   temp_aquario_2.innerHTML = statusCaptacao + '°C';
@@ -669,37 +778,34 @@ function alertar(resposta, testefk) {
   //   card = card_4;
   // }
 
-  card.className = classe_temperatura;
-}
+  function exibirAlerta(temp, testefk, grauDeAviso, grauDeAvisoCor) {
+    var indice = alertas.findIndex(item => item.testefk == testefk);
 
-function exibirAlerta(temp, testefk, grauDeAviso, grauDeAvisoCor) {
-  var indice = alertas.findIndex(item => item.testefk == testefk);
+    if (indice >= 0) {
+      alertas[indice] = { testefk, temp, grauDeAviso, grauDeAvisoCor };
+    } else {
+      alertas.push({ testefk, temp, grauDeAviso, grauDeAvisoCor });
+    }
 
-  if (indice >= 0) {
-    alertas[indice] = { testefk, temp, grauDeAviso, grauDeAvisoCor };
-  } else {
-    alertas.push({ testefk, temp, grauDeAviso, grauDeAvisoCor });
+    exibirCards();
   }
 
-  exibirCards();
-}
-
-function removerAlerta(testefk) {
-  alertas = alertas.filter(item => item.testefk != testefk);
-  exibirCards();
-}
-
-function exibirCards() {
-  alerta.innerHTML = '';
-
-  for (var i = 0; i < alertas.length; i++) {
-    var mensagem = alertas[i];
-    alerta.innerHTML += transformarEmDiv(mensagem);
+  function removerAlerta(testefk) {
+    alertas = alertas.filter(item => item.testefk != testefk);
+    exibirCards();
   }
-}
 
-function transformarEmDiv({ testefk, temp, grauDeAviso, grauDeAvisoCor }) {
-  return `<div class="mensagem-alarme">
+  function exibirCards() {
+    alerta.innerHTML = '';
+
+    for (var i = 0; i < alertas.length; i++) {
+      var mensagem = alertas[i];
+      alerta.innerHTML += transformarEmDiv(mensagem);
+    }
+  }
+
+  function transformarEmDiv({ testefk, temp, grauDeAviso, grauDeAvisoCor }) {
+    return `<div class="mensagem-alarme">
     <div class="informacao">
       <div class="${grauDeAvisoCor}">&#12644;</div> 
       <h3>Aquário ${testefk} está em estado de ${grauDeAviso}!</h3>
@@ -707,9 +813,13 @@ function transformarEmDiv({ testefk, temp, grauDeAviso, grauDeAvisoCor }) {
     </div>
     <div class="alarme-sino"></div>
   </div>`;
-}
+  }
 
+<<<<<<< HEAD
 obterdados(1);
+=======
+  obterdados(4);
+>>>>>>> e6429c12509511a9d1463d8d04d8cbd71da1cca6
 
 
 </script>
