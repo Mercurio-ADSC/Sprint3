@@ -34,7 +34,7 @@ function entrar(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
-        
+
         usuarioModel.entrar(email, senha)
             .then(
                 function (resultado) {
@@ -72,10 +72,22 @@ function cadastrar(req, res) {
     var nivelUsuario = req.body.nivelUsuarioServer;
 
     // Faça as validações dos valores
-    if (nomeUsuario == undefined || emailUsuario == undefined || senhaUsuario == undefined || cpfUsuario == undefined || dtNascUsuario == undefined) {
+    if (nomeUsuario == "" || emailUsuario == "" || senhaUsuario == "" || cpfUsuario == "" || dtNascUsuario == "" || nivelUsuario == "") {
         res.status(400).send("Preencha todos os campos");
+    } else if (cpfUsuario.length != 11) {
+        res.status(400).send("CPF inválido!");
+    } else if (
+        emailUsuario.indexOf("@") == -1 ||
+        emailUsuario.indexOf(".") == -1
+    ) {
+        res.status(400).send("Email inválido, é necessário possuir @ e .");
+
+    } else if (senhaUsuario.length < 8) {
+
+        res.status(400).send("Senha inválida, é necessário possuir 8 ou mais caracteres");
+
     } else {
-        
+
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
         usuarioModel.cadastrar(nomeUsuario, senhaUsuario, emailUsuario, nivelUsuario, cpfUsuario, dtNascUsuario)
             .then(
@@ -106,12 +118,25 @@ function cadastrarEmpresa(req, res) {
     // Faça as validações dos valores
     if (nomeEmpresa == "" || cnpjEmpresa == "" || emailEmpresa == "" || senhaEmpresa == "" || senhaEmpresa == "") {
         res.status(400).send("Preencha todos os campos");
+    } else if (cnpjEmpresa.length != 14) {
+        res.status(400).send("CNPJ inválido!");
+    } else if (
+        emailEmpresa.indexOf("@") == -1 ||
+        emailEmpresa.indexOf(".") == -1
+    ) {
+        res.status(400).send("Email inválido, é necessário possuir @ e .");
+
+    } else if (senhaEmpresa.length < 8) {
+
+        res.status(400).send("Senha inválida, é necessário possuir 8 ou mais caracteres");
+
     } else {
-        
+
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrarEmpresa(nomeEmpresa, cnpjEmpresa, emailEmpresa, senhaEmpresa, senhaEmpresa)
+        usuarioModel.cadastrarEmpresa(nomeEmpresa, cnpjEmpresa, emailEmpresa, senhaEmpresa, porteEmpresa)
             .then(
                 function (resultado) {
+
                     res.json(resultado);
                 }
             ).catch(

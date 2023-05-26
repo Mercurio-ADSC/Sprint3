@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mercúrio - Confirme sua nova senha</title>
+    <title>Mercúrio - Cadastrar Novo Funcionário</title>
 
-    <link rel="icon" type="image/png" href="/css/img/asinha.png"/>
+    <link rel="icon" type="image/png" href="/css/img/asinha.png" />
     <link rel="stylesheet" href="/css/styleCadastroFuncionario.css">
 
     <script src="https://kit.fontawesome.com/22cb63056a.js" crossorigin="anonymous"></script>
@@ -16,14 +16,22 @@
 <body>
     <div class="header">
         <div class="container">
-            <a href="/dashboard"><div class="logo-header"><img src="/css/img/LOGO_COMPLETA.png" alt=""> </div></a>
+            <a href="/dashboard">
+                <div class="logo-header"><img src="/css/img/LOGO_COMPLETA.png" alt=""> </div>
+            </a>
             <ul class="navbar">
                 <a href="/cadastroFuncionario">
                     <li class="img-conf"><i class="fa-solid fa-user-plus" style="color: #ffffff;"></i></li>
                 </a>
                 <!-- Tirei o link, pois não sei para onde linkar -->
-                <li class="btn-login"><a style="width: 110px;" href=""><i
+                <li class="btn-login"><a style="width: 110px;" href="/dashboard"></i>Voltar</a></li>
+
+
+                <li class="btn-login" id="b_usuario"><a style="width: 110px;" href=""><i
                             class="fa-solid fa-circle-user fa-lg"></i>Usuário</a></li>
+
+                <li class="btn-login" id="b_usuario"><a style="width: 110px;" href=""><i
+                            class="fa-solid fa-circle-user fa-lg"></i></a></li>
             </ul>
         </div>
     </div>
@@ -33,36 +41,53 @@
             <div class="div_titulo">
                 <h1> Cadastre um novo colaborador</h1>
             </div>
-            
-            <div class="inputs">
-                <div class="primeiraParte">
-                <p>Nome completo:</p>
-                <input placeholder="" name="nomeServer" class="input-campo-um" type="text" id="input_nome_usuario" required oninvalid="this.setCustomValidity('O campo nome está vazio')" oninput="setCustomValidity('')">
-                <br>
-                <p>Data de nascimento:</p>
-                <input placeholder="" name="dtNascServer" class="input-campo-dois" type="date" id="input_dtNasc_usuario" required oninvalid="this.setCustomValidity('O campo data de nascimento está vazio')" oninput="setCustomValidity('')">
-                <br>
-                <p>Cpf:</p>
-                <input placeholder="" name="cpfServer" class="input-campo-tres" type="text" id="input_cpf_usuario" required oninvalid="this.setCustomValidity('O campo cpf está vazio')" oninput="setCustomValidity('')">
-                <br>
-            </div>
-            <div class="segundaParte">
-                <p>Email:</p>
-                <input placeholder="" name="emailServer" class="input-campo-quatro" type="text" id="input_email_usuario" required oninvalid="this.setCustomValidity('O campo e-mail está vazio')" oninput="setCustomValidity('')">
-                <br>
-                <p>Senha:</p>
-                <input placeholder="" name="senhaServer" class="input-campo-cinco" type="password" id="input_senha_usuario" required oninvalid="this.setCustomValidity('O campo senha está vazio')" oninput="setCustomValidity('')">
 
-                <p>Função:</p>
-                <select class="selecao" name="nivelUsuario" id="input_funcao">
-                    <option selected disabled>Função</option>
-                    <option value="Administrador">Administrador</option>
-                    <option value="Colaborador">Colaborador</option>
-                </select>
-            </div>
-        </div>
+            <form id="formCad">
+                <div class="inputs">
+                    <div class="primeiraParte">
+                        <p>Nome completo:</p>
+                        <input placeholder="" name="nomeServer" class="input-campo-um" type="text"
+                            id="input_nome_usuario" required
+                            oninvalid="this.setCustomValidity('O campo nome está vazio')"
+                            oninput="setCustomValidity('')">
+                        <br>
+                        <p>Data de nascimento:</p>
+                        <input placeholder="" name="dtNascServer" class="input-campo-dois" type="date"
+                            id="input_dtNasc_usuario" required
+                            oninvalid="this.setCustomValidity('O campo data de nascimento está vazio')"
+                            oninput="setCustomValidity('')">
+                        <br>
+                        <p>Cpf:</p>
+                        <input placeholder="" name="cpfServer" class="input-campo-tres" type="text"
+                            id="input_cpf_usuario" required oninvalid="this.setCustomValidity('O campo cpf está vazio')"
+                            oninput="setCustomValidity('')">
+                        <br>
+                    </div>
+                    <div class="segundaParte">
+                        <p>Email:</p>
+                        <input placeholder="" name="emailServer" class="input-campo-quatro" type="text"
+                            id="input_email_usuario" required
+                            oninvalid="this.setCustomValidity('O campo e-mail está vazio')"
+                            oninput="setCustomValidity('')">
+                        <br>
+                        <p>Senha:</p>
+                        <input placeholder="" name="senhaServer" class="input-campo-cinco" type="password"
+                            id="input_senha_usuario" required
+                            oninvalid="this.setCustomValidity('O campo senha está vazio')"
+                            oninput="setCustomValidity('')">
 
-            
+                        <p>Função:</p>
+                        <select class="selecao" name="nivelUsuario" id="input_funcao">
+                            <option selected disabled>Função</option>
+                            <option value="Administrador">Administrador</option>
+                            <option value="Colaborador">Colaborador</option>
+                        </select>
+                    </div>
+                </div>
+
+            </form>
+
+
             <div class="div_botao">
                 <button onclick="irLogar()">Cadastrar</button>
             </div>
@@ -113,28 +138,28 @@
 
 <script>
 
-function irLogar(){
+    var b_usuario = document.getElementById("b_usuario");
 
-    var DadosUsuario = {
-        nomeVar: input_nome_usuario.value,
-        dataNascimentoVar: input_dtNasc_usuario.value,
-        cpfVar: input_cpf_usuario.value,
-        emailVar: input_email_usuario.value,
-        senhaVar: input_senha_usuario.value,
-        funcaoVar: input_funcao.value
-    };
-       
 
-        if (DadosUsuario.emailVar.length == "" || DadosUsuario.senhaVar.length == "") {
-            // cardErro.style.display = "block"
-            alert('Mensagem de erro para todos os campos em branco');
+    if (sessionStorage.NOME_EMPRESA) {
 
-            // finalizarAguardar();
-            return false;
-        }
-        else {
-            setInterval(5000)
-        }
+        b_usuario.innerHTML = sessionStorage.NOME_EMPRESA;
+
+    } else if (sessionStorage.NOME_USUARIO) {
+        b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    }
+
+    function irLogar() {
+
+        var DadosUsuario = {
+            nomeVar: input_nome_usuario.value,
+            dataNascimentoVar: input_dtNasc_usuario.value,
+            cpfVar: input_cpf_usuario.value,
+            emailVar: input_email_usuario.value,
+            senhaVar: input_senha_usuario.value,
+            funcaoVar: input_funcao.value
+        };
+
 
         // Enviando o valor da nova input
         fetch("/usuarios/cadastrar", {
@@ -145,7 +170,7 @@ function irLogar(){
             body: JSON.stringify({
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
-                emailServer:DadosUsuario.emailVar, 
+                emailServer: DadosUsuario.emailVar,
                 senhaServer: DadosUsuario.senhaVar,
                 nomeServer: DadosUsuario.nomeVar,
                 nivelUsuarioServer: DadosUsuario.funcaoVar,
@@ -157,19 +182,21 @@ function irLogar(){
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                // cardErro.style.display = "block";
 
-                alert('Cadastro realizado com sucesso! Redirecionando para tela de Login...');
 
-                setTimeout(() => {
-                    window.location.href = 'http://localhost:3300/Login'
-                }, "2000")
+                alert('Colaborador cadastrado com sucesso');
 
-               // limparFormulario();
-                // finalizarAguardar();
-            } else {
-                throw ("Houve um erro ao tentar realizar o cadastro!");
+                formCad.reset()
+
             }
+            else {
+                return resposta.text().then(function (erro) {
+                    alert(erro);
+                });
+
+            }
+
+
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
             // finalizarAguardar();

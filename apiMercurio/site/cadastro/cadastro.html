@@ -8,7 +8,7 @@
     <title>Mercúrio - Cadastro</title>
     <link rel="stylesheet" href="/css/styleCadastro.css">
     <!-- <link rel="stylesheet" href="/css/styleCadastro.css"> -->
-    <link rel="icon" type="image/png" href="/css/img/asinha.png"/>
+    <link rel="icon" type="image/png" href="/css/img/asinha.png" />
     <script src="https://kit.fontawesome.com/22cb63056a.js" crossorigin="anonymous"></script>
     <!-- <link rel="stylesheet" href="../codig_cadastro_login/logar.js"> -->
 
@@ -39,7 +39,9 @@
 
 
                     <span class="nomeEmpresa">Nome da empresa</span> <br>
-                    <input name="razaoSocial" id="input_nomeEmpresa" required oninvalid="this.setCustomValidity('O Campo deve ser preenchido')" oninput="setCustomValidity('')"> <br>
+                    <input name="razaoSocial" id="input_nomeEmpresa" required
+                        oninvalid="this.setCustomValidity('O Campo deve ser preenchido')"
+                        oninput="setCustomValidity('')"> <br>
 
                     <span class="ladoTexto">
                         <span>CNPJ</span>
@@ -47,7 +49,9 @@
                     </span>
                     <span class="ladoAlado">
                         <!-- input cnpj -->
-                        <input name="cnpjEmpresa" id="input_cnpj" required oninvalid="this.setCustomValidity('O Campo deve ser preenchido com o CNPJ')" oninput="setCustomValidity('')">
+                        <input name="cnpjEmpresa" id="input_cnpj" required
+                            oninvalid="this.setCustomValidity('O Campo deve ser preenchido com o CNPJ')"
+                            oninput="setCustomValidity('')">
                         <!-- input do porte da empresa -->
                         <select class="selecao" name="porteEmpresa" id="input_porte">
                             <option selected disabled>Porte</option>
@@ -61,11 +65,15 @@
                         <span>Senha</span>
                     </span>
                     <span class="ladoAlado">
-                       
-                        <input name="emailEmpresa" id="input_email" required oninvalid="this.setCustomValidity('O Campo deve ser preenchido com o Email')" oninput="setCustomValidity('')">
 
-                        <input name="senhaEmpresa" id="input_senha" required oninvalid="this.setCustomValidity('O Campo deve ser preenchido com a Senha')" oninput="setCustomValidity('')">
-                
+                        <input name="emailEmpresa" id="input_email" required
+                            oninvalid="this.setCustomValidity('O Campo deve ser preenchido com o Email')"
+                            oninput="setCustomValidity('')">
+
+                        <input name="senhaEmpresa" id="input_senha" required
+                            oninvalid="this.setCustomValidity('O Campo deve ser preenchido com a Senha')"
+                            oninput="setCustomValidity('')">
+
                     </span>
 
                 </div>
@@ -74,7 +82,7 @@
             <button onclick="CadastrarEmpresa()">Continuar</button>
         </div>
     </section>
-                        
+
 
     <!--Footer-->
     <div class="footer">
@@ -117,6 +125,8 @@
 
 </html>
 <script>
+
+
     function CadastrarEmpresa() {
         // aguardar();
 
@@ -128,17 +138,6 @@
         var email_empresa = input_email.value;
         var senha_empresa = input_senha.value;
         var porte_empresa = input_porte.value;
-       
-
-        if (nome_empresa.length == "" || cnpj_empresa.length == "" || email_empresa.length == "" || senha_empresa.length == "" || porte_empresa.length == "") {
-            
-            alert('Mensagem de erro para todos os campos em branco');
-
-            return false;
-        }
-        else {
-            setInterval(5000)
-        }
 
         // Enviando o valor da nova input
         fetch("/usuarios/cadastrarEmpresa", {
@@ -155,6 +154,7 @@
                 senhaEmpresa: senha_empresa,
                 porteEmpresa: porte_empresa,
                 fkEmpresa: sessionStorage.ID_EMPRESA
+
             })
         }).then(function (resposta) {
 
@@ -162,16 +162,18 @@
 
             if (resposta.ok) {
 
-                alert('Cadastro realizado com sucesso! Redirecionando para tela de Login...');
+                alert('Cadastro realizado com sucesso! Você já pode logar!');
 
                 setTimeout(() => {
-                    window.location = "/login"; 
-                }, "2000")
+                    window.location = "/login";
+                }, "1000")
 
                 formCad.reset();
                 // finalizarAguardar();
             } else {
-                throw ("Houve um erro ao tentar realizar o cadastro!");
+                return resposta.text().then(function (erro) {
+                    alert(erro);
+                });
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
