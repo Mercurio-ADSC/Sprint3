@@ -30,9 +30,12 @@
 
     <div class="container">
         <div class="formulario">
-            <h1> Cadastre um novo colaborador</h1>
-
-            <form>
+            <div class="div_titulo">
+                <h1> Cadastre um novo colaborador</h1>
+            </div>
+            
+            <div class="inputs">
+                <div class="primeiraParte">
                 <p>Nome completo:</p>
                 <input placeholder="" name="nomeServer" class="input-campo-um" type="text" id="input_nome_usuario" required oninvalid="this.setCustomValidity('O campo nome está vazio')" oninput="setCustomValidity('')">
                 <br>
@@ -42,6 +45,8 @@
                 <p>Cpf:</p>
                 <input placeholder="" name="cpfServer" class="input-campo-tres" type="text" id="input_cpf_usuario" required oninvalid="this.setCustomValidity('O campo cpf está vazio')" oninput="setCustomValidity('')">
                 <br>
+            </div>
+            <div class="segundaParte">
                 <p>Email:</p>
                 <input placeholder="" name="emailServer" class="input-campo-quatro" type="text" id="input_email_usuario" required oninvalid="this.setCustomValidity('O campo e-mail está vazio')" oninput="setCustomValidity('')">
                 <br>
@@ -54,12 +59,13 @@
                     <option value="Administrador">Administrador</option>
                     <option value="Colaborador">Colaborador</option>
                 </select>
+            </div>
+        </div>
 
-
-            </form>
             
-            <button onclick="irLogar()">Cadastrar</button>
-
+            <div class="div_botao">
+                <button onclick="irLogar()">Cadastrar</button>
+            </div>
         </div>
     </div>
 
@@ -107,29 +113,28 @@
 
 <script>
 
-function cadastrarFuncionario(){
+function irLogar(){
 
     var DadosUsuario = {
-
         nomeVar: input_nome_usuario.value,
         dataNascimentoVar: input_dtNasc_usuario.value,
         cpfVar: input_cpf_usuario.value,
         emailVar: input_email_usuario.value,
         senhaVar: input_senha_usuario.value,
-        funcaoVar: input_funcao.value,
-        fkEmpresa: sessionStorage.ID_EMPRESA
+        funcaoVar: input_funcao.value
     };
        
 
-        // if (DadosUsuario.nomeVar == "" || DadosUsuario.dataNascimentoVar == "" || DadosUsuario.cpfVar == "" || DadosUsuario.emailVar == "" || DadosUsuario.emailVar == "" || DadosUsuario.senhaVar == "" || DadosUsuario.funcaoVar == "" || DadosUsuario.fkEmpresa == "") {
-            
-        //     aguardar();
+        if (DadosUsuario.emailVar.length == "" || DadosUsuario.senhaVar.length == "") {
+            // cardErro.style.display = "block"
+            alert('Mensagem de erro para todos os campos em branco');
 
-        //     return false;
-        // }
-        // else {
-        //     setInterval(5000)
-        // }
+            // finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(5000)
+        }
 
         // Enviando o valor da nova input
         fetch("/usuarios/cadastrar", {
@@ -145,8 +150,7 @@ function cadastrarFuncionario(){
                 nomeServer: DadosUsuario.nomeVar,
                 nivelUsuarioServer: DadosUsuario.funcaoVar,
                 cpfServer: DadosUsuario.cpfVar,
-                dtNascimentoServer: DadosUsuario.dataNascimentoVar,
-                fkEmpresaServer: DadosUsuario.fkEmpresa
+                dtNascimentoServer: DadosUsuario.dataNascimentoVar
             })
         }).then(function (resposta) {
 

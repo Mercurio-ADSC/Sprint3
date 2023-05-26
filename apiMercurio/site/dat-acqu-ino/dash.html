@@ -1,0 +1,56 @@
+// grafico fluxos var contextoSetor =
+document.getElementById('setores').getContext('2d'); contextoSetor.canvas.width
+= 1150; contextoSetor.canvas.height = 300; var chave = new Chart( contextoSetor,
+{ type: 'bar', data: { // json dos dados labels: ['07:00', '07:10', '07:20',
+'07:30', '07:40', '07:50', '08:00', '08:10', '08:20'], // vetor do eixo X,
+datasets: [{ // json e vetor // linha 1 label: 'Padaria', data:
+[20,40,90,1000,20,200,500,800,450,430], borderWidth: 1, backgroundColor:
+'rgba(184,134,11)', }, // linha 2 { label: 'Açougue', data:
+[210,745,140,1005,758,140,69,210,630], borderWidth: 1, backgroundColor:
+'rgba(205,92,92)', }, // linha 3 { label: 'Bebidas', data: [701, 643, 222, 550,
+345, 779, 162, 20, 90], borderWidth: 1, backgroundColor: 'rgba(135,206,250)', },
+// linha 3 { label: 'Higiene', data: [600, 220, 100, 180, 1000, 12, 35, 64,34],
+borderWidth: 1, backgroundColor: 'rgba(119,136,153)', }, // linha 3 { label:
+'Confeitaria', data: [200, 510, 452, 965, 74, 324, 466, 741,254], borderWidth:
+1, backgroundColor: 'rgba(188,143,143)', }, // linha 3 { label: 'Limpeza', data:
+[500, 650, 254, 20, 34, 745, 125, 225,210], borderWidth: 1, backgroundColor:
+'rgba(238,232,170)', }, // linha 3 { label: 'Bolachas', data: [210, 10, 254,
+100, 788, 324, 147, 189,452], borderWidth: 1, backgroundColor:
+'rgba(139,0,139)', } ], }, options: { tooltips: { bodyFontStyle: 'bold',
+callbacks: { label: function(tooltipItem, data) { var value =
+data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]; var label =
+data.labels[tooltipItem.index]; var message = ''; if (value >= 420 && value <=
+630 ) { message = 'Fluxo Ideal'; }else if(value > 209 && value < 420){ message =
+'Fluxo em Alerta'; }else if(value > 630 && value < 841){ message = 'Fluxo em
+Alerta'; } else if( value >= 100 && value <= 210){ message = 'Fluxo
+Emergencial'; }else if(value >= 840 && value <= 1000){ message = 'Fluxo
+Emergencial'; }else if(value >= 0 && value < 100 ){ message = 'Fluxo Crítico';
+}else if(value >= 1001){ message = 'Fluxo Crítico'; } return `Hora ${label}:
+Fluxo de ${value} - ${message}`; } } }, legend: { labels: { fontColor: 'white' }
+}, scales: { xAxes: [{ ticks: { beginAtZero: true } }], yAxes: [{ scaleLabel: {
+display: true, }, ticks: { beginAtZero: true } }] }, animation: { duration: 0 }
+} } ); // GRAFICO DOS FILTROS var grafico_filtros =
+document.getElementById('filtros').getContext('2d');
+grafico_filtros.canvas.width = 830; grafico_filtros.canvas.height = 300; new
+Chart(grafico_filtros, { type: 'line', data: { // json dos dados labels:
+[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],
+// vetor do eixo X, datasets: [{ // json e vetor // linha 1 label: '2021', data:
+[20,40,90,170,800,420,630,1000,100,200,190,600,500,300,1000,20,200,500,800,450,320,210,987,985,100,456,78,341,521,640],
+borderWidth: 1, borderColor: 'rgba(106,90,205)', }, // linha 2 { label: '2022',
+data:
+[100,250,30,150,654,500,100,845,500,210,310,477,1000,210,745,140,654,900,140,521,320,547,658,1000,130,758,140,69,210,630],
+borderWidth: 1, borderColor: 'rgba(173,216,230)', }, // linha 3 { label: '2023',
+data: [950, 65, 420, 777, 112, 888, 40, 620, 930, 235, 820, 311, 530, 80, 720,
+950, 299, 701, 915, 643, 222, 550, 345, 779, 162, 935, 423, 711, 888, 20],
+borderWidth: 1, borderColor: 'rgba( 255,255,0)', } ], }, options: { tooltips: {
+bodyFontStyle: 'bold', callbacks: { label: function(tooltipItem, data) { var
+value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]; var
+label = data.labels[tooltipItem.index]; var message = ''; if (value >= 420 &&
+value <= 630 ) { message = 'Fluxo Ideal'; }else if(value > 209 && value < 420){
+message = 'Fluxo em Alerta'; }else if(value > 630 && value < 841){ message =
+'Fluxo em Alerta'; } else if( value >= 100 && value <= 210){ message = 'Fluxo
+Emergencial'; }else if(value >= 840 && value <= 1000){ message = 'Fluxo
+Emergencial'; }else if(value >= 0 && value < 100 ){ message = 'Fluxo Crítico';
+}else if(value >= 1001){ message = 'Fluxo Crítico'; } return `Dia ${label}:
+Fluxo de ${value} - ${message}`; } } }, legend: { labels: { fontColor: 'white' }
+}, scales: { y: { beginAtZero: true, }, } } });
