@@ -53,6 +53,9 @@
     <div class="linha-amarela"></div>
   </div>
 
+  <div id="padaria" style="color: #ffffff;"></div>
+  <div id="card_1"></div>
+
   <div class="corpo">
     <div class="alertas">
       <a href="/listaSetoresCriticos">
@@ -152,6 +155,8 @@
 
 <script>
 
+  console.log(`CHEGEUI`);
+
 if(sessionStorage.NOME_EMPRESA == undefined && sessionStorage.NOME_USUARIO == undefined){
         window.location = "/login";
       }
@@ -171,7 +176,7 @@ function limparSessao() {
 
 var nivel = sessionStorage.FUNCAO;
 
-funcao_usuario.innerHTML = nivel;
+//funcao_usuario.innerHTML = nivel;
 
   function validarSessao() {
 
@@ -549,7 +554,10 @@ funcao_usuario.innerHTML = nivel;
 
   var alertas = [];
 
-function obterdados(testefk) {
+
+
+  console.log("Cheguei!")
+  function obterdados(testefk) {
   fetch(`/medidas/tempo-real/${testefk}`)
     .then(resposta => {
       console.log(resposta);
@@ -560,6 +568,7 @@ function obterdados(testefk) {
           resposta
             .json()
             .then(resposta => {
+              console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
               alertar(resposta, testefk);
             })
             .catch(error => {
@@ -576,9 +585,10 @@ function obterdados(testefk) {
 }
 
 function alertar(resposta, testefk) {
-  var statusCaptacao = resposta[0].statusCaptacao;
+  console.log(`${resposta[0].totalCaptacao} AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa`);
+  var statusCaptacao = resposta[0].totalCaptacao;
 
-  console.log(testefk === resposta[0].fkSensor);
+  console.log(testefk === resposta[0].fkSensor + '');
 
   var grauDeAviso = '';
   var grauDeAvisoCor = '';
@@ -638,19 +648,26 @@ function alertar(resposta, testefk) {
 
   var card;
 
+  // var padaria = document.querySelector('padaria');
+
+
   if (testefk == 1) {
-    temp_aquario_1.innerHTML = statusCaptacao + '°C';
+    console.log(`CHEGAY `);
+    padaria.innerHTML = `TESTE TESTE TESTE`
+    console.log(`CHEGAY DNOVO `);
+    padaria.innerHTML =  statusCaptacao + ' disparos';
     card = card_1;
-  } else if (testefk == 2) {
-    temp_aquario_2.innerHTML = statusCaptacao + '°C';
-    card = card_2;
-  } else if (testefk == 3) {
-    temp_aquario_3.innerHTML = statusCaptacao + '°C';
-    card = card_3;
-  } else if (testefk == 4) {
-    temp_aquario_4.innerHTML = statusCaptacao + '°C';
-    card = card_4;
   }
+  // else if (testefk == 2) {
+  //   temp_aquario_2.innerHTML = statusCaptacao + '°C';
+  //   card = card_2;
+  // } else if (testefk == 3) {
+  //   temp_aquario_3.innerHTML = statusCaptacao + '°C';
+  //   card = card_3;
+  // } else if (testefk == 4) {
+  //   temp_aquario_4.innerHTML = statusCaptacao + '°C';
+  //   card = card_4;
+  // }
 
   card.className = classe_temperatura;
 }
@@ -692,7 +709,7 @@ function transformarEmDiv({ testefk, temp, grauDeAviso, grauDeAvisoCor }) {
   </div>`;
 }
 
-obterdados(4);
+obterdados(1);
 
 
 </script>
