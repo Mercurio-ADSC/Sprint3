@@ -19,6 +19,20 @@
   <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
 </head>
 
+<style>
+  .cor-alerta {
+  color: blueviolet;
+}
+
+.perigo-quente {
+  color: aqua;
+}
+
+.alerta-quente {
+  color: red;
+}
+</style>
+
 <body onload="validarSessao()">
 
   <div class="header">
@@ -52,6 +66,8 @@
 
   <div id="padaria" style="color: #ffffff;"></div>
   <div id="card_1"></div>
+  <div id="disparos" class="cor-alerta">Disparos: <span id="valor-disparos">0</span></div>
+
 
   <div class="corpo">
     <div class="alertas">
@@ -583,10 +599,7 @@ if(sessionStorage.NOME_EMPRESA == undefined && sessionStorage.NOME_USUARIO == un
 }
 
 function alertar(resposta, testefk) {
-  console.log(`${resposta[0].totalCaptacao} AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa`);
   var disparos = resposta[0].totalCaptacao;
-
-  console.log(testefk === resposta[0].fkSensor + '');
 
   var grauDeAviso = '';
   var grauDeAvisoCor = '';
@@ -601,10 +614,9 @@ function alertar(resposta, testefk) {
     emergenciaMais: 841,
     criticoMais: 1001,
   };
+
   var classe_temperatura = 'cor-alerta';
-  
-  
-  
+
   if (disparos >= limites.criticoMais) {
     classe_temperatura = 'cor-alerta perigo-quente';
     grauDeAviso = 'perigo quente';
@@ -644,7 +656,12 @@ function alertar(resposta, testefk) {
     grauDeAvisoCor = 'cor-alerta perigo-frio';
     exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
   }
+
+  var disparosElement = document.getElementById('disparos');
+  disparosElement.className = classe_temperatura;
+  document.getElementById('valor-disparos').textContent = disparos;
 }
+
   function obterdados(testefk) {
     fetch(`/medidas/tempo-real/${testefk}`)
     .then(resposta => {
