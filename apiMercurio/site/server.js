@@ -69,6 +69,6 @@ server.get('/listaSetoresIdeais', (req, res) => {
 
 
 server.listen(3300, () => {
-    console.log(`Servidor rodando em http://localhost:3300`); 
+    console.log(`Servidor rodando em http://localhost:3300/home`); 
 });
 
