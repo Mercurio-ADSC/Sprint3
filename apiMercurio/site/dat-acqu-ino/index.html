@@ -19,7 +19,7 @@
   <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
 </head>
 
-<!-- <style>
+<style>
   .cor-alerta {
   color: blueviolet;
 }
@@ -31,30 +31,35 @@
 .alerta-quente {
   color: red;
 }
-</style> -->
+</style>
 
 <body onload="validarSessao()">
-
   <div class="header">
     <div class="container">
       <div class="logo-header">
         <img src="../css/img/LOGO_COMPLETA.png" alt="" />
       </div>
       <ul class="navbar">
-        <a href="/cadastroFuncionario">
+        <a href="/cadastroFuncionario" id="cadastrarNovoFunc">
           <li class="img-conf">
             <i class="fa-solid fa-user-plus" style="color: #ffffff"></i>
           </li>
+          </li>Cadastrar Funcionário&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </a>
-
-        <a style="width: 110px" href="">
-          <i class="fa-solid fa-circle-user fa-lg" style="color: #ffffff"></i>
-          <span id="b_usuario"></span></a>
+        
+          <a style="width: 110px" href="">
+            <i
+              class="fa-solid fa-circle-user fa-lg"
+              style="color: #ffffff"
+            ></i>
+            <span id="b_usuario"></span></a
+          >
+          <span id="funcao_usuario" style="color: #ffffff; font-weight: bold;"></span>
         </li>
 
 
         <a href="/cadastroFuncionario">
-          <li class="img-conf">
+          <li class="img-conf">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i>
           </li>
         </a>
@@ -67,7 +72,6 @@
   <div id="padaria" style="color: #ffffff;"></div>
   <div id="card_1"></div>
   <div id="disparos" class="cor-alerta">Disparos: <span id="valor-disparos">0</span></div>
-  <div class="alerta"></div>
 
 
   <div class="corpo">
@@ -169,45 +173,65 @@
 
 <script>
 
-  
-
 if(sessionStorage.NOME_EMPRESA == undefined && sessionStorage.NOME_USUARIO == undefined){
         window.location = "/login";
       }
-  if (sessionStorage.NOME_EMPRESA == undefined && sessionStorage.NOME_USUARIO == undefined) {
-    window.location = "/login";
-  }
 
-  if (sessionStorage.FUNCAO == 'Colaborador') {
-    cadastrarNovoFunc.style.visibility = 'hidden'
-  }
+if(sessionStorage.FUNCAO == 'Colaborador'){
+  cadastrarNovoFunc.style.visibility = 'hidden'
+}
 
-
-  function limparSessao() {
+  
+function limparSessao() {
     // aguardar();
     sessionStorage.clear();
     // finalizarAguardar();
     window.location = "/login";
-  }
+}
+1
 
-  var nivel = sessionStorage.FUNCAO;
+var nivel = sessionStorage.FUNCAO;
 
-//funcao_usuario.innerHTML = nivel;
-  // funcao_usuario.innerHTML = nivel;
+funcao_usuario.innerHTML = nivel;
 
   function validarSessao() {
 
+    // aguardar();
+
+    console.log(sessionStorage.NOME_EMPRESA, sessionStorage.NOME_USUARIO)
 
     var b_usuario = document.getElementById("b_usuario");
 
+      
+if(sessionStorage.NOME_EMPRESA){
 
-    if (sessionStorage.NOME_EMPRESA) {
 
-      b_usuario.innerHTML = sessionStorage.NOME_EMPRESA;
+  var nome = sessionStorage.NOME_EMPRESA;
+  var primeiroNome = '';
 
-    } else if (sessionStorage.NOME_USUARIO) {
-      b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-    }
+  for(var i = 0; i < nome.length; i++){
+  primeiroNome += nome[i]
+  if(nome[i] == ' '){
+   break
+  }
+}
+
+b_usuario.innerHTML = primeiroNome;
+  
+}else if(sessionStorage.NOME_USUARIO){
+  var nome = sessionStorage.NOME_USUARIO;
+  var primeiroNome = '';
+
+  for(var i = 0; i < nome.length; i++){
+  primeiroNome += nome[i]
+  if(nome[i] == ' '){
+   break
+  }
+}
+
+b_usuario.innerHTML = primeiroNome;
+
+}
   }
 
   validarSessao()
@@ -564,10 +588,15 @@ if(sessionStorage.NOME_EMPRESA == undefined && sessionStorage.NOME_USUARIO == un
 
   // **************************************************** ALERTAS ****************************************************************
 
+  // alertasssssssssssssssss
 
   var alertas = [];
 
-function obterDados(testefk) {
+
+
+
+  console.log("Cheguei!")
+  function obterdados(testefk) {
   fetch(`/medidas/tempo-real/${testefk}`)
     .then(resposta => {
       console.log(resposta);
@@ -578,6 +607,7 @@ function obterDados(testefk) {
           resposta
             .json()
             .then(resposta => {
+              console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
               alertar(resposta, testefk);
             })
             .catch(error => {
@@ -589,12 +619,14 @@ function obterDados(testefk) {
       }
     })
     .catch(function (error) {
-      console.error(`Erro na obtenção dos dados do aquário para o gráfico: ${error.message}`);
+      console.error(`Erro na obtenção dos dados do aquário p/ gráfico: ${error.message}`);
     });
 }
 
 function alertar(resposta, testefk) {
   var disparos = resposta[0].totalCaptacao;
+  
+  // padaria.innerHTML = resposta[0].totalCaptacao + ' disparos';
 
   var grauDeAviso = '';
   var grauDeAvisoCor = '';
@@ -610,94 +642,210 @@ function alertar(resposta, testefk) {
     criticoMais: 1001,
   };
 
-  var classeDisparos = 'cor-alerta';
+  var classe_temperatura = 'cor-alerta';
 
   if (disparos >= limites.criticoMais) {
-    classeDisparos = 'criticoMais';
-    grauDeAviso = '';
+    classe_temperatura = 'cor-alerta perigo-quente';
+    grauDeAviso = 'perigo quente';
     grauDeAvisoCor = 'cor-alerta perigo-quente';
     exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
-
   } else if (disparos < limites.criticoMais && disparos >= limites.emergenciaMais) {
-    classeDisparos = 'cor-alerta alerta-quente';
+    classe_temperatura = 'cor-alerta alerta-quente';
     grauDeAviso = 'alerta quente';
     grauDeAvisoCor = 'cor-alerta alerta-quente';
     exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
-    
   } else if (disparos < limites.emergenciaMais && disparos > limites.alertaMais) {
-    classeDisparos = 'cor-alerta ideal';
+    classe_temperatura = 'cor-alerta ideal';
     removerAlerta(testefk);
   } else if (disparos <= limites.alertaMais && disparos > limites.idealMais) {
-    classeDisparos = 'cor-alerta alerta-frio';
+    classe_temperatura = 'cor-alerta alerta-frio';
     grauDeAviso = 'alerta frio';
     grauDeAvisoCor = 'cor-alerta alerta-frio';
     exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
   } else if (disparos <= limites.idealMais && disparos > limites.idealMenos) {
-    classeDisparos = 'cor-alerta alerta-frio';
+    classe_temperatura = 'cor-alerta alerta-frio';
     grauDeAviso = 'alerta frio';
     grauDeAvisoCor = 'cor-alerta alerta-frio';
     exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
   } else if (disparos <= limites.idealMenos && disparos > limites.alertaMenos) {
-    classeDisparos = 'cor-alerta alerta-frio';
+    classe_temperatura = 'cor-alerta alerta-frio';
     grauDeAviso = 'alerta frio';
     grauDeAvisoCor = 'cor-alerta alerta-frio';
     exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
   } else if (disparos <= limites.alertaMenos && disparos > limites.emergenciaMenos) {
-    classeDisparos = 'cor-alerta alerta-frio';
+    classe_temperatura = 'cor-alerta alerta-frio';
     grauDeAviso = 'alerta frio';
     grauDeAvisoCor = 'cor-alerta alerta-frio';
     exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
   } else if (disparos <= limites.criticoMenos) {
-    classeDisparos = 'cor-alerta perigo-frio';
+    classe_temperatura = 'cor-alerta perigo-frio';
     grauDeAviso = 'perigo frio';
     grauDeAvisoCor = 'cor-alerta perigo-frio';
     exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
   }
 
   var disparosElement = document.getElementById('disparos');
-  disparosElement.className = classeDisparos;
+  disparosElement.className = classe_temperatura;
   document.getElementById('valor-disparos').textContent = disparos;
 }
 
-function exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor) {
-  var indice = alertas.findIndex(item => item.testefk === testefk);
+  function obterdados(testefk) {
+    fetch(`/medidas/tempo-real/${testefk}`)
+    .then(resposta => {
+      console.log(resposta);
+        if (resposta.ok) {
+          if (resposta.status === 204) {
+            console.log('Nenhum dado encontrado');
+          } else {
+            resposta
+              .json()
+              .then(resposta => {
+                alertar(resposta, testefk);
+              })
+              .catch(error => {
+                console.error(`Erro na análise do JSON: ${error}`);
+              });
+          }
+        } else {
+          console.error('Erro na resposta da API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados do aquário p/ gráfico: ${error.message}`);
+      });
 
-  if (indice >= 0) {
-    alertas[indice] = { testefk, disparos, grauDeAviso, grauDeAvisoCor };
-  } else {
-    alertas.push({ testefk, disparos, grauDeAviso, grauDeAvisoCor });
   }
 
-  exibirCards();
-}
+  function alertar(resposta, testefk) {
+    var disparos = resposta[0].totalCaptacao;
 
-function removerAlerta(testefk) {
-  alertas = alertas.filter(item => item.testefk !== testefk);
-  exibirCards();
-}
+    console.log(disparos + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
-function exibirCards() {
-  var alertaElement = document.getElementById('alerta');
-  alertaElement.innerHTML = '';
+    disparos = 1020;
 
-  for (var i = 0; i < alertas.length; i++) {
-    var mensagem = alertas[i];
-    alertaElement.innerHTML += transformarEmDiv(mensagem);
+  // var padaria = document.querySelector('padaria');
+
+
+    console.log(testefk === resposta[0].fkSensor);
+
+    var grauDeAviso = '';
+    var grauDeAvisoCor = '';
+
+    var limites = {
+      criticoMenos: 100,
+      emergenciaMenos: 101,
+      alertaMenos: 210,
+      idealMenos: 420,
+      idealMais: 630,
+      alertaMais: 840,
+      emergenciaMais: 841,
+      criticoMais: 1001,
+    };
+
+    var classe_temperatura = 'cor-alerta';
+
+    if (disparos >= limites.criticoMais) {
+      classe_temperatura = 'cor-alerta perigo-quente';
+      grauDeAviso = 'perigo quente';
+      grauDeAvisoCor = 'cor-alerta perigo-quente';
+      exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
+    } else if (disparos < limites.criticoMais && disparos >= limites.emergenciaMais) {
+      classe_temperatura = 'cor-alerta alerta-quente';
+      grauDeAviso = 'alerta quente';
+      grauDeAvisoCor = 'cor-alerta alerta-quente';
+      exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
+    } else if (disparos < limites.emergenciaMais && disparos > limites.alertaMais) {
+      classe_temperatura = 'cor-alerta ideal';
+      removerAlerta(testefk);
+    } else if (disparos <= limites.alertaMais && disparos > limites.idealMais) {
+      classe_temperatura = 'cor-alerta alerta-frio';
+      grauDeAviso = 'alerta frio';
+      grauDeAvisoCor = 'cor-alerta alerta-frio';
+      exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
+    } else if (disparos <= limites.idealMais && disparos > limites.idealMenos) {
+      classe_temperatura = 'cor-alerta alerta-frio';
+      grauDeAviso = 'alerta frio';
+      grauDeAvisoCor = 'cor-alerta alerta-frio';
+      exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
+    } else if (disparos <= limites.idealMenos && disparos > limites.alertaMenos) {
+      classe_temperatura = 'cor-alerta alerta-frio';
+      grauDeAviso = 'alerta frio';
+      grauDeAvisoCor = 'cor-alerta alerta-frio';
+      exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
+    } else if (disparos <= limites.alertaMenos && disparos > limites.emergenciaMenos) {
+      classe_temperatura = 'cor-alerta alerta-frio';
+      grauDeAviso = 'alerta frio';
+      grauDeAvisoCor = 'cor-alerta alerta-frio';
+      exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
+    } else if (disparos <= limites.criticoMenos) {
+      classe_temperatura = 'cor-alerta perigo-frio';
+      grauDeAviso = 'perigo frio';
+      grauDeAvisoCor = 'cor-alerta perigo-frio';
+      exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
+    }
+
+    var card;
+
+    if (testefk == 1) {
+      console.log(`CHEGAY `);
+    // padaria.innerHTML = `TESTE TESTE TESTE`
+    console.log(`CHEGAY DNOVO `);
+    padaria.innerHTML = resposta[0].totalCaptacao + ' disparos';
+    card = card_1;
+    } 
+    // else if (testefk == 2) {
+    //   temp_aquario_2.innerHTML = disparos + '°C';
+    //   card = card_2;
+    // } else if (testefk == 3) {
+    //   temp_aquario_3.innerHTML = disparos + '°C';
+    //   card = card_3;
+    // } else if (testefk == 4) {
+    //   temp_aquario_4.innerHTML = disparos + '°C';
+    //   card = card_4;
+    // }
+
+    card.className = classe_temperatura;
+  
   }
-}
+  function exibirAlerta(temp, testefk, grauDeAviso, grauDeAvisoCor) {
+    var indice = alertas.findIndex(item => item.testefk == testefk);
 
-function transformarEmDiv({ testefk, disparos, grauDeAviso, grauDeAvisoCor }) {
-  return `<div class="mensagem-alarme">
+    if (indice >= 0) {
+      alertas[indice] = { testefk, temp, grauDeAviso, grauDeAvisoCor };
+    } else {
+      alertas.push({ testefk, temp, grauDeAviso, grauDeAvisoCor });
+    }
+
+    exibirCards();
+  }
+
+  function removerAlerta(testefk) {
+    alertas = alertas.filter(item => item.testefk != testefk);
+    exibirCards();
+  }
+
+  function exibirCards() {
+    alerta.innerHTML = '';
+
+    for (var i = 0; i < alertas.length; i++) {
+      var mensagem = alertas[i];
+      alerta.innerHTML += transformarEmDiv(mensagem);
+    }
+  }
+
+  function transformarEmDiv({ testefk, temp, grauDeAviso, grauDeAvisoCor }) {
+    return `<div class="mensagem-alarme">
     <div class="informacao">
       <div class="${grauDeAvisoCor}">&#12644;</div> 
       <h3>Aquário ${testefk} está em estado de ${grauDeAviso}!</h3>
-      <small>Disparos ${disparos}.</small>   
+      <small>Temperatura ${temp}.</small>   
     </div>
     <div class="alarme-sino"></div>
   </div>`;
-}
+  }
 
-obterDados(1);
+
+obterdados(1);
 
 
 
