@@ -44,10 +44,10 @@
           <li class="img-conf">
             <i class="fa-solid fa-user-plus" style="color: #ffffff"></i>
           </li>
-          </li>Cadastrar Funcionário&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </a>
-        
-          <a style="width: 110px" href="">
+        </li>Cadastrar Funcionário&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </a>
+      
+      <a style="width: 110px" href="">
             <i
               class="fa-solid fa-circle-user fa-lg"
               style="color: #ffffff"
@@ -57,7 +57,7 @@
           <span id="funcao_usuario" style="color: #ffffff; font-weight: bold;"></span>
         </li>
 
-
+        
         <a onclick="limparSessao()">
           <li class="img-conf">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i>
@@ -68,12 +68,13 @@
 
     <div class="linha-amarela"></div>
   </div>
-
+  
   <div id="padaria" style="color: #ffffff;"></div>
   <div id="card_1"></div>
-  <div id="disparos" class="cor-alerta">Disparos: <span id="valor-disparos">0</span></div>
-
-
+  <div id="disparos" class="cor-alerta">Disparos: <span id="valor_disparos">0</span></div>
+  <div id="alerta" style="color: white;" ></div>
+  
+  
   <div class="corpo">
     <div class="alertas">
       <a href="/listaSetoresCriticos">
@@ -156,14 +157,13 @@
             <option value="bar">Dezembro</option>
           </select>
 
-          <div id="alerta"></div>
-
+          
           <button class="filtrar">Filtrar</button>
         </div>
       </div>
     </div>
   </div>
-
+  
   <div class="footer">
     <div class="container-footer"></div>
   </div>
@@ -172,11 +172,11 @@
 </html>
 
 <script>
-
-if(sessionStorage.NOME_EMPRESA == undefined && sessionStorage.NOME_USUARIO == undefined){
-        window.location = "/login";
-      }
-
+  
+  if(sessionStorage.NOME_EMPRESA == undefined && sessionStorage.NOME_USUARIO == undefined){
+    window.location = "/login";
+  }
+  
 if(sessionStorage.FUNCAO == 'Colaborador'){
   cadastrarNovoFunc.style.visibility = 'hidden'
 }
@@ -719,9 +719,9 @@ function alertar(resposta, testefk) {
   function alertar(resposta, testefk) {
     var disparos = resposta[0].totalCaptacao;
 
-    console.log(disparos + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+  console.log(disparos);
 
-    disparos = 1020;
+    // disparos = 1020;
 
   // var padaria = document.querySelector('padaria');
 
@@ -746,40 +746,41 @@ function alertar(resposta, testefk) {
 
     if (disparos >= limites.criticoMais) {
       classe_temperatura = 'cor-alerta perigo-quente';
-      grauDeAviso = 'perigo quente';
+      grauDeAviso = 'Crítico';
       grauDeAvisoCor = 'cor-alerta perigo-quente';
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos < limites.criticoMais && disparos >= limites.emergenciaMais) {
       classe_temperatura = 'cor-alerta alerta-quente';
-      grauDeAviso = 'alerta quente';
+      grauDeAviso = 'Emergêncial';
       grauDeAvisoCor = 'cor-alerta alerta-quente';
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos < limites.emergenciaMais && disparos > limites.alertaMais) {
       classe_temperatura = 'cor-alerta ideal';
+      grauDeAviso = 'Alerta';
       removerAlerta(testefk);
     } else if (disparos <= limites.alertaMais && disparos > limites.idealMais) {
       classe_temperatura = 'cor-alerta alerta-frio';
-      grauDeAviso = 'alerta frio';
+      grauDeAviso = 'Alerta';
       grauDeAvisoCor = 'cor-alerta alerta-frio';
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos <= limites.idealMais && disparos > limites.idealMenos) {
       classe_temperatura = 'cor-alerta alerta-frio';
-      grauDeAviso = 'alerta frio';
+      grauDeAviso = 'Ideal';
       grauDeAvisoCor = 'cor-alerta alerta-frio';
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos <= limites.idealMenos && disparos > limites.alertaMenos) {
       classe_temperatura = 'cor-alerta alerta-frio';
-      grauDeAviso = 'alerta frio';
+      grauDeAviso = 'Alerta'; //
       grauDeAvisoCor = 'cor-alerta alerta-frio';
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos <= limites.alertaMenos && disparos > limites.emergenciaMenos) {
       classe_temperatura = 'cor-alerta alerta-frio';
-      grauDeAviso = 'alerta frio';
+      grauDeAviso = 'Emergêncial';
       grauDeAvisoCor = 'cor-alerta alerta-frio';
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos <= limites.criticoMenos) {
       classe_temperatura = 'cor-alerta perigo-frio';
-      grauDeAviso = 'perigo frio';
+      grauDeAviso = 'Crítico';
       grauDeAvisoCor = 'cor-alerta perigo-frio';
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     }
@@ -791,6 +792,7 @@ function alertar(resposta, testefk) {
     // padaria.innerHTML = `TESTE TESTE TESTE`
     console.log(`CHEGAY DNOVO `);
     padaria.innerHTML = resposta[0].totalCaptacao + ' disparos';
+    valor_disparos.innerHTML = disparos;
     card = card_1;
     } 
     // else if (testefk == 2) {
@@ -834,11 +836,17 @@ function alertar(resposta, testefk) {
   }
 
   function transformarEmDiv({ testefk, temp, grauDeAviso, grauDeAvisoCor }) {
+    var setor 
+    if(testefk == 1) {
+    setor = "Padaria"
+    }
+
+    
     return `<div class="mensagem-alarme">
     <div class="informacao">
       <div class="${grauDeAvisoCor}">&#12644;</div> 
-      <h3>Aquário ${testefk} está em estado de ${grauDeAviso}!</h3>
-      <small>Temperatura ${temp}.</small>   
+      <h3>Setor ${setor} está em estado ${grauDeAviso}!</h3>
+      <small> Fluxo ${temp}.</small>   
     </div>
     <div class="alarme-sino"></div>
   </div>`;
