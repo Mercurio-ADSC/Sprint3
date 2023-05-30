@@ -49,21 +49,24 @@
 }
 
 .mensagem-alarme{
-  background-color: purple;
+  background-color: white;
   width: 32rem;
   height: 6rem;
   margin-left: 1rem;
   padding: 10px;
   margin-top: 10px;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   position: absolute;
-  margin-left: 69rem;
+  margin-left: 56rem;
   margin-bottom: 1.4rem;
+  /* border: 0.2rem solid #fff; */
+  border-radius: 0.8rem;
 }
 
 .mensagem-alarme h3{
   margin: 0;
+  color: #000;
 }
 
 .mensagem-alarme small{
@@ -71,11 +74,10 @@
   justify-content: right;
   margin-right: 10px;
   margin-top: 20px;
+  color: #000;
 }
 
 .informacao{
-  border: 0.2rem solid #FFFFFF;
-  border-radius: 0.8rem;
   width: 30rem;
   padding-left: 20px;
 }
@@ -86,9 +88,14 @@
   border-radius: 50%;
 }
 
-/* .fechar{
-  
-} */
+.fechar{
+  display: flex;
+  justify-content: right;
+}
+
+.div_fechar svg{
+  cursor: pointer;
+}
 
 </style>
 
@@ -815,16 +822,23 @@ b_usuario.innerHTML = primeiroNome;
     return `<div class="mensagem-alarme">
     <div class="informacao">
       <div class="${grauDeAvisoCor}">&#12644;</div> 
-      <h3>Setor ${setor} está em estado ${grauDeAviso}! <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" fill="currentColor" class="bi bi-circle-fill ${grauDeAvisoCor}" viewBox="0 0 16 16">
+      <h3>Setor ${setor} está em estado ${grauDeAviso}! &nbsp;&nbsp;&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-flag-fill ${grauDeAvisoCor}" viewBox="0 0 16 16">
+  <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
+</svg>
   <circle cx="8" cy="8" r="8"/>
 </svg>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg fechar" viewBox="0 0 16 16">
-  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-</svg></h3>
+</h3>  
       <small> Fluxo ${temp}.</small>   
     </div>
+    <div class="div_fechar"><svg onclick="fecharAlerta()" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-lg fechar" viewBox="0 0 16 16" style="color: black">
+  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+</svg></div>
     <div class="alarme-sino"></div>
   </div>`;
+  }
+
+  function fecharAlerta() {
+    alerta.innerHTML = ``
   }
 
 
