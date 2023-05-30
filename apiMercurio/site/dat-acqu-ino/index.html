@@ -146,7 +146,7 @@
       <a href="/listaSetoresCriticos">
         <div class="quadro alerta4">
           <span class="tlt-alerta">Fluxo Crítico</span>
-          <span class="numero-alerta critico">1</span>
+          <span id="campoCritico" class="numero-alerta critico">1</span>
           <div class="abrir-setor">
             <span class="setor-alerta">Setor(es)</span>
             <i class="fa-solid fa-plus"></i>
@@ -156,7 +156,7 @@
       <a href="/listaSetoresEmergenciais">
         <div class="quadro alerta3">
           <span class="tlt-alerta">Fluxo Emergencial</span>
-          <span class="numero-alerta emergencia">1</span>
+          <span id="campoEmergencial" class="numero-alerta emergencia">1</span>
           <div class="abrir-setor">
             <span class="setor-alerta">Setor(es)</span>
             <i class="fa-solid fa-plus"></i>
@@ -166,7 +166,7 @@
       <a href="/listaSetoresAlerta">
         <div class="quadro alerta2">
           <span class="tlt-alerta">Fluxo Alerta</span>
-          <span class="numero-alerta alerta">2</span>
+          <span id="campoAlerta" class="numero-alerta alerta">2</span>
           <div class="abrir-setor">
             <span class="setor-alerta">Setor(es)</span>
             <i class="fa-solid fa-plus"></i>
@@ -176,7 +176,7 @@
       <a href="/listaSetoresIdeais">
         <div class="quadro alerta1">
           <span class="tlt-alerta">Fluxo Ideal</span>
-          <span class="numero-alerta ideal">3</span>
+          <span id="campoIdeal" class="numero-alerta ideal">3</span>
           <div class="abrir-setor">
             <span class="setor-alerta">Setor(es)</span>
             <i class="fa-solid fa-plus"></i>
@@ -657,6 +657,10 @@ b_usuario.innerHTML = primeiroNome;
   // alertasssssssssssssssss
 
   var alertas = [];
+  var listaCritico = [];
+  var listaAlerta = [];
+  var listaEmergencial = [];
+  var listaIdeal = [];
 
 
 
@@ -690,10 +694,20 @@ b_usuario.innerHTML = primeiroNome;
 
   }
 
+
+  
+
+  
+
+
   function alertar(resposta, testefk) {
     var aleatorio = Math.random() * 50
     console.log(aleatorio + `AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`);
     var disparos = resposta[0].totalCaptacao * parseInt(aleatorio) ;
+    var setor 
+    if(testefk == 1){
+      setor = "Padaria"
+    }
 
   console.log(disparos);
 
@@ -724,41 +738,58 @@ b_usuario.innerHTML = primeiroNome;
       classe_temperatura = 'cor-alerta perigo-quente';
       grauDeAviso = 'Crítico';
       grauDeAvisoCor = 'critico';
+      listaCritico.push(setor)
+      campoCritico.innerHTML = `${listaCritico.length}`
+      
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos < limites.criticoMais && disparos >= limites.emergenciaMais) {
       classe_temperatura = 'cor-alerta alerta-quente';
       grauDeAviso = 'Emergêncial';
       grauDeAvisoCor = 'emergencial';
+      listaEmergencial.push(setor)
+      campoEmergencial.innerHTML = `${listaEmergencial.length }`
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos < limites.emergenciaMais && disparos > limites.alertaMais) {
       classe_temperatura = 'cor-alerta ideal';
       grauDeAviso = 'Alerta';
       grauDeAvisoCor = 'alerta';
+      listaAlerta.push(setor)
+      campoAlerta.innerHTML = `${listaAlerta.length}`
       removerAlerta(testefk);
     } else if (disparos <= limites.alertaMais && disparos > limites.idealMais) {
       classe_temperatura = 'cor-alerta alerta-frio';
       grauDeAviso = 'Alerta';
       grauDeAvisoCor = 'alerta';
+      listaAlerta.push(setor)
+      campoAlerta.innerHTML = `${listaAlerta.length}`
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos <= limites.idealMais && disparos > limites.idealMenos) {
       classe_temperatura = 'cor-alerta alerta-frio';
       grauDeAviso = 'Ideal';
       grauDeAvisoCor = 'ideal';
+      listaIdeal.push(setor)
+      campoIdeal.innerHTML = `${listaIdeal.length}`
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos <= limites.idealMenos && disparos > limites.alertaMenos) {
       classe_temperatura = 'cor-alerta alerta-frio';
       grauDeAviso = 'Alerta'; //
       grauDeAvisoCor = 'alerta';
+      listaAlerta.push(setor)
+      campoAlerta.innerHTML = `${listaAlerta.length}`
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos <= limites.alertaMenos && disparos > limites.emergenciaMenos) {
       classe_temperatura = 'cor-alerta alerta-frio';
       grauDeAviso = 'Emergêncial';
       grauDeAvisoCor = 'emergencial';
+      listaEmergencial.push(setor)
+      campoEmergencial.innerHTML = `${listaEmergencial.length}`
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos <= limites.criticoMenos) {
       classe_temperatura = 'cor-alerta perigo-frio';
       grauDeAviso = 'Crítico';
       grauDeAvisoCor = 'critico';
+      listaCritico.push(setor)
+      campoCritico.innerHTML = `${listaCritico.length}`
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     }
 
@@ -843,6 +874,13 @@ b_usuario.innerHTML = primeiroNome;
 
 
 obterdados(1);
+
+module.exports= {
+  listaCritico,
+  listaEmergencial,
+  listaAlerta,
+  listaIdeal
+}
 
 
 
