@@ -45,11 +45,11 @@ button {
     justify-content: space-between;
 }
 
-.pointer{
+.pointer {
     margin-top: 20px;
     margin-right: 5px;
     cursor: pointer;
-} 
+}
 
 .navbar li,
 .navbar a {
