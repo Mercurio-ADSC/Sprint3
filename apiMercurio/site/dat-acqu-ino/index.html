@@ -20,7 +20,7 @@
 </head>
 
 <style>
-  .cor-alerta {
+  /* .cor-alerta {
   color: blueviolet;
 }
 
@@ -30,7 +30,66 @@
 
 .alerta-quente {
   color: red;
+} */
+
+.alerta {
+  color: orange;
 }
+
+.critico{
+  color: red;
+}
+
+.emergencial{
+  color: orangered;
+}
+
+.idel{
+  color: green;
+}
+
+.mensagem-alarme{
+  background-color: purple;
+  width: 32rem;
+  height: 6rem;
+  margin-left: 1rem;
+  padding: 10px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin-left: 69rem;
+  margin-bottom: 1.4rem;
+}
+
+.mensagem-alarme h3{
+  margin: 0;
+}
+
+.mensagem-alarme small{
+  display: flex;
+  justify-content: right;
+  margin-right: 10px;
+  margin-top: 20px;
+}
+
+.informacao{
+  border: 0.2rem solid #FFFFFF;
+  border-radius: 0.8rem;
+  width: 30rem;
+  padding-left: 20px;
+}
+
+.circulo{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+/* .fechar{
+  
+} */
+
 </style>
 
 <body onload="validarSessao()">
@@ -596,98 +655,6 @@ b_usuario.innerHTML = primeiroNome;
 
 
   console.log("Cheguei!")
-  function obterdados(testefk) {
-  fetch(`/medidas/tempo-real/${testefk}`)
-    .then(resposta => {
-      console.log(resposta);
-      if (resposta.ok) {
-        if (resposta.status === 204) {
-          console.log('Nenhum dado encontrado');
-        } else {
-          resposta
-            .json()
-            .then(resposta => {
-              console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-              alertar(resposta, testefk);
-            })
-            .catch(error => {
-              console.error(`Erro na análise do JSON: ${error}`);
-            });
-        }
-      } else {
-        console.error('Erro na resposta da API');
-      }
-    })
-    .catch(function (error) {
-      console.error(`Erro na obtenção dos dados do aquário p/ gráfico: ${error.message}`);
-    });
-}
-
-function alertar(resposta, testefk) {
-  var disparos = resposta[0].totalCaptacao;
-  
-  // padaria.innerHTML = resposta[0].totalCaptacao + ' disparos';
-
-  var grauDeAviso = '';
-  var grauDeAvisoCor = '';
-
-  var limites = {
-    criticoMenos: 100,
-    emergenciaMenos: 101,
-    alertaMenos: 210,
-    idealMenos: 420,
-    idealMais: 630,
-    alertaMais: 840,
-    emergenciaMais: 841,
-    criticoMais: 1001,
-  };
-
-  var classe_temperatura = 'cor-alerta';
-
-  if (disparos >= limites.criticoMais) {
-    classe_temperatura = 'cor-alerta perigo-quente';
-    grauDeAviso = 'perigo quente';
-    grauDeAvisoCor = 'cor-alerta perigo-quente';
-    exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
-  } else if (disparos < limites.criticoMais && disparos >= limites.emergenciaMais) {
-    classe_temperatura = 'cor-alerta alerta-quente';
-    grauDeAviso = 'alerta quente';
-    grauDeAvisoCor = 'cor-alerta alerta-quente';
-    exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
-  } else if (disparos < limites.emergenciaMais && disparos > limites.alertaMais) {
-    classe_temperatura = 'cor-alerta ideal';
-    removerAlerta(testefk);
-  } else if (disparos <= limites.alertaMais && disparos > limites.idealMais) {
-    classe_temperatura = 'cor-alerta alerta-frio';
-    grauDeAviso = 'alerta frio';
-    grauDeAvisoCor = 'cor-alerta alerta-frio';
-    exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
-  } else if (disparos <= limites.idealMais && disparos > limites.idealMenos) {
-    classe_temperatura = 'cor-alerta alerta-frio';
-    grauDeAviso = 'alerta frio';
-    grauDeAvisoCor = 'cor-alerta alerta-frio';
-    exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
-  } else if (disparos <= limites.idealMenos && disparos > limites.alertaMenos) {
-    classe_temperatura = 'cor-alerta alerta-frio';
-    grauDeAviso = 'alerta frio';
-    grauDeAvisoCor = 'cor-alerta alerta-frio';
-    exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
-  } else if (disparos <= limites.alertaMenos && disparos > limites.emergenciaMenos) {
-    classe_temperatura = 'cor-alerta alerta-frio';
-    grauDeAviso = 'alerta frio';
-    grauDeAvisoCor = 'cor-alerta alerta-frio';
-    exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
-  } else if (disparos <= limites.criticoMenos) {
-    classe_temperatura = 'cor-alerta perigo-frio';
-    grauDeAviso = 'perigo frio';
-    grauDeAvisoCor = 'cor-alerta perigo-frio';
-    exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
-  }
-
-  var disparosElement = document.getElementById('disparos');
-  disparosElement.className = classe_temperatura;
-  document.getElementById('valor-disparos').textContent = disparos;
-}
 
   function obterdados(testefk) {
     fetch(`/medidas/tempo-real/${testefk}`)
@@ -717,7 +684,9 @@ function alertar(resposta, testefk) {
   }
 
   function alertar(resposta, testefk) {
-    var disparos = resposta[0].totalCaptacao;
+    var aleatorio = Math.random() * 50
+    console.log(aleatorio + `AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`);
+    var disparos = resposta[0].totalCaptacao * parseInt(aleatorio) ;
 
   console.log(disparos);
 
@@ -747,41 +716,42 @@ function alertar(resposta, testefk) {
     if (disparos >= limites.criticoMais) {
       classe_temperatura = 'cor-alerta perigo-quente';
       grauDeAviso = 'Crítico';
-      grauDeAvisoCor = 'cor-alerta perigo-quente';
+      grauDeAvisoCor = 'critico';
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos < limites.criticoMais && disparos >= limites.emergenciaMais) {
       classe_temperatura = 'cor-alerta alerta-quente';
       grauDeAviso = 'Emergêncial';
-      grauDeAvisoCor = 'cor-alerta alerta-quente';
+      grauDeAvisoCor = 'emergencial';
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos < limites.emergenciaMais && disparos > limites.alertaMais) {
       classe_temperatura = 'cor-alerta ideal';
       grauDeAviso = 'Alerta';
+      grauDeAvisoCor = 'alerta';
       removerAlerta(testefk);
     } else if (disparos <= limites.alertaMais && disparos > limites.idealMais) {
       classe_temperatura = 'cor-alerta alerta-frio';
       grauDeAviso = 'Alerta';
-      grauDeAvisoCor = 'cor-alerta alerta-frio';
+      grauDeAvisoCor = 'alerta';
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos <= limites.idealMais && disparos > limites.idealMenos) {
       classe_temperatura = 'cor-alerta alerta-frio';
       grauDeAviso = 'Ideal';
-      grauDeAvisoCor = 'cor-alerta alerta-frio';
+      grauDeAvisoCor = 'ideal';
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos <= limites.idealMenos && disparos > limites.alertaMenos) {
       classe_temperatura = 'cor-alerta alerta-frio';
       grauDeAviso = 'Alerta'; //
-      grauDeAvisoCor = 'cor-alerta alerta-frio';
+      grauDeAvisoCor = 'alerta';
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos <= limites.alertaMenos && disparos > limites.emergenciaMenos) {
       classe_temperatura = 'cor-alerta alerta-frio';
       grauDeAviso = 'Emergêncial';
-      grauDeAvisoCor = 'cor-alerta alerta-frio';
+      grauDeAvisoCor = 'emergencial';
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos <= limites.criticoMenos) {
       classe_temperatura = 'cor-alerta perigo-frio';
       grauDeAviso = 'Crítico';
-      grauDeAvisoCor = 'cor-alerta perigo-frio';
+      grauDeAvisoCor = 'critico';
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     }
 
@@ -845,7 +815,12 @@ function alertar(resposta, testefk) {
     return `<div class="mensagem-alarme">
     <div class="informacao">
       <div class="${grauDeAvisoCor}">&#12644;</div> 
-      <h3>Setor ${setor} está em estado ${grauDeAviso}!</h3>
+      <h3>Setor ${setor} está em estado ${grauDeAviso}! <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" fill="currentColor" class="bi bi-circle-fill ${grauDeAvisoCor}" viewBox="0 0 16 16">
+  <circle cx="8" cy="8" r="8"/>
+</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg fechar" viewBox="0 0 16 16">
+  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+</svg></h3>
       <small> Fluxo ${temp}.</small>   
     </div>
     <div class="alarme-sino"></div>
