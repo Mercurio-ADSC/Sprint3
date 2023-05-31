@@ -31,6 +31,9 @@
 
             <div class="lista-setores">
                 <div class="container-lista">
+
+                    <div id="gerar"></div>
+
                     <div class="lista" id="lista">
 
                         <div class="linha-setor">
@@ -58,3 +61,32 @@
 </body>
 
 </html>
+<script>
+
+    var listaDeAlertas = JSON.parse(localStorage.getItem("listaAlertas"));
+    console.log(listaDeAlertas);
+    listaAlerta = listaDeAlertas[2]
+
+
+    if(listaAlerta.length == 1) {
+        gerar.innerHTML = `
+        <div class="lista" id="lista">
+
+<div class="linha-setor">
+    <div class="dados">
+        <i class="fa-solid fa-store"></i>
+        <span>${listaAlerta[0]}</span>
+    </div>
+    <span></span>
+    <div class="div-alerta alerta">Fluxo Alerta</div>
+</div>
+
+</div>
+</div>
+        `
+
+        
+
+    }
+
+</script>
