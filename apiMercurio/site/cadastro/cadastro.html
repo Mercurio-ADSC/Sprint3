@@ -128,7 +128,6 @@
 
 
     function CadastrarEmpresa() {
-        // aguardar();
 
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
@@ -169,7 +168,7 @@
                 }, "1000")
 
                 formCad.reset();
-                // finalizarAguardar();
+
             } else {
                 return resposta.text().then(function (erro) {
                     alert(erro);
@@ -177,7 +176,7 @@
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-            // finalizarAguardar();
+
         });
 
         return false;

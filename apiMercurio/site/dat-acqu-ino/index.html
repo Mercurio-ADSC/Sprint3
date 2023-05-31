@@ -32,71 +32,70 @@
   color: red;
 } */
 
-.alerta {
-  color: orange;
-}
+  .alerta {
+    color: orange;
+  }
 
-.critico{
-  color: red;
-}
+  .critico {
+    color: red;
+  }
 
-.emergencial{
-  color: orangered;
-}
+  .emergencial {
+    color: orangered;
+  }
 
-.idel{
-  color: green;
-}
+  .idel {
+    color: green;
+  }
 
-.mensagem-alarme{
-  background-color: white;
-  width: 32rem;
-  height: 6rem;
-  margin-left: 1rem;
-  padding: 10px;
-  margin-top: 10px;
-  display: flex;
-  /* flex-direction: column; */
-  position: absolute;
-  margin-left: 56rem;
-  margin-bottom: 1.4rem;
-  /* border: 0.2rem solid #fff; */
-  border-radius: 0.8rem;
-}
+  .mensagem-alarme {
+    background-color: white;
+    width: 32rem;
+    height: 6rem;
+    margin-left: 1rem;
+    padding: 10px;
+    margin-top: 10px;
+    display: flex;
+    /* flex-direction: column; */
+    position: absolute;
+    margin-left: 56rem;
+    margin-bottom: 1.4rem;
+    /* border: 0.2rem solid #fff; */
+    border-radius: 0.8rem;
+  }
 
-.mensagem-alarme h3{
-  margin: 0;
-  color: #000;
-}
+  .mensagem-alarme h3 {
+    margin: 0;
+    color: #000;
+  }
 
-.mensagem-alarme small{
-  display: flex;
-  justify-content: right;
-  margin-right: 10px;
-  margin-top: 20px;
-  color: #000;
-}
+  .mensagem-alarme small {
+    display: flex;
+    justify-content: right;
+    margin-right: 10px;
+    margin-top: 20px;
+    color: #000;
+  }
 
-.informacao{
-  width: 30rem;
-  padding-left: 20px;
-}
+  .informacao {
+    width: 30rem;
+    padding-left: 20px;
+  }
 
-.circulo{
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-}
+  .circulo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
 
-.fechar{
-  display: flex;
-  justify-content: right;
-}
+  .fechar {
+    display: flex;
+    justify-content: right;
+  }
 
-.div_fechar svg{
-  cursor: pointer;
-}
-
+  .div_fechar svg {
+    cursor: pointer;
+  }
 </style>
 
 <body onload="validarSessao()">
@@ -110,20 +109,16 @@
           <li class="img-conf">
             <i class="fa-solid fa-user-plus" style="color: #ffffff"></i>
           </li>
-        </li>Cadastrar Funcionário&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </a>
-      
-      <a style="width: 110px" href="">
-            <i
-              class="fa-solid fa-circle-user fa-lg"
-              style="color: #ffffff"
-            ></i>
-            <span id="b_usuario"></span></a
-          >
-          <span id="funcao_usuario" style="color: #ffffff; font-weight: bold;"></span>
+          </li>Cadastrar Funcionário&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </a>
+
+        <a style="width: 110px" href="">
+          <i class="fa-solid fa-circle-user fa-lg" style="color: #ffffff"></i>
+          <span id="b_usuario"></span></a>
+        <span id="funcao_usuario" style="color: #ffffff; font-weight: bold;"></span>
         </li>
 
-        
+
         <a onclick="limparSessao()">
           <li class="img-conf">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i>
@@ -134,13 +129,13 @@
 
     <div class="linha-amarela"></div>
   </div>
-  
+
   <div id="padaria" style="color: #ffffff;"></div>
   <div id="card_1"></div>
   <div id="disparos" class="cor-alerta">Disparos: <span id="valor_disparos">0</span></div>
-  <div id="alerta" style="color: white;" ></div>
-  
-  
+  <div id="alerta" style="color: white;"></div>
+
+
   <div class="corpo">
     <div class="alertas">
       <a href="/listaSetoresCriticos">
@@ -206,30 +201,55 @@
       <div class="bloco-campos">
         <div class="campos-filtros">
           <h4 class="tlt-setores">Comparação de setor</h4>
-          <select class="setor">
+          <select class="setor" id="select_setor">
             <option selected disabled>Setor</option>
-            <option value="line">Açougue</option>
-            <option value="bar">Bebidas</option>
-            <option value="bar">Hortifruti</option>
-            <option value="bar">Padaria</option>
-            <option value="bar">Peixaria</option>
+            <option value="padaria">Padaria</option>
+            <option value="acougue">Açougue</option>
+            <option value="bebidas">Bebidas</option>
+            <option value="higiene">Higiene</option>
+            <option value="confeitaria">Confeitaria</option>
+            <option value="limpeza">Limpeza</option>
+            <option value="bolacha">Bolachas</option>
           </select>
 
-          <select class="mes">
+          <select class="mes" id="select_mes">
             <option selected disabled>Mês</option>
-            <option value="line">Janeiro</option>
-            <option value="bar">Fevereiro</option>
-            <option value="bar">Março</option>
-            <option value="bar">Dezembro</option>
+            <option value="1">Janeiro</option>
+            <option value="2">Fevereiro</option>
+            <option value="3">Março</option>
+            <option value="4">Abril</option>
+            <option value="5">Maio</option>
+            <option value="6">Junho</option>
+            <option value="7">Julho</option>
+            <option value="8">Agosto</option>
+            <option value="9">Setembro</option>
+            <option value="10">Outubro</option>
+            <option value="11">Novembro</option>
+            <option value="12">Dezembro</option>
           </select>
 
-          
-          <button class="filtrar">Filtrar</button>
+          <span style="color: #FFFFFF;">OU</span>
+
+          <select class="mes" id="select_data">
+            <option selected disabled>Datas especiais</option>
+            <option value="ano novo">Ano novo</option>
+            <option value="02-05">Carnaval</option>
+            <option value="12-25">Natal</option>
+            <option value="pascoa">Páscoa</option>
+            <option value="dia das maes">Dia das mães</option>
+            <option value="dia dos namorados">Dia dos namorados</option>
+            <option value="festa junina">Festa Junina</option>
+            <option value="dia dos pais">Dia dos Pais</option>
+            <option value="black friday">Black Friday</option>
+          </select>
+
+
+          <button class="filtrar" onclick="filtrar()">Filtrar</button>
         </div>
       </div>
     </div>
   </div>
-  
+
   <div class="footer">
     <div class="container-footer"></div>
   </div>
@@ -238,27 +258,27 @@
 </html>
 
 <script>
-  
-  if(sessionStorage.NOME_EMPRESA == undefined && sessionStorage.NOME_USUARIO == undefined){
+
+  if (sessionStorage.NOME_EMPRESA == undefined && sessionStorage.NOME_USUARIO == undefined) {
     window.location = "/login";
   }
-  
-if(sessionStorage.FUNCAO == 'Colaborador'){
-  cadastrarNovoFunc.style.visibility = 'hidden'
-}
 
-  
-function limparSessao() {
+  if (sessionStorage.FUNCAO == 'Colaborador') {
+    cadastrarNovoFunc.style.visibility = 'hidden'
+  }
+
+
+  function limparSessao() {
     // aguardar();
     sessionStorage.clear();
     // finalizarAguardar();
     window.location = "/login";
-}
-1
+  }
+  1
 
-var nivel = sessionStorage.FUNCAO;
+  var nivel = sessionStorage.FUNCAO;
 
-funcao_usuario.innerHTML = nivel;
+  funcao_usuario.innerHTML = nivel;
 
   function validarSessao() {
 
@@ -268,36 +288,36 @@ funcao_usuario.innerHTML = nivel;
 
     var b_usuario = document.getElementById("b_usuario");
 
-      
-if(sessionStorage.NOME_EMPRESA){
+
+    if (sessionStorage.NOME_EMPRESA) {
 
 
-  var nome = sessionStorage.NOME_EMPRESA;
-  var primeiroNome = '';
+      var nome = sessionStorage.NOME_EMPRESA;
+      var primeiroNome = '';
 
-  for(var i = 0; i < nome.length; i++){
-  primeiroNome += nome[i]
-  if(nome[i] == ' '){
-   break
-  }
-}
+      for (var i = 0; i < nome.length; i++) {
+        primeiroNome += nome[i]
+        if (nome[i] == ' ') {
+          break
+        }
+      }
 
-b_usuario.innerHTML = primeiroNome;
-  
-}else if(sessionStorage.NOME_USUARIO){
-  var nome = sessionStorage.NOME_USUARIO;
-  var primeiroNome = '';
+      b_usuario.innerHTML = primeiroNome;
 
-  for(var i = 0; i < nome.length; i++){
-  primeiroNome += nome[i]
-  if(nome[i] == ' '){
-   break
-  }
-}
+    } else if (sessionStorage.NOME_USUARIO) {
+      var nome = sessionStorage.NOME_USUARIO;
+      var primeiroNome = '';
 
-b_usuario.innerHTML = primeiroNome;
+      for (var i = 0; i < nome.length; i++) {
+        primeiroNome += nome[i]
+        if (nome[i] == ' ') {
+          break
+        }
+      }
 
-}
+      b_usuario.innerHTML = primeiroNome;
+
+    }
   }
 
   validarSessao()
@@ -307,6 +327,110 @@ b_usuario.innerHTML = primeiroNome;
   let proximaAtualizacao;
 
   window.onload = obterDadosGraficos();
+
+  // PESQUISA - GRAFICO
+  function filtrar() {
+
+    var setor = select_setor.value;
+    var mes = Number(select_mes.value);
+    var data = select_data.value;
+
+    if (setor == "" && data == "" && mes == "") {
+      alert("Preencha os campos corretamente")
+
+    } else if (setor == "" && data == "") {
+
+      alert("Preencha os campos corretamente")
+
+    } else if (setor == "" && mes == "") {
+      alert("Preencha os campos corretamente")
+
+    } else {
+
+      // validacao da data
+      if (setor != "" && mes != "") {
+
+        fetch("pesquisaFechamentoMes", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            setor: setor,
+            mes: mes,
+          }),
+        })
+          .then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!");
+
+            if (resposta.ok) {
+              console.log(resposta);
+
+              resposta.json().then((json) => {
+                console.log(json);
+                console.log(JSON.stringify(json));
+
+
+
+              });
+            } else {
+              console.log("Houve um erro ao tentar realizar o login!");
+
+              resposta.text().then((texto) => {
+                console.error(texto);
+                // finalizarAguardar(texto);
+              });
+            }
+          })
+          .catch(function (erro) {
+            console.log(erro);
+          });
+
+
+      } else {
+
+        fetch("/pesquisaDataEspecial", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            setor: setor,
+            data: data,
+          }),
+        })
+          .then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!");
+
+            if (resposta.ok) {
+              console.log(resposta);
+
+              resposta.json().then((json) => {
+                console.log(json);
+                console.log(JSON.stringify(json));
+
+
+              });
+            } else {
+              console.log("Houve um erro ao tentar realizar o login!");
+
+              resposta.text().then((texto) => {
+                console.error(texto);
+                // finalizarAguardar(texto);
+              });
+            }
+          })
+          .catch(function (erro) {
+            console.log(erro);
+          });
+
+
+
+      }
+    }
+
+  }
+
 
   function obterDadosGraficos() {
     obterDadosGrafico(1);
@@ -669,8 +793,8 @@ b_usuario.innerHTML = primeiroNome;
 
   function obterdados(testefk) {
     fetch(`/medidas/tempo-real/${testefk}`)
-    .then(resposta => {
-      console.log(resposta);
+      .then(resposta => {
+        console.log(resposta);
         if (resposta.ok) {
           if (resposta.status === 204) {
             console.log('Nenhum dado encontrado');
@@ -695,25 +819,26 @@ b_usuario.innerHTML = primeiroNome;
   }
 
 
-  
 
-  
+
+
 
 
   function alertar(resposta, testefk) {
     var aleatorio = Math.random() * 50
     console.log(aleatorio + `AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`);
-    var disparos = resposta[0].totalCaptacao * parseInt(aleatorio) ;
-    var setor 
-    if(testefk == 1){
+    var disparos = resposta[0].totalCaptacao * parseInt(aleatorio);
+
+    var setor
+    if (testefk == 1) {
       setor = "Padaria"
     }
 
-  console.log(disparos);
+    console.log(disparos);
 
     // disparos = 1020;
 
-  // var padaria = document.querySelector('padaria');
+    // var padaria = document.querySelector('padaria');
 
 
     console.log(testefk === resposta[0].fkSensor);
@@ -740,14 +865,14 @@ b_usuario.innerHTML = primeiroNome;
       grauDeAvisoCor = 'critico';
       listaCritico.push(setor)
       campoCritico.innerHTML = `${listaCritico.length}`
-      
+
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos < limites.criticoMais && disparos >= limites.emergenciaMais) {
       classe_temperatura = 'cor-alerta alerta-quente';
       grauDeAviso = 'Emergêncial';
       grauDeAvisoCor = 'emergencial';
       listaEmergencial.push(setor)
-      campoEmergencial.innerHTML = `${listaEmergencial.length }`
+      campoEmergencial.innerHTML = `${listaEmergencial.length}`
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos < limites.emergenciaMais && disparos > limites.alertaMais) {
       classe_temperatura = 'cor-alerta ideal';
@@ -797,12 +922,12 @@ b_usuario.innerHTML = primeiroNome;
 
     if (testefk == 1) {
       console.log(`CHEGAY `);
-    // padaria.innerHTML = `TESTE TESTE TESTE`
-    console.log(`CHEGAY DNOVO `);
-    padaria.innerHTML = resposta[0].totalCaptacao + ' disparos';
-    valor_disparos.innerHTML = disparos;
-    card = card_1;
-    } 
+      // padaria.innerHTML = `TESTE TESTE TESTE`
+      console.log(`CHEGAY DNOVO `);
+      padaria.innerHTML = resposta[0].totalCaptacao + ' disparos';
+      valor_disparos.innerHTML = disparos;
+      card = card_1;
+    }
     // else if (testefk == 2) {
     //   temp_aquario_2.innerHTML = disparos + '°C';
     //   card = card_2;
@@ -815,7 +940,7 @@ b_usuario.innerHTML = primeiroNome;
     // }
 
     card.className = classe_temperatura;
-  
+
   }
   function exibirAlerta(temp, testefk, grauDeAviso, grauDeAvisoCor) {
     var indice = alertas.findIndex(item => item.testefk == testefk);
@@ -844,12 +969,12 @@ b_usuario.innerHTML = primeiroNome;
   }
 
   function transformarEmDiv({ testefk, temp, grauDeAviso, grauDeAvisoCor }) {
-    var setor 
-    if(testefk == 1) {
-    setor = "Padaria"
+    var setor
+    if (testefk == 1) {
+      setor = "Padaria"
     }
 
-    
+
     return `<div class="mensagem-alarme">
     <div class="informacao">
       <div class="${grauDeAvisoCor}">&#12644;</div> 
@@ -873,15 +998,13 @@ b_usuario.innerHTML = primeiroNome;
   }
 
 
-obterdados(1);
+  obterdados(1);
 
-module.exports= {
-  listaCritico,
-  listaEmergencial,
-  listaAlerta,
-  listaIdeal
-}
-
-
+  module.exports = {
+    listaCritico,
+    listaEmergencial,
+    listaAlerta,
+    listaIdeal
+  }
 
 </script>

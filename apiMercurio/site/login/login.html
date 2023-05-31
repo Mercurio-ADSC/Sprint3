@@ -1,133 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mercúrio - Entrar</title>
-    <link rel="stylesheet" href="../css/styleLogin.css" />
 
-    <link rel="icon" type="image/png" href="/css/img/asinha.png" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mercúrio - Entrar</title>
+  <link rel="stylesheet" href="../css/styleLogin.css" />
 
-    <script
-      src="https://kit.fontawesome.com/22cb63056a.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
+  <link rel="icon" type="image/png" href="/css/img/asinha.png" />
 
-  <body>
-    <div class="header">
-      <div class="container">
-        <div class="logo-header">
-          <img src="/css/img/LOGO_COMPLETA.png" alt="" />
-        </div>
-        <ul class="navbar">
-          <li><a style="width: 110px" href="/home">Home</a></li>
-          <li><a style="width: 180px" href="/quemSomos">Quem Somos</a></li>
-          <li><a style="width: 180px" href="">Simulador</a></li>
-          <li>
-            <a style="width: 180px; color: #dec43b" href="/cadastro"
-              >Cadastre-se</a
-            >
-          </li>
-          <li class="btn-login">
-            <a style="width: 110px" href="/login">Login</a>
-          </li>
-        </ul>
+  <script src="https://kit.fontawesome.com/22cb63056a.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="header">
+    <div class="container">
+      <div class="logo-header">
+        <img src="/css/img/LOGO_COMPLETA.png" alt="" />
       </div>
+      <ul class="navbar">
+        <li><a style="width: 110px" href="/home">Home</a></li>
+        <li><a style="width: 180px" href="/quemSomos">Quem Somos</a></li>
+        <li><a style="width: 180px" href="">Simulador</a></li>
+        <li>
+          <a style="width: 180px; color: #dec43b" href="/cadastro">Cadastre-se</a>
+        </li>
+        <li class="btn-login">
+          <a style="width: 110px" href="/login">Login</a>
+        </li>
+      </ul>
     </div>
+  </div>
 
-    <section class="login">
-      <div class="formulario">
-        <h1>Login</h1>
-        <form>
-          <input
-            placeholder="fernando.brandao@sptech.school"
-            class="input email"
-            name="emailUsuario"
-            type="text"
-            id="inputLogin"
-            required
-            oninvalid="this.setCustomValidity('O campo e-mail está vazio')"
-            oninput="setCustomValidity('')"
-          />
-          <i class="fa-solid fa-user icon" style="color: #4f4f4f"></i><br />
+  <section class="login">
+    <div class="formulario">
+      <h1>Login</h1>
+      <form>
+        <input placeholder="fernando.brandao@sptech.school" class="input email" name="emailUsuario" type="text"
+          id="inputLogin" required oninvalid="this.setCustomValidity('O campo e-mail está vazio')"
+          oninput="setCustomValidity('')" />
+        <i class="fa-solid fa-user icon" style="color: #4f4f4f"></i><br />
 
-          <input
-            placeholder="********"
-            type="password"
-            name="senhaUsuario"
-            class="input senha"
-            id="inputSenha"
-            required
-            oninvalid="this.setCustomValidity('O campo senha está vazio')"
-            oninput="setCustomValidity('')"
-          />
-          <i class="fa-solid fa-lock icon" style="color: #4f4f4f"></i> <br />
+        <input placeholder="********" type="password" name="senhaUsuario" class="input senha" id="inputSenha" required
+          oninvalid="this.setCustomValidity('O campo senha está vazio')" oninput="setCustomValidity('')" />
+        <i class="fa-solid fa-lock icon" style="color: #4f4f4f"></i> <br />
 
-          <div class="links-form">
-            <a href="/recuperarSenha" style="color: #4b1761"
-              >Esqueceu a senha?</a
-            >
-            <br />
+        <div class="links-form">
+          <a href="/recuperarSenha" style="color: #4b1761">Esqueceu a senha?</a>
+          <br />
 
-            <span>
-              Não é cadastrado?
-              <a href="/cadastro" style="color: #4b1761"> Cadastre-se</a></span
-            >
-          </div>
-        </form>
+          <span>
+            Não é cadastrado?
+            <a href="/cadastro" style="color: #4b1761"> Cadastre-se</a></span>
+        </div>
+      </form>
 
-        <button id="teste" onclick="VerificarUsuario()">Entrar</button>
-      </div>
-    </section>
+      <button id="teste" onclick="VerificarUsuario()">Entrar</button>
+    </div>
+  </section>
 
-    <div class="footer">
-      <div class="container-footer">
-        <div class="empresa">
-          <div class="logo-footer">
-            <img src="/css/img/LOGO_COMPLETA.png" alt="" srcset="" />
-          </div>
-
-          <div class="redes">
-            <a href=""
-              ><i class="fa-brands fa-instagram" style="color: #ffffff"></i
-            ></a>
-            <a href=""
-              ><i class="fa-brands fa-facebook" style="color: #ffffff"></i
-            ></a>
-            <a href=""
-              ><i class="fa-brands fa-youtube" style="color: #ffffff"></i
-            ></a>
-            <a href=""
-              ><i class="fa-brands fa-twitter" style="color: #ffffff"></i
-            ></a>
-          </div>
+  <div class="footer">
+    <div class="container-footer">
+      <div class="empresa">
+        <div class="logo-footer">
+          <img src="/css/img/LOGO_COMPLETA.png" alt="" srcset="" />
         </div>
 
-        <hr />
+        <div class="redes">
+          <a href=""><i class="fa-brands fa-instagram" style="color: #ffffff"></i></a>
+          <a href=""><i class="fa-brands fa-facebook" style="color: #ffffff"></i></a>
+          <a href=""><i class="fa-brands fa-youtube" style="color: #ffffff"></i></a>
+          <a href=""><i class="fa-brands fa-twitter" style="color: #ffffff"></i></a>
+        </div>
+      </div>
 
-        <div class="paginas-footer">
-          <div class="paginas">
-            <ul>
-              <li><a href="/home">Home</a></li>
-              <li><a href="">Simulador</a></li>
-              <li>
-                <a style="color: #dec43b" ; href="/cadastro">Cadastre-se</a>
-              </li>
-            </ul>
-          </div>
+      <hr />
 
-          <div class="informacoes">
-            <ul>
-              <li><a href="/quemSomos">Quem Somos</a></li>
-              <li><a href="">Fale conosco</a></li>
-            </ul>
-          </div>
+      <div class="paginas-footer">
+        <div class="paginas">
+          <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="">Simulador</a></li>
+            <li>
+              <a style="color: #dec43b" ; href="/cadastro">Cadastre-se</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="informacoes">
+          <ul>
+            <li><a href="/quemSomos">Quem Somos</a></li>
+            <li><a href="">Fale conosco</a></li>
+          </ul>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
 
 <script>
@@ -136,6 +107,7 @@
     var senhaVar = inputSenha.value;
 
     if (emailVar == "" || senhaVar == "") {
+
       alert("Preencha todos os campos!");
 
       return false;
@@ -155,6 +127,7 @@
       }),
     })
       .then(function (resposta) {
+
         console.log("ESTOU NO THEN DO entrar()!");
 
         if (resposta.ok) {
@@ -179,14 +152,16 @@
             }
 
             setTimeout(function () {
-                window.location.href = `http://localhost:3300/dashboard`
+              window.location.href = `http://localhost:3300/dashboard`
             }, 1000); // apenas para exibir o loading
           });
         } else {
+
           console.log("Houve um erro ao tentar realizar o login!");
 
           resposta.text().then((texto) => {
-            console.error(texto);
+
+            alert(texto);
             // finalizarAguardar(texto);
           });
         }
