@@ -12,6 +12,7 @@ var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var avisosRouter = require("./src/routes/avisos");
 var medidasRouter = require("./src/routes/medidas");
+var pesquisaRouter = require("./src/routes/pesquisa");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -24,6 +25,7 @@ app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/avisos", avisosRouter);
 app.use("/medidas", medidasRouter);
+app.use("/pesquisa", pesquisaRouter);
 
 app.get("/home", (req, res) => {
   res.sendFile(__dirname + "/home/index.html");
@@ -68,7 +70,7 @@ app.get("/cadastroFuncionario", (req, res) => {
 app.get("/cadastroFuncionarioInstitucional", (req, res) => {
   res.sendFile(
     __dirname +
-      `/cadastroFuncionarioInstitucional/cadFuncionarioInstitucional.html`
+    `/cadastroFuncionarioInstitucional/cadFuncionarioInstitucional.html`
   );
 });
 

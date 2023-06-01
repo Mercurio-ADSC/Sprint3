@@ -20,18 +20,6 @@
 </head>
 
 <style>
-  /* .cor-alerta {
-  color: blueviolet;
-}
-
-.perigo-quente {
-  color: aqua;
-}
-
-.alerta-quente {
-  color: red;
-} */
-
   .alerta {
     color: orange;
   }
@@ -193,14 +181,25 @@
     </div>
 
     <div class="quadro2-graficos">
+
       <div class="grafico-fluxo-pesquisa">
-        <section>
-          <canvas class="grafico_filtros" id="filtros"></canvas>
-        </section>
+
+        <div id="div-pesquisa-mes">
+          <section>
+            <canvas class="grafico_filtros" id="filtro-mes"></canvas>
+          </section>
+        </div>
+        <div id="div-pesquisa-data">
+          <section>
+            <canvas class="grafico_filtros" id="filtro-data"></canvas>
+          </section>
+        </div>
+
       </div>
+
       <div class="bloco-campos">
         <div class="campos-filtros">
-          <h4 class="tlt-setores">Comparação de setor</h4>
+          <h4 class="tlt-setores">Comparação de fluxo</h4>
           <select class="setor" id="select_setor">
             <option selected disabled>Setor</option>
             <option value="padaria">Padaria</option>
@@ -328,99 +327,186 @@
 
   window.onload = obterDadosGraficos();
 
+
+  // GRAFICO PADRAO - DEFAULT
+  var grafico_filtros_mes = document
+    .getElementById("filtro-mes")
+    .getContext("2d");
+  grafico_filtros_mes.canvas.width = 400;
+  grafico_filtros_mes.canvas.height = 300;
+
+  new Chart(grafico_filtros_mes, {
+    type: "bar",
+
+    data: {
+      // json dos dados
+
+      datasets: [
+        {
+          // json e vetor
+
+          // linha 1
+          label: "2023",
+          data: [],
+          borderWidth: 1,
+          backgroundColor: "rgba(106,90,205)",
+        },
+
+        // linha 2
+        {
+          label: "2022",
+          data: [],
+          borderWidth: 1,
+          backgroundColor: "rgba(173,216,230)",
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
+  var grafico_filtros_data = document
+    .getElementById("filtro-data")
+    .getContext("2d");
+  grafico_filtros_data.canvas.width = 400;
+  grafico_filtros_data.canvas.height = 300;
+
+  new Chart(grafico_filtros_data, {
+    type: "bar",
+
+    data: {
+      // json dos dados
+
+      datasets: [
+        {
+          // json e vetor
+
+          // linha 1
+          label: "2023",
+          data: [],
+          borderWidth: 1,
+          backgroundColor: "rgba(106,90,205)",
+        },
+
+        // linha 2
+        {
+          label: "2022",
+          data: [],
+          borderWidth: 1,
+          backgroundColor: "rgba(173,216,230)",
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
+
   // PESQUISA - GRAFICO
   function filtrar() {
+
     var setor = select_setor.value;
     var mes = select_mes.value;
     var data = select_data.value;
+    var validar_campos = false;
+
+    select_mes.value = 'Mês';
+    select_data.value = 'Datas especiais';
 
     if (setor !== "Setor") {
 
       if (setor === "padaria") {
 
-        if (data !== "Datas especiais" && (mes === "5" || mes === "4")) {
+        if (data == "Datas especiais" && (mes === "5" || mes === "4")) {
 
           mes = Number(mes);
-
-          var url = "/pesquisaFechamentoMes";
+          validar_campos = true;
+          // var url = "/pesquisaFechamentoMes";
           var body = {
             setor: setor,
             mes: mes,
           };
 
-          fetch(url, {
+          fetch("/pesquisa/pesquisaFechamentoMes", {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
+            headers: { "Content-Type": "application/json", },
+            body: JSON.stringify(body)
           })
             .then(function (resposta) {
-              console.log("ESTOU NO THEN DO entrar()!");
-
               if (resposta.ok) {
-                console.log(resposta);
+                resposta.json().then((fechamentoMes) => {
 
-                resposta.json().then((json) => {
-                  console.log(json);
-                  console.log(JSON.stringify(json));
+                  console.log(JSON.stringify(fechamentoMes));
+
+                  gerarGraficoMes(fechamentoMes);
                 });
               } else {
-                console.log("Houve um erro ao tentar realizar o login!");
+                console.log("Houve um erro ao tentar puxar os dados!");
 
                 resposta.text().then((texto) => {
                   console.error(texto);
-
                 });
               }
             })
             .catch(function (erro) {
-              console.log(erro);
+              console.log("Erro no catch: ", erro);
             });
 
 
 
         } else {
-          alert("Selecione uma data válida!");
-        }
 
-        if ((data === '02-05' || data === '12-25') && mes == "Mês") {
+          if ((data === '02-05' || data === '12-25') && mes == "Mês") {
+            validar_campos = true;
 
-          url = "/pesquisaDataEspecial";
-          body = {
-            setor: setor,
-            data: data,
-          };
+            body = {
+              setor: setor,
+              data: data,
+            };
 
-          fetch(url, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
-          })
-            .then(function (resposta) {
-              console.log("ESTOU NO THEN DO entrar()!");
-
-              if (resposta.ok) {
-                console.log(resposta);
-
-                resposta.json().then((json) => {
-                  console.log(json);
-                  console.log(JSON.stringify(json));
-                });
-              } else {
-                console.log("Houve um erro ao tentar realizar o login!");
-
-                resposta.text().then((texto) => {
-                  console.error(texto);
-
-                });
-              }
+            fetch("/pesquisa/pesquisaDataEspecial", {
+              method: "POST",
+              headers: { "Content-Type": "application/json", },
+              body: JSON.stringify(body)
             })
-            .catch(function (erro) {
-              console.log(erro);
-            });
+              .then(function (resposta) {
+
+                if (resposta.ok) {
+
+                  resposta.json().then((fechamentoData) => {
+
+                    console.log(JSON.stringify(fechamentoData));
+
+                    gerarGraficoData(fechamentoData);
+                  });
+
+                } else {
+                  console.log("Houve um erro ao tentar puxar os dados!");
+
+                  resposta.text().then((texto) => {
+                    console.error(texto);
+                  });
+                }
+              })
+              .catch(function (erro) {
+                console.log("Erro no catch: ", erro);
+              });
+          }
+
+          if (!validar_campos) {
+            alert("Selecione um campo válido!");
+          }
+
         }
 
       } else {
@@ -433,6 +519,175 @@
   }
 
 
+  function gerarGraficoData(fechamentoData) {
+
+    var data = fechamentoData;
+
+    console.log(data)
+
+    // GRAFICO DOS FILTROS - Data
+    var contextoChave = document
+      .getElementById("filtro-data")
+      .getContext("2d");
+    contextoChave.canvas.width = 400;
+    contextoChave.canvas.height = 300;
+
+    var datasets = [];
+    // Array de cores
+
+    const cores = [
+      "rgba(192,192,192)",
+      "rgba(100,149,237)",
+      "rgba(72,209,204)",
+      "rgba(205,133,63)",
+      "rgba(255,165,0)",
+    ];
+
+    // Adicione um objeto de dataset para cada conjunto de dados retornado
+    data.forEach((item, index) => {
+      datasets.push({
+        label: item.ano,
+        data: [item.totalCaptacao],
+        borderWidth: 1,
+        backgroundColor: cores[index % cores.length],
+      });
+    });
+
+    var chave = new Chart(contextoChave, {
+      type: "bar",
+      data: {
+        datasets: datasets,
+      },
+      options: {
+        tooltips: {
+          bodyFontStyle: "bold",
+          callbacks: {
+            label: function (tooltipItem, data) {
+              var value =
+                data.datasets[tooltipItem.datasetIndex].data[
+                tooltipItem.index
+                ];
+              var label = data.datasets[tooltipItem.datasetIndex].label; // valor da propriedade 'label' do objeto 'item'
+
+              var message = "";
+
+              return ` Fuxo de ${value} no ano de ${label}`;
+            },
+          },
+        },
+        legend: {
+          labels: {
+            fontColor: "white",
+          },
+        },
+      },
+    });
+  }
+
+  function gerarGraficoMes(fechamentoMes) {
+
+    var data = fechamentoMes;
+
+    console.log(data)
+
+    // GRAFICO DOS FILTROS - mes
+    var contextoChave = document
+      .getElementById("filtro-mes")
+      .getContext("2d");
+    contextoChave.canvas.width = 400;
+    contextoChave.canvas.height = 300;
+
+    var datasets = [];
+    // Array de cores
+
+    const cores = [
+      "rgba(100,149,237)",
+      "rgba(0,255,0)",
+      "rgba(255,165,0)",
+    ];
+
+    // Adicione um objeto de dataset para cada conjunto de dados retornado
+    data.forEach((item, index) => {
+      datasets.push({
+        label: item.ano,
+        data: [item.totalCaptacao],
+        borderWidth: 1,
+        backgroundColor: cores[index % cores.length],
+      });
+    });
+
+    var chave = new Chart(contextoChave, {
+      type: "bar",
+      data: {
+        datasets: datasets,
+      },
+      options: {
+        tooltips: {
+          bodyFontStyle: "bold",
+          callbacks: {
+            label: function (tooltipItem, data) {
+              var value =
+                data.datasets[tooltipItem.datasetIndex].data[
+                tooltipItem.index
+                ];
+              var label = data.datasets[tooltipItem.datasetIndex].label; // valor da propriedade 'label' do objeto 'item'
+
+              var message = "";
+
+              return ` Fuxo de ${value} no ano de ${label}`;
+            },
+          },
+        },
+        legend: {
+          labels: {
+            fontColor: "white",
+          },
+        },
+      },
+    });
+
+  }
+  // **************************************************** ALERTAS ****************************************************************
+
+  // alertasssssssssssssssss
+
+  var alertas = [];
+  var listaCritico = [];
+  var listaAlerta = [];
+  var listaEmergencial = [];
+  var listaIdeal = [];
+
+
+
+
+  console.log("Cheguei!")
+
+  function obterdados(testefk) {
+    fetch(`/medidas/tempo-real/${testefk}`)
+      .then(resposta => {
+        console.log(resposta);
+        if (resposta.ok) {
+          if (resposta.status === 204) {
+            console.log('Nenhum dado encontrado');
+          } else {
+            resposta
+              .json()
+              .then(resposta => {
+                alertar(resposta, testefk);
+              })
+              .catch(error => {
+                console.error(`Erro na análise do JSON: ${error}`);
+              });
+          }
+        } else {
+          console.error('Erro na resposta da API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados do aquário p/ gráfico: ${error.message}`);
+      });
+
+  }
 
 
 
@@ -683,146 +938,7 @@
       });
   }
 
-  // GRAFICO DOS FILTROS
-  var grafico_filtros = document.getElementById("filtros").getContext("2d");
-  grafico_filtros.canvas.width = 830;
-  grafico_filtros.canvas.height = 300;
 
-  new Chart(grafico_filtros, {
-    type: "bar",
-
-    data: {
-      // json dos dados
-      labels: [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-        21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-      ], // vetor do eixo X,
-
-      datasets: [
-        {
-          // json e vetor
-
-          // linha 1
-          label: "2021",
-          data: [
-            20, 40, 90, 170, 800, 420, 630, 1000, 100, 200, 190, 600, 500, 300,
-            1000, 20, 200, 500, 800, 450, 320, 210, 987, 985, 100, 456, 78, 341,
-            521, 640,
-          ],
-          borderWidth: 1,
-          backgroundColor: "rgba(106,90,205)",
-        },
-
-        // linha 2
-        {
-          label: "2022",
-          data: [
-            100, 250, 30, 150, 654, 500, 100, 845, 500, 210, 310, 477, 1000,
-            210, 745, 140, 654, 900, 140, 521, 320, 547, 658, 1000, 130, 758,
-            140, 69, 210, 630,
-          ],
-          borderWidth: 1,
-          backgroundColor: "rgba(173,216,230)",
-        },
-
-        // linha 3
-        {
-          label: "2023",
-          data: [
-            950, 65, 420, 777, 112, 888, 40, 620, 930, 235, 820, 311, 530, 80,
-            720, 950, 299, 701, 915, 643, 222, 550, 345, 779, 162, 935, 423,
-            711, 888, 20,
-          ],
-          borderWidth: 1,
-          backgroundColor: "rgba( 255,255,0)",
-        },
-      ],
-    },
-    options: {
-      tooltips: {
-        bodyFontStyle: "bold",
-        callbacks: {
-          label: function (tooltipItem, data) {
-            var value =
-              data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-            var label = data.labels[tooltipItem.index];
-            var message = "";
-
-            if (value >= 420 && value <= 630) {
-              message = "Fluxo Ideal";
-            } else if (value > 209 && value < 420) {
-              message = "Fluxo em Alerta";
-            } else if (value > 630 && value < 841) {
-              message = "Fluxo em Alerta";
-            } else if (value >= 100 && value <= 210) {
-              message = "Fluxo Emergencial";
-            } else if (value >= 840 && value <= 1000) {
-              message = "Fluxo Emergencial";
-            } else if (value >= 0 && value < 100) {
-              message = "Fluxo Crítico";
-            } else if (value >= 1001) {
-              message = "Fluxo Crítico";
-            }
-
-            return `Dia ${label}: Fluxo de ${value} - ${message}`;
-          },
-        },
-      },
-      legend: {
-        labels: {
-          fontColor: "white",
-        },
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
-
-
-  // **************************************************** ALERTAS ****************************************************************
-
-  // alertasssssssssssssssss
-
-  var alertas = [];
-  var listaCritico = [];
-  var listaAlerta = [];
-  var listaEmergencial = [];
-  var listaIdeal = [];
-
-
-
-
-  console.log("Cheguei!")
-
-  function obterdados(testefk) {
-    fetch(`/medidas/tempo-real/${testefk}`)
-      .then(resposta => {
-        console.log(resposta);
-        if (resposta.ok) {
-          if (resposta.status === 204) {
-            console.log('Nenhum dado encontrado');
-          } else {
-            resposta
-              .json()
-              .then(resposta => {
-                alertar(resposta, testefk);
-              })
-              .catch(error => {
-                console.error(`Erro na análise do JSON: ${error}`);
-              });
-          }
-        } else {
-          console.error('Erro na resposta da API');
-        }
-      })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados do aquário p/ gráfico: ${error.message}`);
-      });
-
-  }
 
 
 
@@ -926,13 +1042,13 @@
 
     var card;
 
-    var listaDeAlertas = [listaCritico,  listaEmergencial, listaAlerta, listaIdeal]
+    var listaDeAlertas = [listaCritico, listaEmergencial, listaAlerta, listaIdeal]
 
-    localStorage.setItem("listaAlertas", JSON.stringify(listaDeAlertas)); 
+    localStorage.setItem("listaAlertas", JSON.stringify(listaDeAlertas));
 
 
 
-    
+
 
 
     if (testefk == 1) {
@@ -1015,6 +1131,6 @@
 
   obterdados(1);
 
- 
+
 
 </script>
