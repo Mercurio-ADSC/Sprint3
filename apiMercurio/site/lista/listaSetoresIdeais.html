@@ -72,3 +72,24 @@
 </body>
 
 </html>
+
+<script>
+    var listaDeAlertas = JSON.parse(localStorage.getItem("listaAlertas"));
+    console.log(listaDeAlertas);
+    listaIdeal = listaDeAlertas[3]
+
+    if(listaIdeal.length == 1) {
+        gerar.innerHTML = `
+        <div class="linha-setor">
+                            <div class="dados">
+                                <i class="fa-solid fa-store"></i>
+                                <span>${listaIdeal}</span>
+                            </div>
+                            <span></span>
+                            <div class="div-alerta">Fluxo Ideal</div>
+                        </div>
+
+        `
+    }
+
+</script>

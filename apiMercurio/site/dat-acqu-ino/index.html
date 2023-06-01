@@ -878,53 +878,62 @@
       grauDeAviso = 'Emergêncial';
       grauDeAvisoCor = 'emergencial';
       listaEmergencial.push(setor)
-      campoEmergencial.innerHTML = `${listaEmergencial.length}`
+      campoEmergencial.innerHTML = `${listaEmergencial.length + 1}`
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos < limites.emergenciaMais && disparos > limites.alertaMais) {
       classe_temperatura = 'cor-alerta ideal';
       grauDeAviso = 'Alerta';
       grauDeAvisoCor = 'alerta';
       listaAlerta.push(setor)
-      campoAlerta.innerHTML = `${listaAlerta.length}`
+      campoAlerta.innerHTML = `${listaAlerta.length + 2}`
       removerAlerta(testefk);
     } else if (disparos <= limites.alertaMais && disparos > limites.idealMais) {
       classe_temperatura = 'cor-alerta alerta-frio';
       grauDeAviso = 'Alerta';
       grauDeAvisoCor = 'alerta';
       listaAlerta.push(setor)
-      campoAlerta.innerHTML = `${listaAlerta.length}`
+      campoAlerta.innerHTML = `${listaAlerta.length + 2}`
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos <= limites.idealMais && disparos > limites.idealMenos) {
       classe_temperatura = 'cor-alerta alerta-frio';
       grauDeAviso = 'Ideal';
       grauDeAvisoCor = 'ideal';
       listaIdeal.push(setor)
-      campoIdeal.innerHTML = `${listaIdeal.length}`
+      campoIdeal.innerHTML = `${listaIdeal.length + 3}`
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos <= limites.idealMenos && disparos > limites.alertaMenos) {
       classe_temperatura = 'cor-alerta alerta-frio';
       grauDeAviso = 'Alerta'; //
       grauDeAvisoCor = 'alerta';
       listaAlerta.push(setor)
-      campoAlerta.innerHTML = `${listaAlerta.length}`
+      campoAlerta.innerHTML = `${listaAlerta.length + 2}`
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos <= limites.alertaMenos && disparos > limites.emergenciaMenos) {
       classe_temperatura = 'cor-alerta alerta-frio';
       grauDeAviso = 'Emergêncial';
       grauDeAvisoCor = 'emergencial';
       listaEmergencial.push(setor)
-      campoEmergencial.innerHTML = `${listaEmergencial.length}`
+      campoEmergencial.innerHTML = `${listaEmergencial.length + 1}`
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos <= limites.criticoMenos) {
       classe_temperatura = 'cor-alerta perigo-frio';
       grauDeAviso = 'Crítico';
       grauDeAvisoCor = 'critico';
       listaCritico.push(setor)
-      campoCritico.innerHTML = `${listaCritico.length}`
+      campoCritico.innerHTML = `${listaCritico.length + 1}`
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     }
 
     var card;
+
+    var listaDeAlertas = [listaCritico,  listaEmergencial, listaAlerta, listaIdeal]
+
+    localStorage.setItem("listaAlertas", JSON.stringify(listaDeAlertas)); 
+
+
+
+    
+
 
     if (testefk == 1) {
       console.log(`CHEGAY `);
@@ -1006,11 +1015,6 @@
 
   obterdados(1);
 
-  module.exports = {
-    listaCritico,
-    listaEmergencial,
-    listaAlerta,
-    listaIdeal
-  }
+ 
 
 </script>
