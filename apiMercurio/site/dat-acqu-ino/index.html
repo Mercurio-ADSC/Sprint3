@@ -274,7 +274,7 @@
     // finalizarAguardar();
     window.location = "/login";
   }
-  1
+
 
   var nivel = sessionStorage.FUNCAO;
 
@@ -330,106 +330,112 @@
 
   // PESQUISA - GRAFICO
   function filtrar() {
-
     var setor = select_setor.value;
-    var mes = Number(select_mes.value);
+    var mes = select_mes.value;
     var data = select_data.value;
 
-    if (setor == "" && data == "" && mes == "") {
-      alert("Preencha os campos corretamente")
+    if (setor !== "Setor") {
 
-    } else if (setor == "" && data == "") {
+      if (setor === "padaria") {
 
-      alert("Preencha os campos corretamente")
+        if (data !== "Datas especiais" && (mes === "5" || mes === "4")) {
 
-    } else if (setor == "" && mes == "") {
-      alert("Preencha os campos corretamente")
+          mes = Number(mes);
 
-    } else {
-
-      // validacao da data
-      if (setor != "" && mes != "") {
-
-        fetch("pesquisaFechamentoMes", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
+          var url = "/pesquisaFechamentoMes";
+          var body = {
             setor: setor,
             mes: mes,
-          }),
-        })
-          .then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!");
+          };
 
-            if (resposta.ok) {
-              console.log(resposta);
-
-              resposta.json().then((json) => {
-                console.log(json);
-                console.log(JSON.stringify(json));
-
-
-
-              });
-            } else {
-              console.log("Houve um erro ao tentar realizar o login!");
-
-              resposta.text().then((texto) => {
-                console.error(texto);
-                // finalizarAguardar(texto);
-              });
-            }
+          fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
           })
-          .catch(function (erro) {
-            console.log(erro);
-          });
+            .then(function (resposta) {
+              console.log("ESTOU NO THEN DO entrar()!");
+
+              if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then((json) => {
+                  console.log(json);
+                  console.log(JSON.stringify(json));
+                });
+              } else {
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then((texto) => {
+                  console.error(texto);
+
+                });
+              }
+            })
+            .catch(function (erro) {
+              console.log(erro);
+            });
 
 
-      } else {
 
-        fetch("/pesquisaDataEspecial", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
+        } else {
+          alert("Selecione uma data válida!");
+        }
+
+        if ((data === '02-05' || data === '12-25') && mes == "Mês") {
+
+          url = "/pesquisaDataEspecial";
+          body = {
             setor: setor,
             data: data,
-          }),
-        })
-          .then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!");
+          };
 
-            if (resposta.ok) {
-              console.log(resposta);
-
-              resposta.json().then((json) => {
-                console.log(json);
-                console.log(JSON.stringify(json));
-
-
-              });
-            } else {
-              console.log("Houve um erro ao tentar realizar o login!");
-
-              resposta.text().then((texto) => {
-                console.error(texto);
-                // finalizarAguardar(texto);
-              });
-            }
+          fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
           })
-          .catch(function (erro) {
-            console.log(erro);
-          });
+            .then(function (resposta) {
+              console.log("ESTOU NO THEN DO entrar()!");
 
+              if (resposta.ok) {
+                console.log(resposta);
 
+                resposta.json().then((json) => {
+                  console.log(json);
+                  console.log(JSON.stringify(json));
+                });
+              } else {
+                console.log("Houve um erro ao tentar realizar o login!");
 
+                resposta.text().then((texto) => {
+                  console.error(texto);
+
+                });
+              }
+            })
+            .catch(function (erro) {
+              console.log(erro);
+            });
+        }
+
+      } else {
+        alert("Selecione um setor disponível!");
       }
-    }
 
+    } else {
+      alert("Selecione um setor disponível!");
+    }
   }
+
+
+
+
+
 
 
   function obterDadosGraficos() {
