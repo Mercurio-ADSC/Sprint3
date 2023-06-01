@@ -7,10 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Mercúrio - Simulador Financeiro</title>
-    <link rel="icon" type="image/png" href="/css/img/asinha.png"/>
+    <link rel="icon" type="image/png" href="/css/img/asinha.png" />
 
     <link rel="stylesheet" href="/css/style_simulador.css">
     <script src="https://kit.fontawesome.com/22cb63056a.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+
 </head>
 
 <body>
@@ -20,7 +23,7 @@
             <ul class="navbar">
                 <li><a style="width: 110px;" href="/home">Home</a></li>
                 <li><a style="width: 180px;" href="/quemSomos">Quem Somos</a></li>
-                <li><a style="width: 180px;" href="">Simulador</a></li>
+                <li><a style="width: 180px;" href="/simulador">Simulador</a></li>
                 <li><a style="width: 180px; color: #DEC43B;" href="/cadastro">Cadastre-se</a></li>
                 <li class="btn-login"><a style="width: 110px;" href="/login">Login</a></li>
             </ul>
@@ -57,8 +60,7 @@
         <div class="container-footer">
 
             <div class="empresa">
-                <div class="logo-footer"><img src="/css/img/LOGO_COMPLETA.png" alt=""
-                        srcset=""></div>
+                <div class="logo-footer"><img src="/css/img/LOGO_COMPLETA.png" alt="" srcset=""></div>
 
                 <div class="redes">
                     <a href=""><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a>
@@ -74,22 +76,24 @@
                 <div class="paginas">
 
                     <ul>
-                        <li><a href="">Home</a></li>
-                        <li><a href="">Simulador</a></li>
-                        <li><a style="color:#DEC43B" ; href="">Cadastre-se</a></li>
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="/simulador">Simulador</a></li>
+                        <li><a style="color:#DEC43B" ; href="/cadastro">Cadastre-se</a></li>
                     </ul>
                 </div>
 
                 <div class="informacoes">
                     <ul>
-                        <li><a href="../tela_quem_somos/quemSomos.html">Quem Somos</a></li>
-                        <li><a href="">Fale conosco</a></li>
+                        <li><a href="/quemSomos">Quem Somos</a></li>
+                        <li><a href="https://mercuriosuporte.atlassian.net/servicedesk/customer/portal/2">Fale
+                                conosco</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
 
 
 </body>
@@ -99,42 +103,56 @@
 <script>
     const ctx = document.getElementById('myChart');
 
-new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['FaturamentoMensal', 'FaturamentoTrimestral', 'FaturamentoSemestral',
-                    'FaturamentoAnual'
-                ],
-                datasets: [{
-                        label: 'Faturamento Atual',
-                        data: [],
-                        borderColor: 'red',
-                        backgroundColor: 'red',
-                        borderWidth: 2
-                    }, {
-                        label: 'Faturamento com Mercúrio',
-                        data: [],
-                        borderColor: 'rgb(50,205,50)',
-                        backgroundColor: 'rgb(50,205,50)',
-                        borderWidth: 2
-                    }
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['FaturamentoMensal', 'FaturamentoTrimestral', 'FaturamentoSemestral',
+                'FaturamentoAnual'
+            ],
+            datasets: [{
+                label: 'Faturamento Atual',
+                data: [],
+                borderColor: 'red',
+                backgroundColor: 'red',
+                borderWidth: 2
+            }, {
+                label: 'Faturamento com Mercúrio',
+                data: [],
+                borderColor: 'rgb(50,205,50)',
+                backgroundColor: 'rgb(50,205,50)',
+                borderWidth: 2
+            }
 
 
-                ]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
-        });
-    
+        }
+    });
+
 
 </script>
 
 <script>
+
+    // ALERTA
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
     var faturamentoMensalControle;
     var faturamentoMensalExperimento;
     var ticketMedioControle;
@@ -150,52 +168,50 @@ new Chart(ctx, {
     var faturamentoAnualControle
 
     function calcular() {
+
         numVendas = Number(inputNumVendas.value);
         faturamentoMensalControle = Number(inputFaturamentoMensal.value);
 
-        ticketMedioControle = faturamentoMensalControle / numVendas;
-        ticketMedioExperimento = ticketMedioControle * 1.45;
+        if (numVendas == "" || faturamentoMensalControle == "") {
 
-        faturamentoMensalExperimento = faturamentoMensalControle * 1.45;
-        faturamentoTrimestral = faturamentoMensalExperimento * 3;
-        faturamentoSemestral = faturamentoMensalExperimento * 6;
-        faturamentoAnual = faturamentoMensalExperimento * 12;
-        faturamentoTrimestralExperimento = faturamentoMensalExperimento * 3;
-        faturamentoSemestralExperimento = faturamentoMensalExperimento * 6;
-        faturamentoAnualExperimento = faturamentoMensalExperimento * 12;
+            Toast.fire({
+                icon: 'error',
+                title: 'Preencha todos os campos!'
+            })
 
-        faturamentoTrimestralControle = faturamentoMensalControle * 3
-        faturamentoSemestralControle = faturamentoMensalControle * 6
-        faturamentoAnualControle = faturamentoMensalControle * 12
+        } else {
 
 
+            ticketMedioControle = faturamentoMensalControle / numVendas;
+            ticketMedioExperimento = ticketMedioControle * 1.45;
 
-        // resposta.innerHTML += `
-        // Após analisarmos os dados do seu estabelecimento, constatamos que o ticket médio dos seus clientes é de ${ticketMedioControle.toFixed(4)}. <br> 
-        // No entanto, com um aumento na satisfação dos seus clientes, esse valor poderia ser elevado para ${ticketMedioExperimento.toFixed(4)}. 
-        // Acreditamos que essa oportunidade de melhorar seus resultados financeiros seja um grande incentivo para investir em ações que possam aumentar a satisfação dos seus clientes e, consequentemente, elevar o ticket médio do seu estabelecimento. Nós da Mercurio estamos à disposição para ajudá-lo nesse processo e transformar esses dados em resultados concretos.
-        // <div class="inner">
-        // Após análise dos dados do seu estabelecimento, verificamos que o ticket médio dos seus clientes é de <b>${(ticketMedioControle).toFixed(2)}</b>.
-        // Porém, ao promover melhorias que visem aumentar a satisfação dos clientes, esse valor pode ser elevado para <b>${(ticketMedioExperimento).toFixed(2)}</b>. 
-        // Essa é uma oportunidade valiosa para investir em ações que possam elevar a satisfação dos seus clientes e, consequentemente, aumentar o faturamento do seu estabelecimento. A equipe Mercúrio está à disposição para auxiliá-lo nesse processo e transformar esses dados em resultados reais. Acreditamos que esse seja um passo importante para impulsionar o seu negócio e alcançar o sucesso desejado.
-        // </div>
-        // `
-//<<<<<<< HEAD
-        resposta.innerHTML += `
+            faturamentoMensalExperimento = faturamentoMensalControle * 1.45;
+            faturamentoTrimestral = faturamentoMensalExperimento * 3;
+            faturamentoSemestral = faturamentoMensalExperimento * 6;
+            faturamentoAnual = faturamentoMensalExperimento * 12;
+            faturamentoTrimestralExperimento = faturamentoMensalExperimento * 3;
+            faturamentoSemestralExperimento = faturamentoMensalExperimento * 6;
+            faturamentoAnualExperimento = faturamentoMensalExperimento * 12;
+
+            faturamentoTrimestralControle = faturamentoMensalControle * 3
+            faturamentoSemestralControle = faturamentoMensalControle * 6
+            faturamentoAnualControle = faturamentoMensalControle * 12
+
+            resposta.innerHTML += `
         <div class = "inner" id="texto">
             Analisando os dados do seu estabelecimento, identificamos que o ticket médio dos seus clientes é de <b style="color:red;">R$${ticketMedioControle.toFixed(4)}</b>. No entanto, com um aumento na satisfação dos clientes, esse valor poderia ser elevado para <b style="color:green;">R$${ticketMedioExperimento.toFixed(4)}</b>. Essa oportunidade de melhoria nos resultados financeiros é um incentivo para investir em ações que possam aumentar a satisfação dos clientes e, consequentemente, elevar o ticket médio do seu estabelecimento. A equipe da Mercurio está à disposição para auxiliá-lo nesse processo e transformar esses dados em resultados concretos. Acreditamos que essa seja uma estratégia valiosa para impulsionar o seu negócio e alcançar o sucesso desejado. 
         </div>
         `;
 
-        const ctx = document.getElementById('myChart');
+            const ctx = document.getElementById('myChart');
 
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['FaturamentoMensal', 'FaturamentoTrimestral', 'FaturamentoSemestral',
-                    'FaturamentoAnual'
-                ],
-                datasets: [{
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['FaturamentoMensal', 'FaturamentoTrimestral', 'FaturamentoSemestral',
+                        'FaturamentoAnual'
+                    ],
+                    datasets: [{
                         label: 'Faturamento Atual',
                         data: [faturamentoMensalControle, faturamentoTrimestralControle,
                             faturamentoSemestralControle, faturamentoAnualControle,
@@ -214,16 +230,18 @@ new Chart(ctx, {
                     }
 
 
-                ]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
+                    ]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
-            }
-        });
-        
+            });
+
+        }
+
     }
 </script>

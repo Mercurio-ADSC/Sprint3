@@ -74,7 +74,7 @@ function cadastrar(req, res) {
     // Faça as validações dos valores
     if (nomeUsuario == "" || emailUsuario == "" || senhaUsuario == "" || cpfUsuario == "" || dtNascUsuario == "" || nivelUsuario == "") {
         res.status(400).send("Preencha todos os campos");
-    } else if (cpfUsuario.length != 11) {
+    } else if (cpfUsuario.length != 18) {
         res.status(400).send("CPF inválido!");
     } else if (
         emailUsuario.indexOf("@") == -1 ||

@@ -10,7 +10,12 @@
     <!-- <link rel="stylesheet" href="/css/styleCadastro.css"> -->
     <link rel="icon" type="image/png" href="/css/img/asinha.png" />
     <script src="https://kit.fontawesome.com/22cb63056a.js" crossorigin="anonymous"></script>
-    <!-- <link rel="stylesheet" href="../codig_cadastro_login/logar.js"> -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+
+    <!-- validacao cnpj -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
 
 </head>
 
@@ -21,7 +26,7 @@
             <ul class="navbar">
                 <li><a style="width: 110px;" href="/home">Home</a></li>
                 <li><a style="width: 180px;" href="/quemSomos">Quem Somos</a></li>
-                <li><a style="width: 180px;" href="">Simulador</a></li>
+                <li><a style="width: 180px;" href="/simulador">Simulador</a></li>
                 <li><a style="width: 180px; color: #DEC43B;" href="/cadastro">Cadastre-se</a></li>
                 <li class="btn-login"><a style="width: 110px;" href="/login">Login</a></li>
             </ul>
@@ -106,7 +111,7 @@
 
                     <ul>
                         <li><a href="/home">Home</a></li>
-                        <li><a href="">Simulador</a></li>
+                        <li><a href="/simulador">Simulador</a></li>
                         <li><a style="color:#DEC43B" ; href="/cadastro">Cadastre-se</a></li>
                     </ul>
                 </div>
@@ -114,18 +119,38 @@
                 <div class="informacoes">
                     <ul>
                         <li><a href="/quemSomos">Quem Somos</a></li>
-                        <li><a href="">Fale conosco</a></li>
+                        <li><a href="https://mercuriosuporte.atlassian.net/servicedesk/customer/portal/2">Fale
+                                conosco</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+
 </body>
 
 </html>
 <script>
 
+    // ALERTA
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
+    // mascara cnpj
+    $(document).ready(function () {
+        $('#input_cnpj').inputmask('99.999.999/9999-99');
+    });
 
     function CadastrarEmpresa() {
 
@@ -137,6 +162,7 @@
         var email_empresa = input_email.value;
         var senha_empresa = input_senha.value;
         var porte_empresa = input_porte.value;
+
 
         // Enviando o valor da nova input
         fetch("/usuarios/cadastrarEmpresa", {
@@ -161,7 +187,10 @@
 
             if (resposta.ok) {
 
-                alert('Cadastro realizado com sucesso! Você já pode logar!');
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Cadastrado com Sucesso!'
+                })
 
                 setTimeout(() => {
                     window.location = "/login";
@@ -170,8 +199,13 @@
                 formCad.reset();
 
             } else {
+
                 return resposta.text().then(function (erro) {
-                    alert(erro);
+
+                    Toast.fire({
+                        icon: 'error',
+                        title: erro
+                    })
                 });
             }
         }).catch(function (resposta) {

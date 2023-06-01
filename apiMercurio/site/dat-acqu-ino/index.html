@@ -17,6 +17,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
   <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
   <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
 </head>
 
 <style>
@@ -252,11 +254,27 @@
   <div class="footer">
     <div class="container-footer"></div>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
 </body>
 
 </html>
 
 <script>
+
+  // ALERTA
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
 
   if (sessionStorage.NOME_EMPRESA == undefined && sessionStorage.NOME_USUARIO == undefined) {
     window.location = "/login";
@@ -504,17 +522,29 @@
           }
 
           if (!validar_campos) {
-            alert("Selecione um campo válido!");
+
+            Toast.fire({
+              icon: 'error',
+              title: 'Selecione um campo válido!'
+            })
+
+
           }
 
         }
 
       } else {
-        alert("Selecione um setor disponível!");
+        Toast.fire({
+          icon: 'error',
+          title: 'elecione um setor disponível!'
+        })
       }
 
     } else {
-      alert("Selecione um setor disponível!");
+      Toast.fire({
+        icon: 'error',
+        title: 'elecione um setor disponível!'
+      })
     }
   }
 
@@ -937,14 +967,6 @@
         );
       });
   }
-
-
-
-
-
-
-
-
 
   function alertar(resposta, testefk) {
     var aleatorio = Math.random() * 50

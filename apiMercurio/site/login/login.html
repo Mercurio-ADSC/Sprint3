@@ -11,24 +11,20 @@
   <link rel="icon" type="image/png" href="/css/img/asinha.png" />
 
   <script src="https://kit.fontawesome.com/22cb63056a.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
 </head>
 
 <body>
   <div class="header">
     <div class="container">
-      <div class="logo-header">
-        <img src="/css/img/LOGO_COMPLETA.png" alt="" />
-      </div>
+      <div class="logo-header"><img src="/css/img/LOGO_COMPLETA.png" alt=""> </div>
       <ul class="navbar">
-        <li><a style="width: 110px" href="/home">Home</a></li>
-        <li><a style="width: 180px" href="/quemSomos">Quem Somos</a></li>
-        <li><a style="width: 180px" href="">Simulador</a></li>
-        <li>
-          <a style="width: 180px; color: #dec43b" href="/cadastro">Cadastre-se</a>
-        </li>
-        <li class="btn-login">
-          <a style="width: 110px" href="/login">Login</a>
-        </li>
+        <li><a style="width: 110px;" href="/home">Home</a></li>
+        <li><a style="width: 180px;" href="/quemSomos">Quem Somos</a></li>
+        <li><a style="width: 180px;" href="/simulador">Simulador</a></li>
+        <li><a style="width: 180px; color: #DEC43B;" href="/cadastro">Cadastre-se</a></li>
+        <li class="btn-login"><a style="width: 110px;" href="/login">Login</a></li>
       </ul>
     </div>
   </div>
@@ -79,36 +75,55 @@
 
       <div class="paginas-footer">
         <div class="paginas">
+
           <ul>
             <li><a href="/home">Home</a></li>
-            <li><a href="">Simulador</a></li>
-            <li>
-              <a style="color: #dec43b" ; href="/cadastro">Cadastre-se</a>
-            </li>
+            <li><a href="/simulador">Simulador</a></li>
+            <li><a style="color:#DEC43B" ; href="/cadastro">Cadastre-se</a></li>
           </ul>
         </div>
 
         <div class="informacoes">
           <ul>
             <li><a href="/quemSomos">Quem Somos</a></li>
-            <li><a href="">Fale conosco</a></li>
+            <li><a href="https://mercuriosuporte.atlassian.net/servicedesk/customer/portal/2">Fale conosco</a></li>
           </ul>
         </div>
       </div>
     </div>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
 </body>
 
 </html>
 
 <script>
+
+  // ALERTA
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
+
   function VerificarUsuario() {
     var emailVar = inputLogin.value;
     var senhaVar = inputSenha.value;
 
     if (emailVar == "" || senhaVar == "") {
 
-      alert("Preencha todos os campos!");
+      Toast.fire({
+        icon: 'error',
+        title: 'Preencha todos os campos!'
+      })
 
       return false;
     }
@@ -157,12 +172,12 @@
           });
         } else {
 
-          console.log("Houve um erro ao tentar realizar o login!");
-
           resposta.text().then((texto) => {
 
-            alert(texto);
-            // finalizarAguardar(texto);
+            Toast.fire({
+              icon: 'error',
+              title: texto
+            })
           });
         }
       })
