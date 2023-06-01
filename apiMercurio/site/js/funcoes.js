@@ -13,7 +13,7 @@ function validarSessao() {
 
         // finalizarAguardar();
     } else {
-        window.location.href = "http://localhost:3300/login";
+        window.location = "/login";
     }
 }
 

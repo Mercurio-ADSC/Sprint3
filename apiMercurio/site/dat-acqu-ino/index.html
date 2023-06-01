@@ -23,7 +23,7 @@
 
 <style>
   .alerta {
-    color: orange;
+    color: yellow;
   }
 
   .critico {
@@ -31,7 +31,7 @@
   }
 
   .emergencial {
-    color: orangered;
+    color: orange;
   }
 
   .idel {
@@ -968,18 +968,47 @@
       });
   }
 
-  function alertar(resposta, testefk) {
-    var aleatorio = Math.random() * 50
-    console.log(aleatorio + `AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`);
-    var disparos = resposta[0].totalCaptacao * parseInt(aleatorio);
+  
+  function obterDisparos(testefk) {
+  fetch(`/medidas/tempo-real-disparos/${testefk}`, { cache: "no-store" })
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (novoRegistro) {
+          console.log(`Dados recebidos:`, novoRegistro[0].totalCaptacao + `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`) ;
+          
+          disparos = novoRegistro[0].totalCaptacao
+
+          console.log(`AQUI ESTÂO OS DADOS DO BANCO ${disparos}`);
+
+          // Resto do código...
+        });
+      } else {
+        throw new Error('Erro na requisição');
+      }
+    })
+    .catch(function(error) {
+      console.log('Ocorreu um erro:', error.message);
+    });
+  }
+  
+
+    
+    obterDisparos(1)
+
+
+  function alertar(resposta, testefk,) {
+    var aleatorio = 1 + Math.random() * 50
+    // var disparosIF = novoRegistro[0].totalCaptacao;
+
+    disparos = disparos * parseInt(aleatorio)
 
     var setor
     if (testefk == 1) {
       setor = "Padaria"
     }
 
-    console.log(disparos);
-
+    console.log(`AQUI ESTÂO OS DISPAROS DO IF ${disparos}`);
+    
     // disparos = 1020;
 
     // var padaria = document.querySelector('padaria');
@@ -1001,14 +1030,15 @@
       criticoMais: 1001,
     };
 
+    
     var classe_temperatura = 'cor-alerta';
-
+    
     if (disparos >= limites.criticoMais) {
       classe_temperatura = 'cor-alerta perigo-quente';
       grauDeAviso = 'Crítico';
       grauDeAvisoCor = 'critico';
       listaCritico.push(setor)
-      campoCritico.innerHTML = `${listaCritico.length}`
+      campoCritico.innerHTML = `${listaCritico.length + 1}`
 
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos < limites.criticoMais && disparos >= limites.emergenciaMais) {
@@ -1034,11 +1064,11 @@
       exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos <= limites.idealMais && disparos > limites.idealMenos) {
       classe_temperatura = 'cor-alerta alerta-frio';
-      grauDeAviso = 'Ideal';
-      grauDeAvisoCor = 'ideal';
+      // grauDeAviso = 'Ideal';
+      // grauDeAvisoCor = 'ideal';
       listaIdeal.push(setor)
       campoIdeal.innerHTML = `${listaIdeal.length + 3}`
-      exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
+      // exibirAlerta(disparos, testefk, grauDeAviso, grauDeAvisoCor);
     } else if (disparos <= limites.idealMenos && disparos > limites.alertaMenos) {
       classe_temperatura = 'cor-alerta alerta-frio';
       grauDeAviso = 'Alerta'; //
@@ -1071,14 +1101,16 @@
 
 
 
+    // var fluxo = disparos * parseInt(aleatorio)
 
 
     if (testefk == 1) {
       console.log(`CHEGAY `);
       // padaria.innerHTML = `TESTE TESTE TESTE`
       console.log(`CHEGAY DNOVO `);
-      padaria.innerHTML = resposta[0].totalCaptacao + ' disparos';
-      valor_disparos.innerHTML = disparos;
+      padaria.innerHTML = disparos + ' disparos' 
+      valor_disparos.innerHTML = disparos ;
+      console.log(disparos + "kkkkkkkkkkkkkkkkkkkkkkkkkkk");
       card = card_1;
     }
     // else if (testefk == 2) {
@@ -1093,15 +1125,16 @@
     // }
 
     card.className = classe_temperatura;
+    
 
-  }
-  function exibirAlerta(temp, testefk, grauDeAviso, grauDeAvisoCor) {
+    }
+  function exibirAlerta(fluxo, testefk, grauDeAviso, grauDeAvisoCor) {
     var indice = alertas.findIndex(item => item.testefk == testefk);
 
     if (indice >= 0) {
-      alertas[indice] = { testefk, temp, grauDeAviso, grauDeAvisoCor };
+      alertas[indice] = { testefk, fluxo, grauDeAviso, grauDeAvisoCor };
     } else {
-      alertas.push({ testefk, temp, grauDeAviso, grauDeAvisoCor });
+      alertas.push({ testefk, fluxo, grauDeAviso, grauDeAvisoCor });
     }
 
     exibirCards();
@@ -1121,38 +1154,44 @@
     }
   }
 
-  function transformarEmDiv({ testefk, temp, grauDeAviso, grauDeAvisoCor }) {
+  function transformarEmDiv({ testefk, fluxo, grauDeAviso, grauDeAvisoCor }) {
     var setor
     if (testefk == 1) {
       setor = "Padaria"
     }
 
+    console.log(grauDeAviso + '1111111111111111111111111111111111111111111111111111111111110');
 
-    return `<div class="mensagem-alarme">
-    <div class="informacao">
-      <div class="${grauDeAvisoCor}">&#12644;</div> 
-      <h3>Setor ${setor} está em estado ${grauDeAviso}! &nbsp;&nbsp;&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-flag-fill ${grauDeAvisoCor}" viewBox="0 0 16 16">
-  <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
-</svg>
-  <circle cx="8" cy="8" r="8"/>
-</svg>
-</h3>  
-      <small> Fluxo ${temp}.</small>   
-    </div>
-    <div class="div_fechar"><svg onclick="fecharAlerta()" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-lg fechar" viewBox="0 0 16 16" style="color: black">
-  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-</svg></div>
-    <div class="alarme-sino"></div>
-  </div>`;
-  }
+    if(grauDeAviso != ''){
+      return `<div class="mensagem-alarme">
+      <div class="informacao">
+        <div class="${grauDeAvisoCor}">&#12644;</div> 
+        <h3>Setor ${setor} está em estado ${grauDeAviso}! &nbsp;&nbsp;&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-flag-fill ${grauDeAvisoCor}" viewBox="0 0 16 16">
+    <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
+  </svg>
+    <circle cx="8" cy="8" r="8"/>
+  </svg>
+  </h3>  
+        <small> Fluxo ${disparos}.</small>   
+      </div>
+      <div class="div_fechar"><svg onclick="fecharAlerta()" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-lg fechar" viewBox="0 0 16 16" style="color: black">
+    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+  </svg></div>
+      <div class="alarme-sino"></div>
+    </div>`;
+    }
+    }
+
 
   function fecharAlerta() {
-    alerta.innerHTML = ``
+    alerta.innerHTML = ``;
   }
 
-
+  // aleer()
   obterdados(1);
 
+ 
 
+  
 
 </script>
