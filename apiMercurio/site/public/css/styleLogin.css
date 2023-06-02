@@ -10,6 +10,7 @@ body {
 body {
     background-image: url(img/img_login.png);
     background-size: cover;
+    font-family: 'Poppins', sans-serif;
 }
 
 a,
@@ -65,7 +66,7 @@ button {
 
 .teste {
     width: 1rem;
-    
+
 }
 
 .btn-login a {

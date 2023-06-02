@@ -10,6 +10,7 @@ body {
 body {
     background-color: #DCDCDC;
     background-size: cover;
+    font-family: 'Poppins', sans-serif;
 
 }
 
@@ -92,7 +93,7 @@ button {
     justify-content: space-between;
 }
 
-.containerForm{
+.containerForm {
     display: flex;
     width: 100%;
     margin: auto;
@@ -326,7 +327,7 @@ form {
     font-size: 15px;
 }
 
-.resultado h3{
+.resultado h3 {
     text-align: center;
 }
 
@@ -339,34 +340,34 @@ form {
     margin-left: 50px;
 }
 
-.formulario h1{
+.formulario h1 {
     margin-right: 60px;
 }
 
-.formulario input{
+.formulario input {
     width: 250px;
 }
 
-.formulario button{
+.formulario button {
     margin-left: 200px;
 }
 
-.resultado canvas{
+.resultado canvas {
     margin-bottom: 25px;
 }
 
-.grafico
-{
+.grafico {
     width: 40rem;
     height: 25rem;
     margin-left: 3rem;
 }
+
 /* 
 .função {
     display: flex;
     flex-direction: column;
 } */
 
-.inner{
+.inner {
     margin-bottom: 4rem;
 }
