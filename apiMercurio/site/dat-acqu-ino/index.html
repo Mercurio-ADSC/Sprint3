@@ -110,7 +110,7 @@
 
 
         <a onclick="limparSessao()">
-          <li class="img-conf">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <li class="img-conf">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sair&nbsp;&nbsp;
             <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i>
           </li>
         </a>
@@ -438,6 +438,8 @@
     var mes = select_mes.value;
     var data = select_data.value;
     var validar_campos = false;
+    var tem_conteudo = false;
+                var corpo;
 
     select_mes.value = 'Mês';
     select_data.value = 'Datas especiais';
@@ -446,7 +448,7 @@
 
       if (setor === "padaria") {
 
-        if (data == "Datas especiais" && (mes === "5" || mes === "4")) {
+        if (data == "Datas especiais" && (mes === "5" || mes === "4" || mes == "6")) {
 
           mes = Number(mes);
           validar_campos = true;
@@ -463,15 +465,30 @@
           })
             .then(function (resposta) {
               if (resposta.ok) {
-                resposta.json().then((fechamentoMes) => {
 
-                  console.log(JSON.stringify(fechamentoMes));
+                if(resposta != undefined)
+                {
+                  resposta.json().then((fechamentoMes) => {
 
-                  gerarGraficoMes(fechamentoMes);
-                });
+                    corpo = fechamentoMes;
+                    console.log(fechamentoMes)
+                    tem_conteudo = true;
+
+                    
+                    if(tem_conteudo){
+                      
+                      gerarGraficoMes(corpo);
+                    }
+                  });
+                }
+                
+
               } else {
-                console.log("Houve um erro ao tentar puxar os dados!");
-
+            
+                 Toast.fire({
+                  icon: 'warning',
+                  title: "Não há registros a serem mostrados!"
+                })
                 resposta.text().then((texto) => {
                   console.error(texto);
                 });
@@ -524,11 +541,11 @@
 
           if (!validar_campos) {
 
-
+            
             Toast.fire({
-              icon: 'error',
-              title: "Selecione um campo válido!"
-            })
+                  icon: 'warning',
+                  title: "Não há registros a serem mostrados!"
+                })
           }
 
         }
@@ -548,71 +565,84 @@
     }
   }
 
+  var contextoChave;
+var chave;
 
-  function gerarGraficoData(fechamentoData) {
+function gerarGraficoData(fechamentoData) {
 
-    var data = fechamentoData;
+  if (chave) {
+    chave.destroy(); // Destruir o gráfico existente antes de criar um novo
+  }
 
-    console.log(data)
+  var canvas = document.getElementById("filtro-data");
 
-    // GRAFICO DOS FILTROS - Data
-    var contextoChave = document
-      .getElementById("filtro-data")
-      .getContext("2d");
-    contextoChave.canvas.width = 400;
+  if (canvas.getContext) {
+    contextoChave = canvas.getContext("2d");
+    contextoChave.clearRect(0, 0, canvas.width, canvas.height);
+    contextoChave.canvas.width = 450;
     contextoChave.canvas.height = 300;
+  } else {
+    console.error("O elemento canvas não é suportado no seu navegador.");
+    return;
+  }
 
-    var datasets = [];
-    // Array de cores
+  var data = fechamentoData;
 
-    const cores = [
-      "rgba(192,192,192)",
-      "rgba(100,149,237)",
-      "rgba(72,209,204)",
-      "rgba(205,133,63)",
-      "rgba(255,165,0)",
-    ];
+  var datasets = [];
+  const cores = [
+    "rgba(192,192,192)",
+    "rgba(100,149,237)",
+    "rgba(72,209,204)",
+    "rgba(205,133,63)",
+    "rgba(255,165,0)",
+  ];
 
-    // Adicione um objeto de dataset para cada conjunto de dados retornado
-    data.forEach((item, index) => {
-      datasets.push({
-        label: item.ano,
-        data: [item.totalCaptacao],
-        borderWidth: 1,
-        backgroundColor: cores[index % cores.length],
-      });
+  data.forEach((item, index) => {
+    datasets.push({
+      label: item.ano,
+      data: [item.totalCaptacao],
+      borderWidth: 1,
+      backgroundColor: cores[index % cores.length],
     });
+  });
 
-    var chave = new Chart(contextoChave, {
-      type: "bar",
-      data: {
-        datasets: datasets,
+  chave = new Chart(contextoChave, {
+    type: "bar",
+    data: {
+      datasets: datasets,
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true, // Começar o eixo y a partir de zero
+          precision: 0, // Exibir apenas valores inteiros no eixo y
+        },
       },
-      options: {
-        tooltips: {
-          bodyFontStyle: "bold",
-          callbacks: {
-            label: function (tooltipItem, data) {
-              var value =
+      responsive: true,
+      maintainAspectRatio: false,
+      tooltips: {
+        bodyFontStyle: "bold",
+        callbacks: {
+          label: function (tooltipItem, data) {
+            var value =
                 data.datasets[tooltipItem.datasetIndex].data[
                 tooltipItem.index
                 ];
-              var label = data.datasets[tooltipItem.datasetIndex].label; // valor da propriedade 'label' do objeto 'item'
-
-              var message = "";
-
-              return ` Fuxo de ${value} no ano de ${label}`;
-            },
-          },
-        },
-        legend: {
-          labels: {
-            fontColor: "white",
+            var label = data.datasets[tooltipItem.datasetIndex].label;
+            return `Fluxo de ${value} no ano de ${label}`;
           },
         },
       },
-    });
-  }
+      legend: {
+        labels: {
+          fontColor: "white",
+        },
+      },
+    },
+  });
+}
+
+
 
   function gerarGraficoMes(fechamentoMes) {
 
@@ -1177,7 +1207,7 @@
 
     if (grauDeAviso == 'Alerta') {
       campoAlerta.innerHTML = 2
-      campoCritico.innerHTML = 1
+      campoCritico.innerHTML = 0
       campoEmergencial.innerHTML = 1
       campoIdeal.innerHTML = 3
       listaCritico.splice(0, listaCritico.length)
@@ -1188,7 +1218,7 @@
       }
 
     } else if (grauDeAviso == 'Crítico') {
-      campoCritico.innerHTML = 2
+      campoCritico.innerHTML = 1
       campoEmergencial.innerHTML = 1
       campoAlerta.innerHTML = 1
       campoIdeal.innerHTML = 3
@@ -1201,7 +1231,7 @@
 
     } else if (grauDeAviso == 'Emergêncial') {
       campoEmergencial.innerHTML = 2
-      campoCritico.innerHTML = 1
+      campoCritico.innerHTML = 0
       campoAlerta.innerHTML = 1
       campoIdeal.innerHTML = 3
       listaCritico.splice(0, listaCritico.length)
@@ -1213,7 +1243,7 @@
 
     } else if (grauDeAviso == 'Ideal') {
       campoIdeal.innerHTML = 4
-      campoCritico.innerHTML = 1
+      campoCritico.innerHTML = 0
       campoEmergencial.innerHTML = 1
       campoAlerta.innerHTML = 1
       listaCritico.splice(0, listaCritico.length)

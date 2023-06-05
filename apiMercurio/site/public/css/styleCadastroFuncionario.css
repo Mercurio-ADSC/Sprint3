@@ -21,15 +21,17 @@ button {
 
 /*HEADER ----------------------------------------------------------------*/
 .header {
-    background-color: #4B1761;
-    mix-blend-mode: normal;
-    backdrop-filter: blur(2px);
+    background: rgb(83, 5, 98);
+    background: linear-gradient(90deg, rgba(83, 5, 98, 1) 0%, rgba(80, 13, 142, 1) 28%, rgba(77, 6, 140, 1) 53%, rgba(0, 0, 0, 0.9859593495601365) 100%);
     height: 4.5rem;
+    box-shadow: -1px 3px 11px -5px rgba(0, 0, 0, 0.747);
 }
+
+
 
 .container {
     display: flex;
-    width: 80%;
+    width: 90%;
     margin: auto;
 }
 
@@ -39,7 +41,7 @@ button {
 
 .navbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     list-style: none;
     text-align: start;
@@ -47,8 +49,8 @@ button {
 
 .titulo {
     color: #ffffff;
-    font-weight: 500;
-
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
 }
 
 .navbar li,
@@ -63,18 +65,27 @@ button {
     font-weight: 200;
 }
 
-.teste {
-    width: 1rem;
-}
-
 .logo-header img {
     margin-top: 0.5rem;
     width: 10rem;
     height: 3rem;
 }
 
-a {
-    text-decoration: none;
+.img-conf {
+    margin-right: 10px;
+}
+
+.perfil-div {
+    width: 15%;
+    height: 70rem;
+    position: absolute;
+    z-index: -1;
+    background: rgb(43, 43, 43);
+    background: linear-gradient(16deg, rgba(43, 43, 43, 1) 0%, rgba(67, 55, 156, 1) 0%, rgba(198, 179, 237, 0.845903327151173) 39%, rgba(255, 255, 255, 0.7618697137057948) 75%, rgba(255, 255, 255, 1) 100%);
+    display: flex;
+    flex-direction: column;
+    margin-top: 9px;
+    box-shadow: -1px 3px 11px -5px rgba(0, 0, 0, 0.747);
 }
 
 

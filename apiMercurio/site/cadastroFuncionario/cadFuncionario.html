@@ -14,18 +14,34 @@
 </head>
 
 <body>
-    <div class="header">
+    <div class="header" onload="validarSessao()">
         <div class="container">
-            <div class="logo-header"><img src="/css/img/LOGO_COMPLETA.png" alt=""> </div>
-            <ul class="navbar">
-                <li><a style="width: 110px;" href="/home">Home</a></li>
-                <li><a style="width: 180px;" href="/quemSomos">Quem Somos</a></li>
-                <li><a style="width: 180px;" href="/simulador">Simulador</a></li>
-                <li><a style="width: 180px; color: #DEC43B;" href="/cadastro">Cadastre-se</a></li>
-                <li class="btn-login"><a style="width: 110px;" href="/login">Login</a></li>
-            </ul>
+          <div class="logo-header">
+            <img src="../css/img/LOGO_COMPLETA.png" alt="" />
+          </div>
+          <ul class="navbar">
+
+            <li><a href="/dashboard"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+              </svg>&nbsp;&nbsp;Voltar&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+   
+            <li>
+            <a style="width: 110px" href="">
+              <i class="fa-solid fa-circle-user fa-lg" style="color: #ffffff"></i>
+              <span id="b_usuario"></span></a>
+            <span id="funcao_usuario" style="color: #ffffff; font-weight: bold;"></span>
+            </li>
+    
+            <a onclick="limparSessao()">
+              <li class="img-conf">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sair&nbsp;&nbsp;
+                <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i>
+              </li>
+            </a>
+          </ul>
         </div>
-    </div>
+    
+        <div class="linha-amarela"></div>
+      </div>
 
     <div class="container">
         <div class="formulario">
@@ -130,16 +146,68 @@
 
 <script>
 
+if (sessionStorage.NOME_EMPRESA == undefined && sessionStorage.NOME_USUARIO == undefined) {
+    window.location = "/login";
+  }
+
+  if (sessionStorage.FUNCAO == 'Colaborador') {
+    cadastrarNovoFunc.style.visibility = 'hidden'
+  }
+
+
+  function limparSessao() {
+    // aguardar();
+    sessionStorage.clear();
+    // finalizarAguardar();
+    window.location = "/login";
+  }
+
+
+  var nivel = sessionStorage.FUNCAO;
+
+  funcao_usuario.innerHTML = nivel;
+
+  function validarSessao() {
+
+    // aguardar();
+
+    console.log(sessionStorage.NOME_EMPRESA, sessionStorage.NOME_USUARIO)
+
     var b_usuario = document.getElementById("b_usuario");
 
 
     if (sessionStorage.NOME_EMPRESA) {
 
-        b_usuario.innerHTML = sessionStorage.NOME_EMPRESA;
+
+      var nome = sessionStorage.NOME_EMPRESA;
+      var primeiroNome = '';
+
+      for (var i = 0; i < nome.length; i++) {
+        primeiroNome += nome[i]
+        if (nome[i] == ' ') {
+          break
+        }
+      }
+
+      b_usuario.innerHTML = primeiroNome;
 
     } else if (sessionStorage.NOME_USUARIO) {
-        b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+      var nome = sessionStorage.NOME_USUARIO;
+      var primeiroNome = '';
+
+      for (var i = 0; i < nome.length; i++) {
+        primeiroNome += nome[i]
+        if (nome[i] == ' ') {
+          break
+        }
+      }
+
+      b_usuario.innerHTML = primeiroNome;
+
     }
+  }
+
+  validarSessao()
 
     function irLogar() {
 
