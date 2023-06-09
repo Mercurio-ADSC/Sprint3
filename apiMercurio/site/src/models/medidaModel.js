@@ -14,12 +14,12 @@ function buscarUltimasMedidas(idCaptacao, limite_linhas) {
                     order by id desc`;
   } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
 
-    instrucaoSql = `SELECT DATE_FORMAT(dthCaptacao,'%H:%i:%s') as momento_grafico, 
+    instrucaoSql = `SELECT DATE_FORMAT(dthCaptacao,'%H:%i') as momento_grafico, 
     SUM(statusCaptacao) as totalCaptacao
     FROM captacao
     JOIN sensor on fkSensor = idSensor
     WHERE captacao.fkSensor = ${idCaptacao} AND sensor.fkSetor = ${idCaptacao}
-    GROUP BY DATE_FORMAT(dthCaptacao,'%H:%i:%s') 
+    GROUP BY DATE_FORMAT(dthCaptacao,'%H:%i') 
     order by momento_grafico 
     LIMIT ${5};`;
 
